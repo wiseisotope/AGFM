@@ -1,0 +1,7 @@
+# AGFM is published to be read, indexed, cited and reused under CC BY 4.0.
+# That includes AI answer engines. Citation is the point.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://REPLACE-WITH-YOUR-DOMAIN/sitemap.xml

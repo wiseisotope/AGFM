@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AGFM — AI Governance Failure Mode Framework</title>
+<meta name="description" content="AGFM is an open, community-maintained catalog of the ways enterprise AI governance processes fail, each explained in plain language and mapped — with role scoping and date stamps — to the EU AI Act, NIST AI RMF, ISO/IEC 42001, SR 26-2 and sector guidance.">
+<meta property="og:title" content="AGFM — AI Governance Failure Mode Framework">
+<meta property="og:description" content="An open catalog of how AI governance processes fail. Not how models get attacked.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,300..700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"DefinedTermSet","name":"AI Governance Failure Mode Framework","alternateName":"AGFM","description":"An open, community-maintained catalog of the ways enterprise AI governance processes fail, mapped to the regulations and controls that address each failure mode.","version":"0.3","license":"https://creativecommons.org/licenses/by/4.0/"}
+</script>
+<style>
+:root{
+  --bone:#EDEDE7; --panel:#FBFBF8; --ink:#16181D; --ink-2:#3E434D; --ink-3:#6C7280;
+  --rule:#C9C8BF; --rule-2:#DEDDD5; --indigo:#2B3A8F; --indigo-tint:#E6E7F2;
+  --crit:#8C2F22; --high:#A96A14; --mod:#4A5D6B;
+  --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Source Serif 4",Georgia,serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --maxw:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bone);color:var(--ink);font-family:var(--f-body);font-size:16.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+a{color:var(--indigo);text-decoration:none;border-bottom:1px solid rgba(43,58,143,.32)}
+a:hover{border-bottom-color:var(--indigo)}
+:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+.eyebrow{font-family:var(--f-mono);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.mono{font-family:var(--f-mono)}
+
+.topbar{position:sticky;top:0;z-index:60;background:rgba(237,237,231,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:var(--maxw);margin:0 auto;padding:10px 28px;display:flex;align-items:center;gap:22px}
+.topbar .brand{font-family:var(--f-mono);font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--ink);border:none;white-space:nowrap}
+.topbar nav{display:flex;gap:16px;overflow-x:auto;scrollbar-width:none}
+.topbar nav::-webkit-scrollbar{display:none}
+.topbar nav a{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);border:none;white-space:nowrap;padding:4px 0}
+.topbar nav a:hover{color:var(--indigo)}
+
+.masthead{padding:76px 0 0}
+.masthead h1{font-family:var(--f-display);font-weight:800;font-stretch:112%;font-size:clamp(38px,6.2vw,78px);line-height:.98;letter-spacing:-.02em;margin:16px 0 0;text-wrap:balance}
+.masthead h1 em{font-style:normal;color:var(--indigo)}
+.deck{font-size:clamp(18px,2.1vw,22px);line-height:1.48;color:var(--ink-2);max-width:64ch;margin:24px 0 0}
+.deck strong{color:var(--ink);font-weight:600}
+.docctl{margin:44px 0 0;border-top:2px solid var(--ink);border-bottom:1px solid var(--rule);display:grid;grid-template-columns:repeat(5,1fr)}
+.docctl div{padding:14px 16px 16px;border-right:1px solid var(--rule-2)}
+.docctl div:last-child{border-right:none}
+.docctl dt{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 5px}
+.docctl dd{margin:0;font-family:var(--f-mono);font-size:12.5px;font-weight:500;color:var(--ink)}
+@media(max-width:860px){.docctl{grid-template-columns:repeat(2,1fr)}.docctl div{border-bottom:1px solid var(--rule-2)}}
+
+section{padding:70px 0 0}
+.sechead{display:flex;align-items:baseline;gap:14px;margin:0 0 8px}
+.secnum{font-family:var(--f-mono);font-size:11px;font-weight:600;color:var(--indigo);letter-spacing:.1em;padding-top:6px}
+h2{font-family:var(--f-display);font-weight:700;font-stretch:105%;font-size:clamp(25px,3.4vw,38px);line-height:1.08;letter-spacing:-.015em;margin:0}
+h3{font-family:var(--f-display);font-weight:700;font-stretch:100%;font-size:18px;letter-spacing:-.005em;margin:34px 0 10px}
+h4{font-family:var(--f-mono);font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:22px 0 8px}
+p{margin:0 0 15px;max-width:74ch}
+ul,ol{max-width:74ch;padding-left:20px;margin:0 0 16px}
+li{margin:0 0 8px}
+hr.rule{border:none;border-top:1px solid var(--rule);margin:56px 0 0}
+
+.callout{background:var(--panel);border-left:3px solid var(--indigo);padding:20px 24px;margin:24px 0}
+.callout.warn{border-left-color:var(--crit)}
+.callout.warn .eyebrow{color:var(--crit)}
+.callout p:last-child{margin-bottom:0}
+.tldr{background:var(--panel);border:1px solid var(--rule);padding:26px 28px;margin:34px 0 0}
+.tldr ul{margin:12px 0 0;max-width:none}
+.tldr li{margin-bottom:12px}
+.plainbox{background:var(--indigo-tint);padding:18px 22px;margin:20px 0;font-size:15.5px}
+.plainbox .eyebrow{color:var(--indigo)}
+.plainbox p{margin:8px 0 0;max-width:none}
+
+.tablewrap{overflow-x:auto;margin:20px 0 26px;border:1px solid var(--rule);background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:640px}
+th{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:11px 14px;border-bottom:1.5px solid var(--ink);vertical-align:bottom;font-weight:600}
+td{padding:11px 14px;border-bottom:1px solid var(--rule-2);vertical-align:top;line-height:1.5}
+tbody tr:last-child td{border-bottom:none}
+td.mono,th.mono{font-family:var(--f-mono);font-size:12px;white-space:nowrap}
+.yes{color:var(--indigo);font-weight:600}
+.no{color:var(--crit);font-weight:600}
+.pill{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border:1px solid var(--rule);color:var(--ink-3);white-space:nowrap;display:inline-block}
+.pill.live{border-color:var(--crit);color:var(--crit)}
+.pill.future{border-color:var(--indigo);color:var(--indigo)}
+.pill.stayed{border-color:var(--ink-3);color:var(--ink-3)}
+
+.matrix-shell{margin:26px 0 0}
+.matrix-controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:0 0 16px;border-bottom:1px solid var(--rule);margin-bottom:18px}
+.ctl-label{font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-right:4px}
+.chip{font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;padding:5px 11px;border:1px solid var(--rule);background:transparent;color:var(--ink-2);cursor:pointer;transition:all .14s ease}
+.chip:hover{border-color:var(--ink-3)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bone);border-color:var(--ink)}
+.chip.plain[aria-pressed="true"]{background:var(--indigo);border-color:var(--indigo)}
+.matrix-scroll{overflow-x:auto;padding-bottom:14px}
+.matrix{display:flex;gap:9px;min-width:min-content;align-items:flex-start}
+.col{flex:0 0 182px;min-width:182px}
+.colhead{border-top:2px solid var(--ink);padding:9px 0 11px;margin-bottom:9px}
+.colhead .cid{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.1em;color:var(--indigo);display:block;margin-bottom:3px;font-weight:600}
+.colhead .cname{font-family:var(--f-display);font-weight:700;font-stretch:96%;font-size:13.5px;line-height:1.18;letter-spacing:-.005em;display:block}
+.colhead .ccount{font-family:var(--f-mono);font-size:9.5px;color:var(--ink-3);margin-top:5px;display:block}
+.cell{width:100%;text-align:left;display:block;background:var(--panel);border:1px solid var(--rule-2);border-left:2.5px solid var(--mod);padding:8px 9px 9px;margin-bottom:5px;cursor:pointer;font-family:inherit;transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease;animation:cellin .34s ease both}
+@keyframes cellin{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.cell:hover{transform:translateX(2px);box-shadow:-2px 2px 0 rgba(22,24,29,.14);border-color:var(--ink-3)}
+.cell[data-sev="Critical"]{border-left-color:var(--crit)}
+.cell[data-sev="High"]{border-left-color:var(--high)}
+.cell[data-sev="Moderate"]{border-left-color:var(--mod)}
+.cell .fid{font-family:var(--f-mono);font-size:9.5px;color:var(--ink-3);display:block;letter-spacing:.03em}
+.cell .fname{font-family:var(--f-display);font-weight:600;font-stretch:94%;font-size:12.5px;line-height:1.25;display:block;margin-top:3px;color:var(--ink)}
+.cell .flay{display:none;font-size:11.5px;line-height:1.4;color:var(--ink-2);margin-top:6px;padding-top:6px;border-top:1px dotted var(--rule)}
+body.plainmode .cell .flay{display:block}
+.cell .tagrow{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+.cell.dim{opacity:.2;pointer-events:none}
+.cell.hasfull{border-top:1px solid var(--indigo)}
+.tag{font-family:var(--f-mono);font-size:8.5px;letter-spacing:.07em;text-transform:uppercase;padding:1px 5px;border:1px solid currentColor;line-height:1.5}
+.tag.full{color:var(--ink);background:var(--indigo-tint);border-color:var(--indigo-tint)}
+.tag.open{color:var(--ink-3)}
+.tag.sev{color:var(--ink-3)}
+.tag.newv{color:var(--indigo)}
+.legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:18px;padding-top:16px;border-top:1px solid var(--rule);font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3)}
+.legend span{display:flex;align-items:center;gap:6px}
+.swatch{width:11px;height:11px;display:inline-block}
+
+.drawer-back{position:fixed;inset:0;background:rgba(22,24,29,.42);z-index:90;opacity:0;pointer-events:none;transition:opacity .2s ease}
+.drawer-back.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(600px,100%);z-index:100;background:var(--panel);border-left:2px solid var(--ink);transform:translateX(100%);transition:transform .26s cubic-bezier(.4,0,.2,1);overflow-y:auto;padding:26px 30px 60px}
+.drawer.open{transform:none}
+.drawer-close{position:absolute;top:18px;right:22px;background:none;border:1px solid var(--rule);font-family:var(--f-mono);font-size:11px;padding:5px 10px;cursor:pointer;color:var(--ink-2)}
+.drawer-close:hover{border-color:var(--ink);color:var(--ink)}
+.d-id{font-family:var(--f-mono);font-size:12px;color:var(--indigo);font-weight:600;letter-spacing:.06em}
+.d-name{font-family:var(--f-display);font-weight:700;font-stretch:104%;font-size:26px;line-height:1.1;letter-spacing:-.015em;margin:7px 0 12px;padding-right:60px}
+.d-meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.d-lay{background:var(--indigo-tint);padding:16px 18px;margin:0 0 18px;font-size:16px;line-height:1.55}
+.d-lay h5{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--indigo);margin:0 0 7px;font-weight:600}
+.d-lay p{margin:0;max-width:none}
+.d-field{border-top:1px solid var(--rule-2);padding:14px 0 0;margin:0 0 14px}
+.d-field h5{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin:0 0 6px;font-weight:600}
+.d-field p{font-size:15px;margin:0;max-width:none}
+.d-field ul{margin:0;padding-left:17px;font-size:15px;max-width:none}
+.d-field li{margin-bottom:5px}
+.d-stub{background:var(--bone);border:1px dashed var(--rule);padding:16px 18px;font-size:14.5px;color:var(--ink-2)}
+
+.mapitem{border-bottom:1px dotted var(--rule-2);padding:9px 0}
+.mapitem:last-child{border-bottom:none}
+.map-top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:3px}
+.map-fw{font-family:var(--f-mono);font-size:10.5px;font-weight:600;color:var(--ink);letter-spacing:.04em}
+.map-role{font-family:var(--f-mono);font-size:8.5px;letter-spacing:.07em;text-transform:uppercase;padding:1px 5px;border:1px solid var(--rule);color:var(--ink-3)}
+.map-role.dep{border-color:var(--indigo);color:var(--indigo)}
+.map-status{font-family:var(--f-mono);font-size:8.5px;letter-spacing:.07em;text-transform:uppercase;padding:1px 5px}
+.map-status.live{background:var(--crit);color:var(--panel)}
+.map-status.future{background:var(--indigo);color:var(--panel)}
+.map-status.stayed{background:var(--rule);color:var(--ink-2)}
+.map-prov{font-size:13.5px;color:var(--ink-2);line-height:1.5}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin:22px 0 0}
+.card{background:var(--panel);border:1px solid var(--rule);border-top:3px solid var(--indigo);padding:20px 22px}
+.card .ck{font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--indigo);font-weight:600}
+.card h3{margin:8px 0 8px;font-size:16px}
+.card p{font-size:14.5px;margin-bottom:0}
+.cite{background:var(--panel);border:1px solid var(--rule);padding:18px 22px;font-family:var(--f-mono);font-size:12.5px;line-height:1.8;color:var(--ink-2);margin:20px 0 0;overflow-x:auto}
+
+footer{margin-top:80px;border-top:2px solid var(--ink);padding:26px 0 70px}
+footer p{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-3);line-height:1.7;max-width:82ch}
+footer a{color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <span class="brand">AGFM · v0.3</span>
+    <nav aria-label="Sections">
+      <a href="#about">What this is</a>
+      <a href="#scope">Scope</a>
+      <a href="#structure">Structure</a>
+      <a href="#matrix">The matrix</a>
+      <a href="#patterns">Patterns</a>
+      <a href="#crosswalk">Crosswalk</a>
+      <a href="#schema">Schema</a>
+      <a href="#contribute">Contribute</a>
+      <a href="#stewardship">Stewardship</a>
+      <a href="#cite">Cite</a>
+    </nav>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <span class="eyebrow">An open catalog · Public draft, open for comment</span>
+    <h1>How AI governance <em>actually fails</em></h1>
+    <p class="deck">Existing frameworks catalog attacks on AI systems and vulnerabilities in AI applications. <strong>AGFM catalogs the failures of the governance process itself</strong> — the use case that reached production without approval, the human review that exists in policy but not in the system, the approval nobody revisited after the model changed, the action item that has been open for seven months.</p>
+
+    <dl class="docctl">
+      <div><dt>Version</dt><dd>v0.3 — Public draft</dd></div>
+      <div><dt>Stages</dt><dd>11</dd></div>
+      <div><dt>Failure modes</dt><dd>87</dd></div>
+      <div><dt>Mappings current to</dt><dd>18 Sep 2026</dd></div>
+      <div><dt>License</dt><dd>CC BY 4.0</dd></div>
+    </dl>
+  </div>
+</header>
+
+<main>
+
+<!-- ABOUT -->
+<section id="about">
+<div class="wrap">
+  <div class="sechead"><span class="secnum">01</span><h2>What AGFM is</h2></div>
+
+  <p>The AI Governance Failure Mode framework (AGFM) is an open, community-maintained catalog of the ways enterprise AI <em>governance processes</em> fail. Each failure mode carries a permanent identifier, a plain-language example, the signals that indicate it is present, its root causes, the controls that address it, and a role-scoped, date-stamped mapping to the regulations and standards it implicates.</p>
+
+  <div class="tldr">
+    <ul>
+      <li><b>It is a shared vocabulary.</b> <span class="mono">AGF-F040</span> is something a risk officer can put in a finding, a ticket, or an audit response. "The human oversight problem" is not.</li>
+      <li><b>It is a detection aid.</b> Every entry leads with observable indicators, so a team can determine whether a failure mode is present without hiring anyone to tell them.</li>
+      <li><b>It is a crosswalk that states its own limits.</b> Every mapping names who the obligation falls on, when it applies, and how precisely it has been verified. Mappings that are aspirational are labelled as such rather than asserted.</li>
+      <li><b>It is written to be understood.</b> Every entry opens with a concrete example in ordinary language, before any framework vocabulary appears.</li>
+    </ul>
+  </div>
+
+  <div class="plainbox">
+    <span class="eyebrow">Why plain language is a design rule, not a courtesy</span>
+    <p>AI governance is new work for most of the people now responsible for it — often a risk manager, a quality lead, or an operations director rather than a specialist. A catalog that only makes sense to people who already understand the problem cannot help the people who need it most. Every entry opens with <b>"In plain terms"</b>: one concrete situation, no acronyms, no framework references. If a failure mode cannot be described that way, the entry is not finished.</p>
+  </div>
+
+  <h3>What AGFM is not</h3>
+  <ul>
+    <li><b>Not a maturity score.</b> There is no AGFM rating, level, or grade.</li>
+    <li><b>Not a certification.</b> Conformance assessment, where it exists, is a separate published methodology carried out by accredited assessors.</li>
+    <li><b>Not software.</b> A knowledge base, designed to be implemented inside whatever tooling an organization already uses.</li>
+    <li><b>Not legal advice.</b> A mapping identifies which provision a failure mode plausibly implicates. It does not interpret that provision, determine applicability, or establish compliance.</li>
+    <li><b>Not a blame framework.</b> Almost every failure here is the predictable output of a reasonable process under load, not of anyone behaving badly.</li>
+  </ul>
+</div>
+</section>
+
+<hr class="rule">
+
+<!-- SCOPE -->
+<section id="scope">
+<div class="wrap">
+  <div class="sechead"><span class="secnum">02</span><h2>Scope, and how it relates to existing frameworks</h2></div>
+  <p>AGFM is deliberately complementary. It occupies the layer none of the established frameworks address: organizational and process failure, with no attacker present.</p>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th style="min-width:190px">Framework</th><th>What it catalogs</th><th style="min-width:130px">Structure</th><th style="min-width:120px">Governance process failure?</th></tr></thead>
+      <tbody>
+        <tr><td><b>MITRE ATT&amp;CK</b><br><span class="mono" style="font-size:11px;color:var(--ink-3)">Enterprise v18, Oct 2025</span></td><td>Adversary behaviour in cyber intrusions. The structural model AGFM borrows from.</td><td class="mono">14 tactics<br>216 techniques<br>475 sub-techniques</td><td class="no">Out of scope</td></tr>
+        <tr><td><b>MITRE ATLAS</b><br><span class="mono" style="font-size:11px;color:var(--ink-3)">v5.4.0, Feb 2026</span></td><td>Adversarial attacks on AI systems — data poisoning, evasion, prompt injection, model extraction, agent attacks.</td><td class="mono">~16 tactics<br>80+ techniques</td><td class="no">Adversarial only</td></tr>
+        <tr><td><b>OWASP Top 10 for LLM</b><br><span class="mono" style="font-size:11px;color:var(--ink-3)">2025 edition</span></td><td>Application vulnerabilities — prompt injection, sensitive-information disclosure, supply chain, excessive agency.</td><td class="mono">Ranked top-10</td><td class="no">Developer-facing, system-level</td></tr>
+        <tr><td><b>NIST AI RMF 1.0</b><br><span class="mono" style="font-size:11px;color:var(--ink-3)">AI 100-1, Jan 2023</span></td><td>Prescribed governance outcomes. Voluntary and non-certifiable.</td><td class="mono">4 functions<br>19 categories<br>72 subcategories</td><td class="no">Prescribes good practice</td></tr>
+        <tr><td><b>ISO/IEC 42001:2023</b></td><td>Certifiable management-system requirements, including an AI system impact assessment (6.1.4 / 8.4) with no ISO 27001 equivalent.</td><td class="mono">Clauses 4–10<br>38 Annex A controls<br>9 objectives (A.2–A.10)</td><td class="no">Requirements, not failures</td></tr>
+        <tr><td><b>AI Incident Database</b></td><td>Real-world AI incidents and harms after the fact.</td><td class="mono">Incident records</td><td class="no">Outcomes, not causes</td></tr>
+        <tr style="background:var(--indigo-tint)"><td><b>AGFM</b></td><td><b>Governance-process failure modes</b> — how the organizational machinery for governing AI breaks down.</td><td class="mono">11 stages<br>87 failure modes</td><td class="yes">This is the scope</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <p style="margin-bottom:0">Existing frameworks answer <em>"how does the model fail?"</em> and <em>"how does the attacker get in?"</em> AGFM answers <em>"how did this reach production without anyone approving it, and why can't we demonstrate otherwise?"</em></p>
+  </div>
+
+  <h3>Why this layer needs a catalog</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th style="min-width:150px">Source</th><th>Finding</th><th class="mono" style="min-width:110px">Related modes</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">Verizon DBIR 2026</td><td>Regular corporate-device AI users rose from 15% to 45% year over year; 67% of those users access AI services through non-corporate accounts. Unsanctioned AI use is now the third most common non-malicious insider action.</td><td class="mono">AGF-F011</td></tr>
+        <tr><td class="mono">IBM / Ponemon 2025</td><td>20% of organizations experienced breaches linked to unauthorized AI use, adding roughly $670,000 to average breach cost. 97% of AI-breached organizations lacked adequate AI access controls.</td><td class="mono">AGF-F010<br>AGF-F011</td></tr>
+        <tr><td class="mono">Netskope 2026</td><td>47% of generative AI users access tools through personal, unmanaged accounts; the average organization logs 223 generative AI data-policy violations per month.</td><td class="mono">AGF-F052</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:14px;color:var(--ink-3)">Figures are drawn from vendor-published security research. Consult the primary reports for methodology.</p>
+</div>
+</section>
+
+<hr class="rule">
+
+<!-- STRUCTURE -->
+<section id="structure">
+<div class="wrap">
+  <div class="sechead"><span class="secnum">03</span><h2>Structure and identifiers</h2></div>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Level</th><th>AGFM element</th><th>ATT&amp;CK equivalent</th><th class="mono">Format</th><th class="mono">Example</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">1</td><td><b>Governance lifecycle stage</b> — matrix columns</td><td>Tactic</td><td class="mono">AGF-TAxx</td><td class="mono">AGF-TA02</td></tr>
+        <tr><td class="mono">2</td><td><b>Failure mode</b> — cells</td><td>Technique</td><td class="mono">AGF-Fxxx</td><td class="mono">AGF-F010</td></tr>
+        <tr><td class="mono">3</td><td><b>Failure variant</b></td><td>Sub-technique</td><td class="mono">AGF-Fxxx.xx</td><td class="mono">AGF-F010.01</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Identifier policy</h3>
+  <p>Identifiers are permanent. Once assigned, an <span class="mono">AGF-F</span> number is never reused and never renumbered, even if the failure mode is later deprecated or merged. Deprecated entries remain published with a pointer to their successor, so citations in audit records and tooling do not break.</p>
+
+  <h3>Why lifecycle stages organize the matrix</h3>
+  <p>Regulation was rejected as the organizing axis because it moves too quickly. In the eighteen months to September 2026 alone: Colorado repealed its own AI Act before it ever took effect, the EU deferred its high-risk regime by sixteen months while leaving transparency duties in force, and US banking's model risk guidance was superseded after fifteen years. A structure keyed to regulation would need re-architecting annually. Roles were rejected because ownership of AI governance differs wildly between a regional bank, a cell-therapy manufacturer, and an industrial processor.</p>
+  <p>The governance lifecycle is the stable axis. Regulatory mappings therefore live as fields on each entry, where they can be versioned and date-stamped independently of the structure that holds them.</p>
+</div>
+</section>
+
+<hr class="rule">
+
+<!-- MATRIX -->
+<section id="matrix">
+<div class="wrap">
+  <div class="sechead"><span class="secnum">04</span><h2>The matrix</h2></div>
+  <p>Eleven governance lifecycle stages, 87 failure modes. Twenty entries carry the full schema; the remainder are enumerated with plain-language examples and are open for contribution.</p>
+  <p style="font-size:14.5px;color:var(--ink-2)">Select any cell to open its entry. Turn on <b>Plain language</b> to read the whole matrix as everyday examples rather than governance terms.</p>
+
+  <div class="matrix-shell">
+    <div class="matrix-controls">
+      <span class="ctl-label">View</span>
+      <button class="chip plain" id="plainToggle" aria-pressed="false">Plain language</button>
+      <span class="ctl-label" style="margin-left:10px">Filter</span>
+      <button class="chip" data-filter="full" aria-pressed="false">Full entries</button>
+      <button class="chip" data-filter="Critical" aria-pressed="false">Critical</button>
+      <button class="chip" data-filter="High" aria-pressed="false">High</button>
+      <button class="chip" data-filter="reset" aria-pressed="false" style="margin-left:auto">Reset</button>
+    </div>
+    <div class="matrix-scroll"><div class="matrix" id="matrix"></div></div>
+    <div class="legend">
+      <span><i class="swatch" style="background:var(--crit)"></i> Critical</span>
+      <span><i class="swatch" style="background:var(--high)"></i> High</span>
+      <span><i class="swatch" style="background:var(--mod)"></i> Moderate</span>
+      <span><i class="tag full">FULL</i> complete entry</span>
+      <span><i class="tag open">OPEN</i> enumerated, entry in progress</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<hr class="rule">
+
+<!-- PATTERNS -->
+<section id="patterns">
+<div class="wrap">
+  <div class="sechead"><span class="secnum">05</span><h2>Cross-cutting patterns</h2></div>
+  <p>Individual failure modes are useful. The relationships between them are more useful, because they explain why fixing one thing in isolation usually fails.</p>
+
+  <h3>1. Friction causes evasion</h3>
+  <p>The most reliable cause of ungoverned AI is governance that is too slow to use. When every request receives the same heavyweight review regardless of risk <span class="mono">(AGF-F027)</span>, when no turnaround commitment exists <span class="mono">(AGF-F037)</span>, and when the same question gets re-litigated from scratch every time <span class="mono">(AGF-F038)</span>, teams stop submitting. The observable result is intake bypass <span class="mono">(AGF-F010)</span> and unsanctioned use <span class="mono">(AGF-F011)</span> — almost always treated as discipline problems when they are throughput problems. <b>Enforcement without a fast path makes the measured problem worse while making the real problem invisible.</b></p>
+
+  <h3>2. Reviews without remediation are theatre</h3>
+  <p>A review that produces findings nobody tracks <span class="mono">(AGF-F100)</span>, with no owner or due date <span class="mono">(AGF-F101)</span>, no escalation when they age <span class="mono">(AGF-F102)</span>, and no evidence required to close <span class="mono">(AGF-F103)</span>, generates the appearance of governance and none of the effect. This is the most common gap between programmes that look mature and programmes that are.</p>
+
+  <h3>3. Gate order determines whether gates work</h3>
+  <p>When a review stage requires artifacts that a later stage produces <span class="mono">(AGF-F039)</span>, every item routes through it, fails, and returns — permanently and structurally. Teams normalize the loop rather than reordering the gates. The symptom presents as slowness; the cause is sequencing, and no amount of additional resourcing fixes it.</p>
+
+  <h3>4. Approvals are states, not events</h3>
+  <p>Treating approval as a one-time decision rather than a time-boxed state produces stale approvals <span class="mono">(AGF-F031)</span>, silent scope expansion <span class="mono">(AGF-F032)</span>, unverified conditions <span class="mono">(AGF-F033)</span>, and systems running on authority granted against a model that no longer exists <span class="mono">(AGF-F071)</span>. All are invisible in a register that records only that approval occurred.</p>
+
+  <h3>5. Governance records are themselves a system that can fail</h3>
+  <p>Reorganizations rewrite historical attribution <span class="mono">(AGF-F096)</span>. Rigid data models cannot record what actually happened <span class="mono">(AGF-F097)</span>. Corrections have to be made by hand across hundreds of records <span class="mono">(AGF-F098)</span>. Configuration differs between environments so records quietly lose fields <span class="mono">(AGF-F075)</span>. An organization can operate every control correctly and still be unable to demonstrate it, because the evidence layer degraded underneath.</p>
+
+  <div class="callout">
+    <p style="margin-bottom:0"><b>Practical implication.</b> A remediation plan that addresses failure modes one at a time, in identifier order, will underperform. Fix the throughput problem before enforcing the bypass problem, build the remediation loop before adding review depth, and reorder gates before adding reviewers.</p>
+  </div>
+</div>
+</section>
+
+<hr class="rule">
+
+<!-- CROSSWALK -->
+<section id="crosswalk">
+<div class="wrap">
+  <div class="sechead"><span class="secnum">06</span><h2>Regulatory crosswalk</h2></div>
+  <p>The crosswalk is the most useful and the fastest-decaying part of this catalog. It is therefore governed by explicit conventions rather than presented as settled fact.</p>
+
+  <h3>How to read a mapping</h3>
+  <p>Every mapping in every entry carries three things beyond the citation itself:</p>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th style="min-width:130px">Element</th><th>What it tells you</th><th style="min-width:200px">Values</th></tr></thead>
+      <tbody>
+        <tr><td><b>Role scope</b></td><td><b>Who the obligation actually falls on.</b> This matters more than any other element and is the most common source of error in published crosswalks. Most organizations using AGFM are <em>deployers</em> — they buy and operate AI systems. A large share of EU AI Act obligations fall on <em>providers</em> — those who develop a system and place it on the market. Citing a provider obligation to a deployer produces a compliance plan for a duty they do not hold, while missing the one they do.</td><td class="mono">Provider · Deployer · Provider &amp; deployer · Organization · Banking organization</td></tr>
+        <tr><td><b>Status</b></td><td>Whether the obligation is currently enforceable, scheduled for a future date, or subject to a litigation stay. A deferred obligation is not an absent one, but it is not the same planning problem.</td><td class="mono">In force · Future date · Stayed</td></tr>
+        <tr><td><b>Precision</b></td><td>How specifically the mapping has been verified. AGFM cites EU AI Act provisions at article and, where verified, paragraph level; ISO/IEC 42001 at clause level; NIST AI RMF at function and category level.</td><td class="mono">See the note below</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <h4 style="margin-top:0">On NIST subcategory precision</h4>
+    <p style="margin-bottom:0">NIST AI RMF 1.0 contains 72 subcategories across 19 categories and 4 functions. AGFM currently maps at <b>function and category level</b> — for example <span class="mono">GOVERN-1</span> rather than <span class="mono">GOVERN-1.5</span>. Subcategory-level mapping is a v1.0 target and will be verified against the NIST AI RMF Playbook before publication. Approximate precision stated honestly is more useful than false precision stated confidently, and a subcategory reference that turns out to be wrong damages the credibility of every other mapping alongside it.</p>
+  </div>
+
+  <h3>Framework status as of 18 September 2026</h3>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th style="min-width:150px">Instrument</th><th>Anchor provisions</th><th style="min-width:110px">Falls on</th><th style="min-width:150px">Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>EU AI Act</b><br><span class="mono" style="font-size:11px;color:var(--ink-3)">Reg. (EU) 2024/1689</span></td>
+          <td>Art. 4 AI literacy · Art. 5 prohibited practices · Art. 9 risk management · Art. 10 data governance · Art. 12 record-keeping · Art. 13 transparency to deployers · Art. 14 human oversight · Art. 17 quality management system · Art. 18 documentation retention · Art. 26 deployer obligations · Art. 50 transparency · Art. 72 post-market monitoring · Art. 73 serious incident reporting.</td>
+          <td class="mono">Varies by article — see role scope on each entry</td>
+          <td><span class="pill live">Partly in force</span><br><span class="mono" style="font-size:11px">Art. 4 and Art. 5 since 2 Feb 2025; GPAI since 2 Aug 2025</span></td>
+        </tr>
+        <tr>
+          <td><b>EU AI Act — Art. 50</b><br><span class="mono" style="font-size:11px;color:var(--ink-3)">Transparency</span></td>
+          <td>Disclosure that a person is interacting with an AI system; marking of synthetic audio, image, video and text; deepfake and public-interest content disclosure. Applies by <b>system function, not risk tier</b> — mainstream generative deployments are in scope regardless of the high-risk deferral.</td>
+          <td class="mono">Provider &amp; deployer</td>
+          <td><span class="pill live">In force</span><br><span class="mono" style="font-size:11px">Since 2 Aug 2026. Art. 50(2) machine-readable marking for systems placed on market before that date: 2 Dec 2026</span></td>
+        </tr>
+        <tr>
+          <td><b>EU Digital Omnibus</b><br><span class="mono" style="font-size:11px;color:var(--ink-3)">Reg. (EU) 2026/1744</span></td>
+          <td>Deferred Annex III standalone high-risk obligations from 2 Aug 2026 to <b>2 Dec 2027</b> (~16 months), and Annex I product-embedded high-risk from 2 Aug 2027 to <b>2 Aug 2028</b>. Member-state regulatory sandboxes deferred to 2 Aug 2027. Added two new Art. 5 prohibitions effective 2 Dec 2026. <b>Did not defer Art. 50 or GPAI obligations.</b></td>
+          <td class="mono">Provider (primarily)</td>
+          <td><span class="pill future">Deferral in force</span><br><span class="mono" style="font-size:11px">Council approval 29 Jun 2026</span></td>
+        </tr>
+        <tr>
+          <td><b>NIST AI RMF 1.0</b><br><span class="mono" style="font-size:11px;color:var(--ink-3)">NIST AI 100-1, Jan 2023</span></td>
+          <td>GOVERN · MAP · MEASURE · MANAGE — 4 functions, 19 categories, 72 subcategories. Companion Playbook holds suggested actions. NIST AI 600-1 Generative AI Profile (Jul 2024) extends it to generative systems.</td>
+          <td class="mono">Organization</td>
+          <td><span class="pill stayed">Voluntary</span><br><span class="mono" style="font-size:11px">Non-certifiable. Mappings are vocabulary aids, never compliance claims</span></td>
+        </tr>
+        <tr>
+          <td><b>ISO/IEC 42001:2023</b></td>
+          <td>Clauses 4–10 certifiable requirements. Annex A: 38 controls across 9 objectives (A.2–A.10). AI system impact assessment at 6.1.4 and 8.4. Annex B holds implementation guidance. Certification is valid three years with annual surveillance.</td>
+          <td class="mono">Organization</td>
+          <td><span class="pill stayed">Stable</span><br><span class="mono" style="font-size:11px">Certifiable by accredited body</span></td>
+        </tr>
+        <tr>
+          <td><b>SR 26-2</b><br><span class="mono" style="font-size:11px;color:var(--ink-3)">OCC Bulletin 2026-13<br>FDIC FIL-15-2026</span></td>
+          <td>Issued jointly 17 Apr 2026 by the Federal Reserve, OCC and FDIC. Supersedes <b>both</b> SR 11-7 (2011) and SR 21-8 (2021 BSA/AML interagency statement). Principles-based and risk-tailored; materiality-proportionate validation. <b>Footnote 3 to § II places generative and agentic AI outside scope</b>, leaving general safety-and-soundness expectations in its place.</td>
+          <td class="mono">Banking organization<br><span style="font-size:10px;color:var(--ink-3)">Primary audience &gt;$30bn total assets</span></td>
+          <td><span class="pill live">In force</span><br><span class="mono" style="font-size:11px">Since 17 Apr 2026. The scope carve-out is the basis of AGF-F066</span></td>
+        </tr>
+        <tr>
+          <td><b>GxP / GAMP 5</b></td>
+          <td>GAMP 5 Second Edition (2022) Appendix D11 on the AI/ML lifecycle; ISPE GAMP AI Guide (2025); 21 CFR Part 11 and EU Annex 11 data integrity (ALCOA+); FDA draft guidance on AI credibility in regulatory submissions (Jan 2025).</td>
+          <td class="mono">Regulated organization</td>
+          <td><span class="pill stayed">Stable</span><br><span class="mono" style="font-size:11px">Guidance expanding</span></td>
+        </tr>
+        <tr>
+          <td><b>NYC Local Law 144</b></td>
+          <td>Annual independent bias audit for automated employment decision tools; published results summary; candidate notice. <b>Currently the most mature enforced bias-audit regime in the United States.</b></td>
+          <td class="mono">Employer / employment agency</td>
+          <td><span class="pill live">In force</span><br><span class="mono" style="font-size:11px">Enforced since 5 Jul 2023</span></td>
+        </tr>
+        <tr>
+          <td><b>Colorado SB 26-189</b><br><span class="mono" style="font-size:11px;color:var(--ink-3)">ADMT Act</span></td>
+          <td>Signed 14 May 2026; repealed and reenacted SB 24-205, which never took effect. Reframes from "high-risk AI system" to <b>automated decision-making technology materially influencing a consequential decision</b>. Duties: pre-use notice, adverse-outcome explanation within 30 days, meaningful human review on request, data access and correction, developer documentation to deployers, three-year records. <b>Dropped</b> SB 24-205's annual impact-assessment mandate, its broad algorithmic-discrimination duty, and the NIST AI RMF rebuttable presumption.</td>
+          <td class="mono">Developer &amp; deployer</td>
+          <td><span class="pill future">1 Jan 2027</span><br><span class="mono" style="font-size:11px">Enforcement stayed since 27 Apr 2026 pending AG rulemaking and litigation. Proposed rules filed 11 Aug 2026</span></td>
+        </tr>
+        <tr>
+          <td><b>Colorado HB 26-1263</b><br><span class="mono" style="font-size:11px;color:var(--ink-3)">Chatbot Safety Act</span></td>
+          <td>Separate statute signed 29 May 2026, alongside the ADMT Act.</td>
+          <td class="mono">Deployer</td>
+          <td><span class="pill future">1 Jan 2027</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <span class="eyebrow">Corrections issued in v0.3</span>
+    <p style="margin-top:10px">Published crosswalks propagate errors. AGFM records its own, so that anyone who built on an earlier version can correct it:</p>
+    <ul style="margin-bottom:0">
+      <li><b>EU AI Act post-market monitoring is Article 72, not Article 61.</b> Serious incident reporting is Article 73. Article 61 concerns informed consent for testing in real-world conditions and was cited in error in v0.1 and v0.2 on entries AGF-F031, AGF-F080 and AGF-F100.</li>
+      <li><b>NIST AI RMF structure was misstated.</b> Earlier versions described "GOVERN 6 categories / 19 subcategories." The correct structure is 4 functions, 19 categories, and 72 subcategories in total.</li>
+      <li><b>Colorado mappings were materially wrong.</b> Earlier versions cited Colorado for anti-discrimination duties. SB 26-189 <em>removed</em> the algorithmic-discrimination duty and the impact-assessment mandate when it repealed SB 24-205. Colorado now maps to notice, explanation, human review and correction rights — not to bias testing. Bias-audit mappings now anchor on NYC Local Law 144.</li>
+      <li><b>SR 26-2 supersedes SR 21-8 as well as SR 11-7</b>, and its generative and agentic carve-out sits specifically at footnote 3 to § II.</li>
+      <li><b>Role scoping was absent entirely.</b> Every mapping now names whether the obligation falls on a provider, a deployer, or the organization generally. This was the largest structural defect in earlier versions.</li>
+    </ul>
+  </div>
+
+  <div class="callout">
+    <p style="margin-bottom:0"><b>Mappings are research aids, not legal advice.</b> AGFM identifies which provisions a failure mode plausibly implicates. It does not interpret those provisions, determine applicability to any particular organization, or establish compliance. Consult qualified counsel for any of those questions.</p>
+  </div>
+</div>
+</section>
+
+<hr class="rule">
+
+<!-- SCHEMA -->
+<section id="schema">
+<div class="wrap">
+  <div class="sechead"><span class="secnum">07</span><h2>Entry schema</h2></div>
+  <p>Every failure mode carries the same fields. The full catalog is published as machine-readable data alongside this site, under the same CC BY 4.0 licence:</p>
+
+  <div class="cite" style="margin-bottom:22px">
+    <b style="color:var(--ink)">Download</b><br>
+    <a href="/data/agfm.json">data/agfm.json</a> — full catalog, nested by lifecycle stage<br>
+    <a href="/data/agfm.flat.json">data/agfm.flat.json</a> — flat array of all 87 failure modes<br>
+    <a href="/data/agfm.csv">data/agfm.csv</a> — one row per failure mode<br>
+    <a href="/data/mappings.csv">data/mappings.csv</a> — one row per regulatory mapping, with role scope and status<br>
+    <a href="/schema/agfm.schema.json">schema/agfm.schema.json</a> — JSON Schema for the entry format
+  </div>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th style="min-width:170px">Field</th><th>Contents</th><th style="min-width:90px">Required</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">id</td><td>Permanent identifier. Never reused, never renumbered.</td><td class="mono">Yes</td></tr>
+        <tr><td class="mono">name</td><td>Short, neutral, non-accusatory phrasing.</td><td class="mono">Yes</td></tr>
+        <tr><td class="mono">stage</td><td>Parent governance lifecycle stage.</td><td class="mono">Yes</td></tr>
+        <tr style="background:var(--indigo-tint)"><td class="mono"><b>plainTerms</b></td><td><b>One concrete situation in ordinary language.</b> No acronyms, no framework references, no organization identifiable.</td><td class="mono">Yes</td></tr>
+        <tr><td class="mono">description</td><td>What the failure is, described generically.</td><td class="mono">Yes</td></tr>
+        <tr><td class="mono">variants</td><td>Sub-modes where the failure has materially distinct pathways.</td><td class="mono">No</td></tr>
+        <tr><td class="mono">sectors</td><td>Broad industry categories where the failure is commonly observed.</td><td class="mono">Yes</td></tr>
+        <tr><td class="mono">severity</td><td>Critical, High, or Moderate — impact if left unaddressed.</td><td class="mono">Yes</td></tr>
+        <tr><td class="mono">indicators</td><td>Observable detection signals.</td><td class="mono">Yes</td></tr>
+        <tr><td class="mono">rootCauses</td><td>Structural reasons the failure occurs. Non-blame-assigning by rule.</td><td class="mono">Yes</td></tr>
+        <tr><td class="mono">mitigations</td><td>Controls that address it. Tool-agnostic and vendor-neutral by rule.</td><td class="mono">Yes</td></tr>
+        <tr style="background:var(--indigo-tint)"><td class="mono"><b>mapping[]</b></td><td>Each mapping is a four-part object: <span class="mono">framework</span> · <span class="mono">provision</span> · <span class="mono">role</span> · <span class="mono">status</span>. A mapping without a role scope is incomplete and does not publish.</td><td class="mono">Yes</td></tr>
+        <tr><td class="mono">related</td><td>Adjacent failure mode identifiers. Builds the graph between entries.</td><td class="mono">Yes</td></tr>
+        <tr><td class="mono">reference</td><td>Public incident or enforcement reference where one exists. Left blank where none does.</td><td class="mono">No</td></tr>
+        <tr><td class="mono">tiers</td><td>Programme maturity tiers at which the failure typically surfaces.</td><td class="mono">Yes</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <h4 style="margin-top:0">De-identification rule</h4>
+    <p style="margin-bottom:0">No published entry may contain an organization name, an individual's name, a product name, or any combination of sector, size, and circumstance that renders a contributor identifiable. This applies with particular force to plain-language examples: they are composites, written to be recognizable to many organizations and traceable to none.</p>
+  </div>
+</div>
+</section>
+
+<hr class="rule">
+
+<!-- CONTRIBUTE -->
+<section id="contribute">
+<div class="wrap">
+  <div class="sechead"><span class="secnum">08</span><h2>Contributing</h2></div>
+  <p>AGFM is built from observed practice. Contributions are welcome from anyone who governs AI systems in production — risk, audit, quality, model risk, data governance, and AI programme roles in particular.</p>
+
+  <div class="cards">
+    <div class="card">
+      <span class="ck">Submit</span>
+      <h3>Propose a failure mode</h3>
+      <p>Describe a governance failure you have observed, generalized so that no organization or individual is identifiable. Submissions go through public editorial triage.</p>
+    </div>
+    <div class="card">
+      <span class="ck">Improve</span>
+      <h3>Complete an open entry</h3>
+      <p>Sixty-seven enumerated modes await full schema. Indicators and mitigations from practitioners are worth more than any amount of desk research.</p>
+    </div>
+    <div class="card">
+      <span class="ck">Correct</span>
+      <h3>Challenge a mapping</h3>
+      <p>Wrong article, wrong role scope, superseded instrument, missing jurisdiction. Mapping corrections are the highest-priority contribution class and ship on the next minor version with a named correction notice.</p>
+    </div>
+    <div class="card">
+      <span class="ck">Translate</span>
+      <h3>Sharpen a plain-language example</h3>
+      <p>If an example reads as jargon or would confuse someone new to governance work, say so. Clarity contributions are treated as substantive, not cosmetic.</p>
+    </div>
+  </div>
+
+  <h3>Editorial process</h3>
+  <ol>
+    <li><b>Triage.</b> Scope fit, de-identification, and duplication against existing entries.</li>
+    <li><b>Drafting.</b> Written to the standard schema, including the plain-language example and role-scoped mappings. Anonymous contribution is the default.</li>
+    <li><b>Review.</b> Entries touching regulatory mapping receive a second review against primary sources before publication. Secondary sources are not sufficient for a mapping.</li>
+    <li><b>Release.</b> Published on the next scheduled version with a changelog entry. Corrections to previously published mappings are recorded explicitly rather than edited silently.</li>
+  </ol>
+
+  <h3>Release cadence</h3>
+  <p>Minor versions quarterly. Major versions annually. Regulatory monitoring runs continuously, and material changes to a cited instrument trigger an out-of-cycle correction notice rather than waiting for the next scheduled release.</p>
+</div>
+</section>
+
+<hr class="rule">
+
+<!-- STEWARDSHIP -->
+<section id="stewardship">
+<div class="wrap">
+  <div class="sechead"><span class="secnum">09</span><h2>Stewardship and licensing</h2></div>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th style="min-width:160px">Element</th><th>Position</th></tr></thead>
+      <tbody>
+        <tr><td><b>Content licence</b></td><td><b>Creative Commons Attribution 4.0 (CC BY 4.0).</b> Reuse, adapt, and redistribute freely, including commercially, with attribution.</td></tr>
+        <tr><td><b>Tooling licence</b></td><td><b>Apache 2.0</b> for the schema, dataset converters, and matrix viewer.</td></tr>
+        <tr><td><b>Advisory board</b></td><td>Practitioners recruited by role — model risk, computer systems validation and quality, actuarial and insurance risk, industrial AI programmes, academic research, former regulatory supervision, external audit, incident-reporting and standards work, and ethics and civil society.</td></tr>
+        <tr><td><b>Vendor neutrality</b></td><td>No entry names, recommends, or excludes a commercial product. Mitigations are described as capabilities and controls, never as tools. Enforced editorially and applied to sponsors on identical terms.</td></tr>
+        <tr><td><b>Sustainability</b></td><td>Designed to outlive any single sponsor. The stewardship model provides for transfer to an independent foundation or established standards body, and the permissive licence ensures the catalog remains usable regardless.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <h4 style="margin-top:0">Sponsorship disclosure</h4>
+    <p style="margin-bottom:0">AGFM was founded and is currently underwritten by AlignAI, which provides secretariat support. AlignAI holds a minority voice on the advisory board and receives no editorial privilege. Sponsorship does not confer influence over which failure modes are catalogued or how mitigations are described, and no AGFM entry references any commercial product, including the sponsor's. We disclose this openly because a catalog of governance failures is worth exactly as much as its independence.</p>
+  </div>
+</div>
+</section>
+
+<hr class="rule">
+
+<!-- CITE -->
+<section id="cite">
+<div class="wrap">
+  <div class="sechead"><span class="secnum">10</span><h2>Citing AGFM</h2></div>
+  <p>Cite individual failure modes by identifier and version. Identifiers are permanent and remain resolvable after deprecation.</p>
+
+  <div class="cite">
+    <b style="color:var(--ink)">Entry</b><br>
+    AI Governance Failure Mode framework, AGF-F040 "Missing human-in-the-loop trigger", v0.3 (2026).<br><br>
+    <b style="color:var(--ink)">Framework</b><br>
+    AI Governance Failure Mode framework (AGFM), v0.3. Licensed CC BY 4.0.<br><br>
+    <b style="color:var(--ink)">In tooling</b><br>
+    Reference the identifier alone — <span style="color:var(--indigo)">AGF-F040</span> — with the framework version recorded once at the tool or report level.
+  </div>
+
+  <div class="callout warn">
+    <span class="eyebrow">Cite the version with any mapping</span>
+    <p style="margin-top:10px;margin-bottom:0">Regulatory mappings change between versions, and four instruments cited here changed materially in the eighteen months to September 2026. A mapping quoted without its framework version cannot be checked against the instrument as it stood at the time. Always record the AGFM version alongside any mapping reproduced in a report, finding, or control document.</p>
+  </div>
+
+  <h3>Version status</h3>
+  <p><b>v0.3 is a public draft.</b> The structure, identifier scheme, and schema are stable enough to build on. Identifiers assigned in v0.1 onward are permanent and carry forward.</p>
+  <p><b>Changes in v0.3:</b> added role scoping to every mapping; corrected the EU AI Act post-market monitoring citation from Art. 61 to Art. 72/73; corrected the NIST AI RMF structural description; rewrote all Colorado mappings following the SB 24-205 repeal; added Art. 4, Art. 17, Art. 26 and the Art. 50 paragraph-level detail; recorded the SR 26-2 supersession of SR 21-8 and the footnote 3 scope carve-out; added a published corrections notice.</p>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="wrap">
+  <p><b>AI Governance Failure Mode framework · v0.3 public draft · 18 September 2026</b></p>
+  <p>Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International</a>. Schema and tooling licensed under Apache 2.0.</p>
+  <p>Regulatory references are accurate as reported at the date of publication and are subject to change. Colorado enforcement is subject to an active federal stay and pending attorney-general rulemaking; the EU Digital Omnibus deferral applies from publication in the Official Journal. Framework version counts for MITRE ATT&amp;CK, MITRE ATLAS, and the OWASP Top 10 for LLM Applications reflect the releases cited. Security statistics are drawn from vendor-published research; consult the primary reports for methodology. NIST AI RMF mappings are stated at function and category level; subcategory-level mapping is a v1.0 target. Regulatory mappings are research aids and do not constitute legal advice or establish compliance with any obligation. Plain-language examples are composites written for recognition, not descriptions of any specific organization. AGFM is not affiliated with MITRE, OWASP, NIST, ISO, ISPE, or any regulatory authority.</p>
+</div>
+</footer>
+
+<div class="drawer-back" id="drawerBack"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dName" tabindex="-1">
+  <button class="drawer-close" id="drawerClose">Close ✕</button>
+  <div id="drawerBody"></div>
+</aside>
+
+<script>
+/* mapping tuple: [framework, provision, role, status]
+   role:   Provider | Deployer | Provider & deployer | Organization | Banking organization | Employer | Developer & deployer
+   status: live | future | stayed | voluntary                                                                          */
+const STAGES=[
+{id:"AGF-TA01",name:"Strategy, Scope & Policy",modes:[
+ {id:"AGF-F001",name:"No executive-approved AI policy",sev:"High",lay:"Nobody has written down what the company will and won't do with AI. Every team decides for itself, and no two teams decide the same way."},
+ {id:"AGF-F002",name:"Policy not mapped to operations",sev:"High",lay:"There's a twelve-page AI policy. It lives in a shared drive. Nobody's day-to-day work changed when it was published."},
+ {id:"AGF-F003",name:"No risk-tier taxonomy",sev:"High",lay:"Every AI project is treated the same. A tool that suggests lunch spots gets the same scrutiny as one that declines loan applications."},
+ {id:"AGF-F004",name:"Prohibited-use categories unenforced",sev:"Critical",lay:"The policy says the company will never use AI for a particular purpose. Nothing in any system actually prevents someone from doing it."},
+ {id:"AGF-F005",name:"No accountable executive owner",sev:"High",lay:"Ask who owns AI risk and you get four names, a committee, and a shrug."},
+ {id:"AGF-F006",name:"Policy unversioned / no change control",sev:"Moderate",lay:"Someone edited the AI policy in March. Nobody can say what it said in February, or who changed it, or why."},
+ {id:"AGF-F007",name:"Strategy–execution disconnect",sev:"Moderate",lay:"Leadership announced an AI strategy. The projects actually being funded have very little to do with it."},
+ {id:"AGF-F008",name:"No value measurement for the AI programme",sev:"Moderate",lay:"The AI programme has been running eighteen months. When the CFO asks what it delivered, the answer is a list of projects, not a number — so at the next budget cycle, governance reads as pure cost."}]},
+
+{id:"AGF-TA02",name:"Intake & Discovery",modes:[
+ {id:"AGF-F010",name:"Intake bypass",sev:"High",lay:"A team bought an AI tool on a corporate card, rolled it out to forty people, and the governance team found out when someone mentioned it in an unrelated meeting.",
+  full:{desc:"A use case reaches production without ever entering the governance intake process. It is never tiered, never reviewed, and never approved — so no downstream control in the lifecycle can attach to it.",
+  variants:[".01 Procurement path — AI purchased as software and never flagged as AI",".02 Embedded-SaaS path — AI features switched on inside an already-approved vendor tool",".03 Low-code and citizen-developer path",".04 Individually adopted tooling brought into a team workflow"],
+  sectors:"Cross-sector",
+  ind:["AI expenditure appearing with no corresponding intake record","SaaS AI features enabled without a change request","Model or API traffic originating from teams with no registered use case","Vendor renewal documentation describing capabilities absent from the register"],
+  causes:["Intake operates as a request rather than a gate, so nothing structurally prevents bypass","Procurement and governance workflows are not integrated","Intake is perceived as slow, so delivery teams route around it — see AGF-F027 and AGF-F037"],
+  mit:["Integrate procurement with governance so AI expenditure triggers intake automatically","Scan for AI features newly enabled within the existing SaaS estate","Make the gate structural by tying it to funding release or access provisioning","Run amnesty-based discovery drives that surface existing bypasses without penalty","Address review throughput first — enforcement without a fast path drives bypass underground"],
+  map:[
+   ["EU AI Act","Art. 26 — deployer obligations, including use in accordance with instructions. Cannot be discharged for a system the organization does not know it operates.","Deployer","future"],
+   ["EU AI Act","Art. 4 — AI literacy across staff operating AI systems","Provider & deployer","live"],
+   ["NIST AI RMF","GOVERN-1, MAP-1 — inventory and context establishment","Organization","stayed"],
+   ["ISO/IEC 42001","Clause 6.1 planning; Clause 8.1 operational planning and control","Organization","stayed"],
+   ["SR 26-2","Model inventory completeness and scope determination","Banking organization","live"]],
+  rel:"AGF-F011, AGF-F015, AGF-F027, AGF-F037, AGF-F091",
+  ref:"No single canonical public incident. Prevalence is supported by Verizon DBIR 2026 and IBM/Ponemon 2025 findings on unauthorized AI use.",
+  tiers:"Tiers 1–2"}},
+ {id:"AGF-F011",name:"Unsanctioned AI use",sev:"Critical",lay:"Half the department is pasting work into a free chatbot on their phones. It isn't on any list, because nobody ever decided to use it — people just started.",
+  full:{desc:"Individuals use unsanctioned AI tools on corporate data and devices, entirely outside any governance perimeter. Distinct from intake bypass in that no organizational adoption decision occurs at all — adoption is individual and invisible.",
+  sectors:"Cross-sector; consequences most acute in banking, biopharma, and insurance where the underlying data is regulated",
+  ind:["Personal-account access to AI services from corporate devices","Cloud access security telemetry showing traffic to consumer AI domains","Expense claims for individual AI subscriptions","Sensitive document volume moving toward consumer AI endpoints"],
+  causes:["Sanctioned tooling is slower, less capable, or unavailable for the task","No approved-tool catalog exists, so there is nothing concrete to comply with","An enforcement-only posture drives usage further underground rather than eliminating it","Pent-up demand created by slow or opaque approval — see AGF-F037"],
+  mit:["Provide fast sanctioned pathways rather than relying on prohibition alone","Apply redaction and data-loss controls at the egress point","Publish an approved-tool catalog with a genuinely fast addition process","Lead with amnesty-based discovery before enforcement"],
+  map:[
+   ["EU AI Act","Art. 4 — AI literacy obligation, in force since 2 Feb 2025. The clearest currently-enforceable hook for ungoverned staff use.","Provider & deployer","live"],
+   ["EU AI Act","Art. 50 — where unsanctioned output reaches customers, the disclosure duty still attaches","Deployer","live"],
+   ["NIST AI RMF","GOVERN-1, MAP-1 — inventory and context","Organization","stayed"],
+   ["ISO/IEC 42001","Clause 4.1 context; A.2 policies related to AI; A.9 use of AI systems","Organization","stayed"],
+   ["SR 26-2","Inventory and scope determination","Banking organization","live"]],
+  rel:"AGF-F010, AGF-F052, AGF-F037",
+  ref:"Widely reported corporate source-code exposure through consumer AI assistants (2023) led to internal prohibitions at several large manufacturers. Netskope 2026 reports 47% of generative AI users on personal, unmanaged accounts.",
+  tiers:"Tier 1"}},
+ {id:"AGF-F012",name:"Incomplete intake — context, data or owner missing",sev:"Moderate",lay:"The intake form was submitted with 'TBD' for data sources and 'various' for the owner. It was approved anyway, because sending it back would have taken another three weeks."},
+ {id:"AGF-F013",name:"No continuous or adaptive intake",sev:"Moderate",lay:"Intake happens once a quarter in a big batch. Anything that comes up in between either waits three months or quietly skips the process."},
+ {id:"AGF-F014",name:"Duplicate use cases undetected",sev:"Moderate",lay:"Three teams built three versions of the same document summarizer. None of them knew about the others. All three went through review separately."},
+ {id:"AGF-F015",name:"Vendor-supplied AI uncaptured in inventory",sev:"High",lay:"The HR system the company has used for years quietly added AI-driven candidate ranking in an update. It's now an AI system, but it's still filed as an HR system."},
+ {id:"AGF-F016",name:"Agentic components not distinguished from models",sev:"High",lay:"The register says 'AI assistant.' It's actually an agent that can send emails and update records on its own — which is a completely different risk, recorded as if it were the same one."},
+ {id:"AGF-F017",name:"Fragmented intake surfaces",sev:"High",lay:"Submitting an idea means filling out four different forms owned by four different teams, with most of the questions repeated across all of them. Most people fill out one and stop."},
+ {id:"AGF-F018",name:"No triage or routing layer",sev:"High",lay:"An idea gets submitted, sits with the wrong team for two weeks, is forwarded to a second team, who forward it to a third. Nobody rejected it. It just circulated until the submitter gave up.",
+  full:{desc:"Submissions enter the organization with no upfront triage step that determines where they belong. Items route by guesswork, bounce between functions, and accumulate delay that is invisible in any single team's metrics because no single team ever held the item long enough to own the wait.",
+  sectors:"Cross-sector; worst where innovation, operational excellence, and AI governance run as separate intake channels",
+  ind:["Submissions with multiple reassignments before first substantive review","Elapsed time far exceeding the sum of active review time","Submitters re-submitting the same idea through a different channel","No single queue where all incoming requests are visible"],
+  causes:["Multiple teams each built their own intake channel independently","No agreed criteria for which path a submission belongs on","Routing is a judgement call made by whoever receives the item first","Nobody owns the end-to-end submitter experience"],
+  mit:["Establish a single upfront triage step preceding all routing decisions","Publish explicit routing criteria so classification is repeatable rather than discretionary","Make the full queue visible across functions so bouncing is observable","Measure and report elapsed time from submission, not active time per team","Assign ownership of the submission experience to a named role"],
+  map:[
+   ["NIST AI RMF","GOVERN-2 — accountability structures and role clarity","Organization","stayed"],
+   ["ISO/IEC 42001","Clause 5.3 — organizational roles, responsibilities and authorities","Organization","stayed"],
+   ["SR 26-2","Governance and accountability expectations","Banking organization","live"],
+   ["No direct obligation","Process-design failure with no specific statutory hook. Mapped for completeness, not compliance.","Organization","stayed"]],
+  rel:"AGF-F017, AGF-F044, AGF-F010, AGF-F086",
+  ref:"Manifests as submitter attrition and shadow adoption rather than as a reportable incident.",
+  tiers:"Tiers 1–3"}}]},
+
+{id:"AGF-TA03",name:"Risk Assessment & Tiering",modes:[
+ {id:"AGF-F020",name:"No consistent scoring methodology",sev:"High",lay:"Two reviewers assess similar projects and reach different conclusions, because the scoring criteria exist in their heads rather than on paper."},
+ {id:"AGF-F021",name:"Tier assigned once, never revisited",sev:"High",lay:"A tool was rated low risk when it drafted internal emails. It now drafts customer communications. It is still rated low risk."},
+ {id:"AGF-F022",name:"Miscategorization — high-impact rated low",sev:"Critical",lay:"A system that influences who gets hired was filed as a productivity tool, because it doesn't make the final call — a person does, after reading its ranking."},
+ {id:"AGF-F023",name:"Transparency-triggering uses not flagged",sev:"High",lay:"Customers are chatting with an AI agent and nobody told them. Nothing in the assessment ever asked whether they would need to be told.",
+  full:{desc:"Use cases that trigger a legal duty to disclose AI involvement to an end user are not identified as such during assessment, so the disclosure obligation is never implemented anywhere downstream. Art. 50 applies by system function rather than risk tier, so the Annex III deferral provides no relief here.",
+  sectors:"Cross-sector; acute for organizations with EU-facing customers or operations",
+  ind:["Customer-facing AI outputs carrying no disclosure language","No transparency-trigger field on the risk assessment form","AI-generated service or marketing content published without labelling","No record of which use cases touch EU data subjects"],
+  causes:["The assessment framework predates the transparency obligations and was never revised","Transparency treated as a legal question rather than an assessment field","Assumption that an internal-only classification excludes disclosure duties","Assumption that the high-risk deferral moved Art. 50 as well — it did not"],
+  mit:["Add an explicit transparency-trigger question to the assessment form","Maintain a disclosure register mapped to individual use cases","Automate machine-readable marking where synthetic content is generated","Re-screen the existing portfolio rather than only new intake"],
+  map:[
+   ["EU AI Act","Art. 50(1) — disclosure that a person is interacting with an AI system","Provider & deployer","live"],
+   ["EU AI Act","Art. 50(2) — machine-readable marking of synthetic content. Systems placed on the market before 2 Aug 2026 have until 2 Dec 2026.","Provider","live"],
+   ["EU AI Act","Art. 50(4) — deepfake and public-interest text disclosure","Deployer","live"],
+   ["Colorado SB 26-189","Pre-use notice that an automated decision-making technology will be used","Developer & deployer","future"],
+   ["NIST AI RMF","GOVERN-4, MAP-3 — transparency and impact characterization","Organization","stayed"],
+   ["ISO/IEC 42001","A.8 — information for interested parties","Organization","stayed"]],
+  rel:"AGF-F024, AGF-F004, AGF-F092",
+  ref:"Art. 50 became enforceable 2 Aug 2026. Applies by system function, not risk tier, so mainstream generative deployments are in scope regardless of the Annex III deferral to Dec 2027.",
+  tiers:"Tiers 2–3"}},
+ {id:"AGF-F024",name:"No regulatory trigger built into assessment",sev:"High",lay:"The assessment asks thorough questions about data and security. It never asks which laws apply, so nobody finds out until someone in legal reads about it in the news."},
+ {id:"AGF-F025",name:"Aggregate portfolio risk unassessed",sev:"High",lay:"Every individual AI project is low risk. Nobody has asked what it means that forty of them now depend on the same vendor's model."},
+ {id:"AGF-F026",name:"Bias and fairness risk unassessed",sev:"Critical",lay:"A screening tool has been running for two years. Nobody has ever checked whether it treats different groups of applicants the same way."},
+ {id:"AGF-F027",name:"Undifferentiated review burden",sev:"High",lay:"Every AI request — including one to summarize meeting notes — goes through the full security, architecture, privacy and legal review. It takes eleven weeks, the reviewers are drowning, and teams have quietly stopped asking.",
+  full:{desc:"Governance applies the same depth of review to every use case regardless of risk. The result is not more safety: reviewer capacity is consumed by low-risk items, genuinely high-risk items receive no additional attention because there is none left to give, and the delay drives teams out of the process entirely.",
+  sectors:"Cross-sector; most acute in regulated industries where review functions are already at capacity",
+  ind:["Identical review path and duration across trivially and materially different use cases","Specialist review functions reporting sustained backlog","Review cycle times measured in months","Rising proportion of use cases discovered after deployment rather than at intake","Reviewers approving late-stage items without substantive examination in order to clear queue"],
+  causes:["Risk tiering was never established, or exists on paper without routing consequences — see AGF-F003","Caution is expressed by adding reviewers rather than by directing them","No mechanism exists to route by risk, so the only safe default is to route everything everywhere","Fear that a fast path will be blamed if something goes wrong"],
+  mit:["Establish tiered intake where low-risk use cases follow a materially shorter path","Route by questionnaire trigger so only the relevant specialist functions are engaged","Require attestation to core controls on the fast path, with sampled post-hoc validation","Measure reviewer load and cycle time per tier, and publish both","Treat sustained backlog as a governance failure in its own right rather than a resourcing complaint"],
+  map:[
+   ["SR 26-2","Materiality-proportionate validation — the 2026 guidance explicitly moves toward tailoring and risk-based scaling, making undifferentiated review a departure from current supervisory expectation rather than a conservative reading of it","Banking organization","live"],
+   ["EU AI Act","Art. 9 — risk management system proportionate to risk","Provider","future"],
+   ["NIST AI RMF","MAP-1, MANAGE-1 — risk prioritization and resource allocation","Organization","stayed"],
+   ["ISO/IEC 42001","Clause 6.1 — actions to address risks and opportunities, proportionate to impact","Organization","stayed"]],
+  rel:"AGF-F003, AGF-F010, AGF-F011, AGF-F035, AGF-F037",
+  ref:"Presents as reviewer burnout and shadow adoption. Rarely reported as an incident, because the failure is the absence of governance rather than its malfunction.",
+  tiers:"Tiers 2–4"}}]},
+
+{id:"AGF-TA04",name:"Approval & Authorization",modes:[
+ {id:"AGF-F030",name:"Unauthorized or unqualified approver",sev:"High",lay:"The approval was signed by whoever was available that week, not by anyone with the authority or the background to judge it."},
+ {id:"AGF-F031",name:"Stale approval",sev:"High",lay:"The system was approved two years ago. The vendor has swapped the underlying model twice since then. The record still says 'approved,' and technically it is.",
+  full:{desc:"A use case continues to operate under an approval that has been invalidated by a subsequent change — to the model, the vendor, the data, or the applicable regulation — because no re-review was triggered.",
+  variants:[".01 Following a model change — the underlying model was replaced or retrained",".02 Following a regulatory change — the rule the approval relied upon has moved"],
+  sectors:"Cross-sector; consequences highest in banking and biopharma",
+  ind:["Approval dates materially older than the last model or vendor change","Approval records with no expiry","Regulatory change logs with no linked re-review activity","Vendor release notes with no corresponding governance event"],
+  causes:["Approvals modelled as one-time events rather than time-boxed states","No structural linkage between change management and the approval record","No owner monitoring regulatory change against the existing portfolio"],
+  mit:["Time-box every approval with a defined expiry","Trigger re-review on model, vendor, data, or regulatory change","Link change records to approval records structurally rather than by convention","Operate a regulatory-change-to-portfolio impact process"],
+  map:[
+   ["EU AI Act","Art. 72 — post-market monitoring system, running across the operational lifetime. Corrected in v0.3 from Art. 61, cited in error in earlier versions.","Provider","future"],
+   ["EU AI Act","Art. 9 — risk management as a continuous iterative process, not a one-time assessment","Provider","future"],
+   ["NIST AI RMF","MANAGE-2, GOVERN-1 — ongoing management and policy currency","Organization","stayed"],
+   ["ISO/IEC 42001","Clause 9 performance evaluation; Clause 10 improvement","Organization","stayed"],
+   ["SR 26-2","Ongoing monitoring and periodic review","Banking organization","live"],
+   ["GAMP 5","Periodic review requirements","Regulated organization","stayed"]],
+  rel:"AGF-F070, AGF-F071, AGF-F094",
+  ref:"Typically surfaced during examination or inspection rather than as a publicly reported incident.",
+  tiers:"Tiers 4–5"}},
+ {id:"AGF-F032",name:"Use outside approved scope",sev:"High",lay:"A tool approved to draft internal summaries is now generating content that goes to customers. No new approval was sought, because to everyone involved it felt like the same tool doing the same thing.",
+  full:{desc:"A system approved for one narrow purpose is progressively used for others. Each extension appears minor in isolation; the cumulative result is a system operating well outside its assessed and approved risk profile.",
+  sectors:"Manufacturing, insurance, banking, professional services",
+  ind:["Usage patterns diverging from the documented intended-use statement","New user groups onboarded with no corresponding governance event","Output types appearing that were absent from the original assessment","Vendor capability expansion adopted without re-intake"],
+  causes:["No documented use-case boundary statement exists to be breached","Success in the approved use invites informal extension","Nothing monitors actual usage against approved scope"],
+  mit:["Require an explicit use-case boundary statement at the point of approval","Monitor usage against declared boundaries","Define re-intake triggers for scope extension","Treat vendor capability changes as a governance event"],
+  map:[
+   ["EU AI Act","Art. 26 — deployers must use the system in accordance with the provider's instructions for use. Use outside intended purpose is the clearest deployer-side breach in the Act.","Deployer","future"],
+   ["EU AI Act","Art. 50 — a scope extension into customer-facing output activates transparency duties immediately, independent of the high-risk deferral","Deployer","live"],
+   ["EU AI Act","Art. 25 — a deployer who substantially modifies purpose may itself become a provider","Deployer","future"],
+   ["NIST AI RMF","MAP-1, MANAGE-1 — intended purpose and context","Organization","stayed"],
+   ["ISO/IEC 42001","A.9 — responsible use of AI systems; Clause 8 operational control","Organization","stayed"],
+   ["GxP","Intended-use documentation and validated state","Regulated organization","stayed"],
+   ["SR 26-2","Use consistent with validation scope","Banking organization","live"]],
+  rel:"AGF-F031, AGF-F063, AGF-F015",
+  ref:"Commonly identified during internal audit rather than through public incident reporting.",
+  tiers:"Tiers 3–4"}},
+ {id:"AGF-F033",name:"Conditional-approval conditions never verified",sev:"High",lay:"Approval was granted on condition the team added human review and logging before launch. They launched. Nobody ever checked whether they added either."},
+ {id:"AGF-F034",name:"No defined responsibility model for approval",sev:"Moderate",lay:"Four people have to sign off. None of them can say which parts they are each responsible for, so each waits to see what the others do first."},
+ {id:"AGF-F035",name:"Approval without substantive review",sev:"High",lay:"The committee approves everything. Nobody can recall the last time a request was sent back with a material objection."},
+ {id:"AGF-F036",name:"Emergency approval with no subsequent review",sev:"High",lay:"Something urgent got approved in a hallway conversation to hit a deadline. The proper review was going to happen right after launch. That was a year ago."},
+ {id:"AGF-F037",name:"No service level on review decisions",sev:"High",lay:"Teams submit a request and hear nothing for six weeks. There's no published turnaround time, so nothing is ever technically late — and people stop waiting and start improvising.",
+  full:{desc:"No committed turnaround exists for governance decisions. Because nothing is late by definition, delay is never escalated, never measured, and never treated as a defect. The predictable consequence is that teams route around governance rather than wait for it.",
+  sectors:"Cross-sector",
+  ind:["No published turnaround commitment for any review stage","Submitters contacting reviewers directly to ask about status","Items with no status change for extended periods and no escalation triggered","Pent-up demand visible as a surge whenever a fast path is announced","Rising discovery of deployed systems that never entered review"],
+  causes:["Governance designed around thoroughness with no throughput commitment","No owner of end-to-end cycle time","Escalation paths defined for risk but not for delay","Capacity constraints treated as immovable rather than as a governable parameter"],
+  mit:["Publish service levels per review tier and report performance against them","Trigger automatic escalation when an item exceeds its service level","Operate a regular triage cadence rather than ad-hoc scheduling","Make cycle time a reported governance metric alongside risk metrics","Treat sustained service-level breach as a finding, not as background noise"],
+  map:[
+   ["NIST AI RMF","GOVERN-2, GOVERN-4 — accountability structures and organizational practice","Organization","stayed"],
+   ["ISO/IEC 42001","Clause 5.3 roles and authorities; Clause 9.1 monitoring and measurement","Organization","stayed"],
+   ["SR 26-2","Governance and accountability expectations","Banking organization","live"],
+   ["No direct obligation","No instrument mandates a governance service level. The regulatory consequence is indirect: latency causes the bypass and unsanctioned-use failures that do carry obligations.","Organization","stayed"]],
+  rel:"AGF-F027, AGF-F011, AGF-F010, AGF-F044, AGF-F086",
+  ref:"Presents as shadow adoption and submitter attrition rather than as a reportable incident. The causal link between review latency and unsanctioned use is the most consistent pattern in this catalog.",
+  tiers:"Tiers 2–4"}},
+ {id:"AGF-F038",name:"No precedent reuse",sev:"Moderate",lay:"The same question — can we use this kind of model with this kind of data — has now been answered eight times by eight different reviewers. There's no record of the previous answers, so the ninth team starts from scratch.",
+  full:{desc:"Each review is conducted from first principles because prior decisions are not captured in reusable form. Reviewer effort is spent re-deriving conclusions that already exist, decisions drift as different reviewers reach different answers to the same question, and the organization cannot demonstrate consistency of treatment.",
+  sectors:"Cross-sector; compounding cost rises with portfolio size",
+  ind:["Reviewers unable to cite a prior decision on a materially identical question","Similar use cases receiving different conditions or outcomes","No searchable repository of past decisions, guidance, or accepted patterns","Review duration not decreasing as volume increases"],
+  causes:["Decisions recorded as approvals rather than as reasoning","No repository for guidance, patterns, or reference architectures","Review treated as a per-item task rather than as an accumulating knowledge base","Reviewer turnover with no capture of accumulated judgement"],
+  mit:["Maintain a searchable repository of decisions, guidance, and accepted patterns","Record the reasoning, not only the outcome","Define pre-approved patterns that qualifying use cases can adopt without full review","Publish playbooks for recurring use-case archetypes","Measure the proportion of reviews resolved by precedent as a programme health metric"],
+  map:[
+   ["NIST AI RMF","GOVERN-1, GOVERN-4 — policy, process and organizational knowledge","Organization","stayed"],
+   ["ISO/IEC 42001","Clause 7.5 — documented information","Organization","stayed"],
+   ["SR 26-2","Documentation expectations supporting consistent treatment","Banking organization","live"]],
+  rel:"AGF-F027, AGF-F037, AGF-F020, AGF-F091",
+  ref:"Presents as persistent reviewer load and inconsistent treatment of comparable cases.",
+  tiers:"Tiers 3–5"}},
+ {id:"AGF-F039",name:"Review sequencing mismatch",sev:"High",lay:"Review step three requires test results that only get produced at step five. Every request reaches step three, gets sent back, and goes around again. Everyone involved knows. Nobody has changed the order.",
+  full:{desc:"Governance gates are ordered so that an earlier stage requires artifacts produced by a later one. Items cycle repeatedly between stages, consuming reviewer capacity and elapsed time without adding assurance. The failure is structural: no amount of additional effort or resourcing resolves it, because the loop is built into the sequence.",
+  sectors:"Cross-sector; most visible in organizations with formal multi-stage review",
+  ind:["Items repeatedly transitioning backward between the same two stages","Reviewers routinely rejecting for missing artifacts rather than for substance","Average number of stage transitions materially exceeding the number of stages","Teams pre-emptively producing artifacts out of sequence to avoid the loop","Stage-level metrics that look healthy while end-to-end cycle time does not"],
+  causes:["Stages designed independently by the functions that own them","No end-to-end process owner with authority to reorder gates","Artifact dependencies never mapped against stage sequence","Loop normalized over time and re-described as 'how the process works'"],
+  mit:["Map artifact dependencies against stage order and reorder where they conflict","Introduce an explicit stage for producing prerequisite artifacts before the gate requiring them","Assign end-to-end process ownership with authority to change sequencing","Instrument backward transitions as a first-class metric","Review process design when backward transition rates exceed a defined threshold"],
+  map:[
+   ["EU AI Act","Art. 17 — quality management system covering the design and sequence of control processes. EN 18286:2026 is the supporting harmonized standard.","Provider","future"],
+   ["NIST AI RMF","GOVERN-2, MANAGE-1 — process design and accountability","Organization","stayed"],
+   ["ISO/IEC 42001","Clause 8.1 — operational planning and control","Organization","stayed"],
+   ["GAMP 5","Lifecycle stage sequencing and gating","Regulated organization","stayed"],
+   ["SR 26-2","Validation process design","Banking organization","live"]],
+  rel:"AGF-F044, AGF-F037, AGF-F060, AGF-F086",
+  ref:"Widely experienced, rarely documented — the loop is usually described as a resourcing problem rather than a design defect.",
+  tiers:"Tiers 3–5"}}]},
+
+{id:"AGF-TA05",name:"Human Oversight & Accountability",modes:[
+ {id:"AGF-F040",name:"Missing human-in-the-loop trigger",sev:"Critical",lay:"The policy says a person reviews every high-value decision. In the actual system, there is no screen where a person could do that, and no record that anyone ever has.",
+  full:{desc:"A decision pathway that requires human review under policy or law has no mechanism that enforces the review. The system decides and acts autonomously in cases where a human was supposed to intervene.",
+  sectors:"Banking (credit, fraud), insurance (claims), employment screening, healthcare",
+  ind:["Decision logs containing no human-review event","Automated approval rates at or near 100%","No reviewer identity captured on high-impact decisions","Review queue depth of zero on a pathway that should be generating reviews"],
+  causes:["Human oversight specified in policy prose but never implemented as a system control","Review thresholds defined qualitatively and therefore unenforceable","Volume pressure leads to the checkpoint being disabled without a governance decision"],
+  mit:["Define review thresholds numerically and enforce them in the system","Make the checkpoint blocking rather than advisory","Run sampling audits of automated decisions to confirm the pathway operates","Capture and retain reviewer identity as evidence"],
+  map:[
+   ["EU AI Act","Art. 14 — human oversight designed into high-risk systems by the provider","Provider","future"],
+   ["EU AI Act","Art. 26(2) — deployers must assign human oversight to natural persons with the necessary competence, training and authority","Deployer","future"],
+   ["Colorado SB 26-189","Meaningful human review of significant ADMT-driven decisions, on request","Developer & deployer","future"],
+   ["NIST AI RMF","MANAGE-1, GOVERN-3 — risk treatment and workforce accountability","Organization","stayed"],
+   ["ISO/IEC 42001","A.9 — responsible use, including human oversight of AI systems","Organization","stayed"],
+   ["SR 26-2","Control environment expectations","Banking organization","live"]],
+  rel:"AGF-F041, AGF-F045, AGF-F043",
+  ref:"A recurring contributing factor across publicly reported automated-decision harms in the AI Incident Database.",
+  tiers:"Tiers 3–5"}},
+ {id:"AGF-F041",name:"Human review present but not substantive",sev:"Critical",lay:"There is a review step. The reviewer processes four hundred items an hour. It is a button, not a judgement."},
+ {id:"AGF-F042",name:"Orphaned ownership",sev:"High",lay:"The person who built and owned the system left in March. The system is still running, still making decisions, and has no owner."},
+ {id:"AGF-F043",name:"No escalation path",sev:"High",lay:"Someone on the front line notices the AI is producing something wrong. There is no route for that concern to go anywhere, so they work around it and tell a colleague."},
+ {id:"AGF-F044",name:"Diffused accountability across functions",sev:"High",lay:"A decision needs risk, legal, data, and the business to agree. Getting them in the same room takes three weeks. The decision itself takes ten minutes.",
+  full:{desc:"Responsibility is spread across business, data, technology, legal, and risk functions with no single owner. Reviews stall in handoffs, decisions require assembling people who do not report to one another, and when something fails nobody is accountable because everybody was involved.",
+  sectors:"Cross-sector; most pronounced in large matrixed organizations",
+  ind:["Long elapsed time against short active working time on governance reviews","Use cases stalling between functions rather than within them","No named owner recorded on a material proportion of the register","Escalations resolved by seniority rather than by defined authority"],
+  causes:["Governance designed as a committee rather than as a process","No responsibility model, or one that exists on paper only","Each function optimizes its own step while nobody owns end-to-end cycle time"],
+  mit:["Publish a responsibility model with named accountable roles at each stage","Operate a single orchestration workspace so handoffs are visible","Set per-stage service levels with escalation on breach","Measure and report end-to-end cycle time rather than per-step throughput"],
+  map:[
+   ["EU AI Act","Art. 26(2) — the deployer must assign oversight to identified natural persons, which cannot be satisfied by a committee with no named holder","Deployer","future"],
+   ["NIST AI RMF","GOVERN-2 — accountability structures; GOVERN-4 — organizational culture and process","Organization","stayed"],
+   ["ISO/IEC 42001","Clause 5.3 — roles, responsibilities and authorities","Organization","stayed"],
+   ["SR 26-2","Governance and accountability expectations","Banking organization","live"]],
+  rel:"AGF-F042, AGF-F034, AGF-F005, AGF-F018",
+  ref:"Manifests as slow delivery and unattributable failure rather than as a discrete incident.",
+  tiers:"Tiers 2–4"}},
+ {id:"AGF-F045",name:"No override or appeal route for affected individuals",sev:"Critical",lay:"A customer was declined by an automated decision. There is no way for them to ask a human to look at it again, and no one inside the company who could act if they did."},
+ {id:"AGF-F046",name:"Governance owner without capacity",sev:"High",lay:"One person owns AI governance. It is not their only job, or their second. They are in meetings all day, and the governance work happens on weekends — or it doesn't."},
+ {id:"AGF-F047",name:"Process communication diverges from routing logic",sev:"Moderate",lay:"The screen tells the submitter their request is going to expert review. The rules actually send it somewhere else entirely. Nobody notices until someone goes looking for a review that never happened."}]},
+
+{id:"AGF-TA06",name:"Data Governance & Provenance",modes:[
+ {id:"AGF-F050",name:"Undocumented data lineage",sev:"High",lay:"Ask where the training data came from and the answer is the name of a person who might remember."},
+ {id:"AGF-F051",name:"Data-use rights and consent unverified",sev:"Critical",lay:"Customer data collected for billing is now training a model. Nobody checked whether customers agreed to that when they handed it over."},
+ {id:"AGF-F052",name:"Sensitive data in ungoverned tools",sev:"Critical",lay:"Confidential documents are being pasted into tools the company doesn't control, to get a quick summary before a meeting."},
+ {id:"AGF-F053",name:"No data-quality gate before use",sev:"High",lay:"The model started producing strange results. It turns out the input data has been broken for five weeks. Nothing was checking."},
+ {id:"AGF-F054",name:"Residency and cross-border rules unenforced",sev:"High",lay:"Data that is supposed to stay in one country is being processed by a service running somewhere else. Nobody set out to do that; it's just where the vendor's capacity was."},
+ {id:"AGF-F055",name:"Retention and deletion not applied to AI artifacts",sev:"High",lay:"The company deletes customer records after seven years. The prompts and AI outputs containing those same records are kept indefinitely, because nobody classified them as records."},
+ {id:"AGF-F056",name:"Conflicting sources of truth",sev:"High",lay:"Two dashboards show different numbers for the same thing, because they pull from two systems that disagree. Both are being used to make decisions, and nobody knows which one is right."}]},
+
+{id:"AGF-TA07",name:"Validation, Testing & Documentation",modes:[
+ {id:"AGF-F060",name:"No independent validation before first use",sev:"Critical",lay:"The team that built the model is the team that checked whether it works."},
+ {id:"AGF-F061",name:"Validation not proportionate to materiality",sev:"High",lay:"A model that sets pricing across the whole business received the same one-page review as a tool that reformats slides."},
+ {id:"AGF-F062",name:"System documentation incomplete",sev:"Moderate",lay:"The documentation is a screenshot and a sentence. Nobody outside the original team could work out what the system actually does."},
+ {id:"AGF-F063",name:"No intended-use statement",sev:"High",lay:"There is no written statement of what the system is for, so when someone asks whether a new use is in scope, there is nothing to compare it against."},
+ {id:"AGF-F064",name:"Assumptions and limitations undocumented",sev:"High",lay:"The model assumes customers behave the way they did three years ago. That assumption is real, load-bearing, and written down nowhere."},
+ {id:"AGF-F065",name:"No fairness testing evidence retained",sev:"Critical",lay:"Fairness testing was done once, by the team that built it, in a notebook on somebody's laptop. Then the auditor asked for evidence.",
+  full:{desc:"Fairness testing was either not performed or was performed without retaining evidence in a form that satisfies an external auditor. Under several regimes the absence of evidence is itself the violation, independent of whether the system is in fact biased.",
+  sectors:"Employment screening, lending, insurance underwriting, tenant screening",
+  ind:["No independent audit within the last twelve months on in-scope systems","Testing performed by the building team with no independence","Results held in analyst notebooks rather than in a retained record","No published summary where publication is required"],
+  causes:["Fairness testing treated as a build-phase activity rather than a recurring obligation","No clear determination of which systems fall in scope of which jurisdiction","Independence requirements misread as satisfied by internal second-line review"],
+  mit:["Commission annual independent audits for in-scope automated employment decision tools","Retain evidence in an audit-ready system of record rather than in analysis artifacts","Maintain an in-scope determination register per jurisdiction","Publish required summaries on schedule"],
+  map:[
+   ["NYC Local Law 144","Annual independent bias audit; published results summary; candidate notice. The primary enforced anchor for this failure mode in the United States.","Employer / employment agency","live"],
+   ["EU AI Act","Annex III — employment and worker management classified high-risk; Art. 10 data governance including bias examination","Provider","future"],
+   ["NIST AI RMF","MEASURE-2 — evaluation of AI system performance and trustworthiness characteristics","Organization","stayed"],
+   ["ISO/IEC 42001","A.5 — assessing impacts of AI systems; A.6 lifecycle controls","Organization","stayed"],
+   ["Colorado SB 26-189","Not applicable to bias testing. SB 26-189 removed the algorithmic-discrimination duty and the annual impact-assessment mandate that SB 24-205 had contained. Corrected in v0.3.","Developer & deployer","future"]],
+  rel:"AGF-F026, AGF-F090, AGF-F060",
+  ref:"Compliance studies since 2023 have repeatedly found low rates of published audit summaries among employers apparently in scope of NYC Local Law 144.",
+  tiers:"Tiers 3–5"}},
+ {id:"AGF-F066",name:"Generative and agentic systems governed under legacy assumptions",sev:"Critical",lay:"A generative assistant is being validated using the checklist written for statistical credit models. The checklist asks for things that don't apply and misses everything that does.",
+  full:{desc:"Generative and agentic systems are either forced into a validation framework designed for deterministic statistical models, or fall into a governance gap because the applicable guidance explicitly excludes them. Both produce controls that do not fit the risk.",
+  sectors:"Banking most acutely; applicable wherever legacy model risk frameworks exist",
+  ind:["Generative use cases validated using deterministic backtesting methods","No hallucination or groundedness monitoring in place","Agent autonomy levels and tool-access scopes undocumented","Governance guidance predating generative adoption, unrevised"],
+  causes:["Supervisory guidance expressly places generative and agentic AI out of scope, leaving institutions to self-determine controls with no template","Existing frameworks are the only available machinery, so they are reused by default","Agentic capability changes faster than governance revision cycles"],
+  mit:["Establish a dedicated generative and agentic standard rather than extending the model standard","Implement hallucination, groundedness, and drift monitoring appropriate to non-deterministic output","Maintain an agent registry capturing capability, autonomy level, and tool access","Define validation methods suited to probabilistic systems"],
+  map:[
+   ["SR 26-2","Footnote 3 to § II places generative and agentic AI outside the scope of model risk management, leaving general safety-and-soundness expectations. Institutions must self-determine controls with no supervisory template.","Banking organization","live"],
+   ["NIST AI RMF","NIST AI 600-1 Generative AI Profile (Jul 2024) — the closest available substitute framework","Organization","stayed"],
+   ["EU AI Act","GPAI obligations under Chapter V — legal effect since 2 Aug 2025, Commission enforcement powers since 2 Aug 2026","Provider","live"],
+   ["ISO/IEC 42001","Clause 6.1 — planning for risks and opportunities; A.6 lifecycle controls","Organization","stayed"]],
+  rel:"AGF-F016, AGF-F061, AGF-F081",
+  ref:"A structural gap rather than a discrete incident, created by the 17 Apr 2026 supersession of SR 11-7 and its explicit carve-out.",
+  tiers:"Tiers 3–5"}},
+ {id:"AGF-F067",name:"No production-readiness gate",sev:"Critical",lay:"The idea was reviewed and approved at the concept stage, when it was a slide. It was then built, changed substantially along the way, and went live. Nothing looked at it again before launch.",
+  full:{desc:"Governance reviews the use case at intake but has no second checkpoint before deployment. Because most material design decisions are made after intake, the system that goes live can differ substantially from the one that was assessed — and nothing in the process is positioned to notice.",
+  sectors:"Cross-sector",
+  ind:["Approval dates consistently preceding build start by a wide margin","No governance event recorded between approval and go-live","Deployed system characteristics differing from the intake record","Production incidents on systems whose governance record shows no issues","No defined criteria for what 'ready to deploy' requires"],
+  causes:["Governance programme built intake-first, with later lifecycle stages never implemented","Assumption that intake approval covers the whole lifecycle","Deployment owned by delivery teams with no governance touchpoint","No agreed production-readiness criteria to gate against"],
+  mit:["Establish an explicit production-readiness review distinct from intake approval","Define readiness criteria covering monitoring, human oversight, rollback, and documentation","Require confirmation that the deployed system matches the assessed system","Gate deployment access or release approval on the readiness review","Treat material design change during build as a re-assessment trigger"],
+  map:[
+   ["EU AI Act","Art. 17 — quality management system covering design, development and pre-market control. EN 18286:2026 is the supporting harmonized standard.","Provider","future"],
+   ["EU AI Act","Art. 9, Art. 13, Art. 14 — obligations that must be satisfied before placing on market or putting into service","Provider","future"],
+   ["NIST AI RMF","MANAGE-1, MEASURE-1 — pre-deployment treatment and measurement","Organization","stayed"],
+   ["ISO/IEC 42001","Clause 8.1 operational planning and control; A.6 AI system life cycle","Organization","stayed"],
+   ["SR 26-2","Validation prior to use","Banking organization","live"],
+   ["GAMP 5","Release and qualification before operational use","Regulated organization","stayed"]],
+  rel:"AGF-F031, AGF-F033, AGF-F060, AGF-F070",
+  ref:"Commonly identified when a production incident traces back to a system whose governance record appears complete because it was assessed at concept stage.",
+  tiers:"Tiers 2–4"}}]},
+
+{id:"AGF-TA08",name:"Deployment & Change Management",modes:[
+ {id:"AGF-F070",name:"No change control over model, prompt or vendor changes",sev:"Critical",lay:"Someone changed the prompt driving a customer-facing assistant. It was a two-line edit. There's no record of who, when, or why, and no way to get back to the old one."},
+ {id:"AGF-F071",name:"Silent vendor model update",sev:"Critical",lay:"The vendor upgraded their model over a weekend. Output quality changed noticeably on Monday. Nobody was told in advance and nothing was re-checked afterwards."},
+ {id:"AGF-F072",name:"Change misclassified as non-material",sev:"High",lay:"'We just switched models' was logged as a minor configuration change, so it skipped review entirely."},
+ {id:"AGF-F073",name:"No rollback plan",sev:"High",lay:"The new version is behaving badly. There is no agreed, tested way to go back to the old one, so the choice is to leave it running or turn it off."},
+ {id:"AGF-F074",name:"Environment drift between test and production",sev:"High",lay:"It worked in testing. Production has different data, different settings, and different permissions, so it doesn't."},
+ {id:"AGF-F075",name:"Governance tooling configuration drift",sev:"High",lay:"The governance workflow in the test system and the one in the live system aren't the same. Records moved between them quietly lose fields, and items disappear from the queues people actually work from."}]},
+
+{id:"AGF-TA09",name:"Monitoring, Drift & Incident",modes:[
+ {id:"AGF-F080",name:"Absent or undocumented drift review",sev:"Critical",lay:"The model's accuracy has been sliding for eight months. Nobody looked, because looking wasn't anybody's job.",
+  full:{desc:"Model or system performance is not monitored for degradation over time, or is monitored informally without retained evidence. Performance decays silently until it surfaces as a business failure or an audit finding.",
+  sectors:"Cross-sector; regulatory consequence highest in banking and biopharma",
+  ind:["No documented drift review within the defined review period","Monitoring dashboards with no owner and no review record","Performance thresholds undefined, so nothing can breach","Alerting configured but routed to an unmonitored channel"],
+  causes:["Monitoring treated as a technical function detached from governance","No thresholds defined at approval, so there is no baseline to drift from","No named owner and no service level for review"],
+  mit:["Define quantitative performance thresholds at the point of approval","Schedule drift reviews producing retained, dated evidence","Assign a named monitoring owner with a defined service level","Route alerting to a monitored, accountable channel"],
+  map:[
+   ["EU AI Act","Art. 72 — post-market monitoring system, documented and proportionate, running across the system's operational lifetime. The monitoring plan forms part of Annex IV technical documentation. Corrected in v0.3 from Art. 61.","Provider","future"],
+   ["EU AI Act","Art. 26(5) — deployers must monitor operation in accordance with instructions for use and inform the provider of risks","Deployer","future"],
+   ["NIST AI RMF","MEASURE-2, MANAGE-4 — ongoing measurement and post-deployment management","Organization","stayed"],
+   ["ISO/IEC 42001","Clause 9 — performance evaluation","Organization","stayed"],
+   ["GAMP 5","Drift detection and periodic review","Regulated organization","stayed"],
+   ["SR 26-2","Ongoing monitoring","Banking organization","live"]],
+  rel:"AGF-F081, AGF-F084, AGF-F031",
+  ref:"Among the most frequently cited technical contributors across AI Incident Database entries involving deployed production systems.",
+  tiers:"Tier 5"}},
+ {id:"AGF-F081",name:"No performance thresholds defined",sev:"High",lay:"Everyone agrees performance should be monitored. Nobody has said what 'bad' looks like, so nothing ever triggers and the monitoring is decorative."},
+ {id:"AGF-F082",name:"No AI-incident definition or reporting channel",sev:"Critical",lay:"Something went wrong with an AI system. Nobody was sure whether it counted as an incident, or who to tell, so it was handled as a bug."},
+ {id:"AGF-F083",name:"No feedback loop from incidents into governance",sev:"Moderate",lay:"The same problem has happened three times. Each time it was fixed. Nothing changed in how things get approved, so it will happen a fourth time."},
+ {id:"AGF-F084",name:"No monitoring owner or service level",sev:"High",lay:"There's a monitoring dashboard. It's genuinely good. No one has opened it since the week it was built."},
+ {id:"AGF-F085",name:"Near-misses uncaptured",sev:"Moderate",lay:"The system nearly caused a serious error and somebody caught it by luck. It was fixed quietly and never written down, so the luck isn't reproducible."},
+ {id:"AGF-F086",name:"No stage-aging or cycle-time metric",sev:"High",lay:"Leadership asks how long approvals are taking. The system can show which stage each item is in, but not how long it's been sitting there — so the real answer is a guess, and it's usually optimistic."}]},
+
+{id:"AGF-TA10",name:"Audit, Evidence & Record Integrity",modes:[
+ {id:"AGF-F090",name:"Evidence gap at audit",sev:"Critical",lay:"Every control worked exactly as designed. The auditor asked for proof. The proof was in someone's email, someone else's chat, and a folder nobody could find.",
+  full:{desc:"A control operated correctly but was not documented in a producible form, so compliance cannot be demonstrated at examination or inspection. The organization did the right thing and still receives the finding.",
+  sectors:"Banking, biopharma, insurance — anywhere external examination occurs",
+  ind:["Evidence assembled reactively in the weeks preceding an examination","Controls described in policy with no corresponding artifact","Evidence scattered across email, chat, and personal drives","Prior findings citing documentation rather than control design"],
+  causes:["Evidence capture is manual and therefore skipped under operational load","No single system of record, so evidence has no natural home","Controls designed for operation rather than for demonstrability"],
+  mit:["Capture evidence in a system of record at the moment the control operates","Link every control explicitly to its evidence artifact","Collect continuously rather than reactively","Design controls to be demonstrable, not merely effective"],
+  map:[
+   ["EU AI Act","Art. 12 — automatic recording of events (logs) over the system lifetime","Provider","future"],
+   ["EU AI Act","Art. 18 — retention of technical documentation for 10 years after placing on market","Provider","future"],
+   ["EU AI Act","Art. 26(6) — deployers must retain logs generated by high-risk systems for at least 6 months","Deployer","future"],
+   ["Colorado SB 26-189","Three-year records retention for ADMT decisions","Developer & deployer","future"],
+   ["NIST AI RMF","GOVERN-1, MANAGE-4 — documented policy and post-deployment records","Organization","stayed"],
+   ["ISO/IEC 42001","Clause 7.5 documented information; Clause 9.2 internal audit","Organization","stayed"],
+   ["GxP","Data integrity — ALCOA+ (attributable, legible, contemporaneous, original, accurate, and enduring)","Regulated organization","stayed"],
+   ["SR 26-2","Documentation expectations","Banking organization","live"]],
+  rel:"AGF-F091, AGF-F093, AGF-F103",
+  ref:"A common category of finding in model and AI governance examinations, where the deficiency is evidentiary rather than operational.",
+  tiers:"Tiers 4–5"}},
+ {id:"AGF-F091",name:"No single system of record",sev:"High",lay:"AI governance records live in a spreadsheet, a ticketing system, three inboxes and a shared drive. There is no single place that is authoritative, so every question has several answers."},
+ {id:"AGF-F092",name:"No regulatory mapping maintained",sev:"High",lay:"The company has controls. Nobody has mapped which control satisfies which regulatory requirement, so every audit starts from zero and takes six weeks."},
+ {id:"AGF-F093",name:"Reactive evidence assembly",sev:"Moderate",lay:"Six weeks before the examination, four people stop their day jobs to reconstruct evidence for the previous two years."},
+ {id:"AGF-F094",name:"No periodic re-attestation",sev:"High",lay:"Systems were approved once. There is no point at which anyone is asked to confirm they're still appropriate, still used as described, or still needed."},
+ {id:"AGF-F095",name:"No portfolio-level visibility",sev:"High",lay:"The board asks how many AI systems the company runs. The honest answer is that nobody knows.",
+  full:{desc:"Governance operates case by case with no aggregated view. Leadership cannot state how many AI systems exist, what their combined risk profile is, or where concentrations sit — so risk is managed locally and never in aggregate.",
+  sectors:"Cross-sector; consequence rises with portfolio size",
+  ind:["No current count of AI systems in production","Risk reported per use case and never at portfolio level","No catalog of deployed solutions","Board reporting assembled manually each cycle"],
+  causes:["Governance built for individual approvals rather than portfolio management","Records held across disconnected systems","No aggregate risk methodology defined"],
+  mit:["Maintain a solutions catalog as the authoritative portfolio view","Provide standing executive reporting rather than assembled reporting","Define and apply a portfolio-level risk aggregation method","Track concentration by vendor, model family, and business function"],
+  map:[
+   ["SR 26-2","Aggregate model risk — the 2026 guidance places explicit emphasis on portfolio-level rather than only model-level risk","Banking organization","live"],
+   ["EU AI Act","Art. 49 and Art. 71 — registration of high-risk systems in the EU database, which presupposes the provider knows its own portfolio","Provider","future"],
+   ["NIST AI RMF","GOVERN-1, MANAGE-3 — organizational policy and third-party/portfolio risk","Organization","stayed"],
+   ["ISO/IEC 42001","Clause 9.1 — monitoring, measurement, analysis and evaluation","Organization","stayed"]],
+  rel:"AGF-F025, AGF-F091, AGF-F106",
+  ref:"Surfaces as an inability to answer supervisory or board questions rather than as an operational incident.",
+  tiers:"Tier 5"}},
+ {id:"AGF-F096",name:"Historical attribution lost through organizational change",sev:"High",lay:"A reorganization moved people between teams. Historical records now show the new structure, so reports about last year's reviews no longer match what actually happened — and the reviewers who did the work have vanished from their own reviews.",
+  full:{desc:"Governance records reflect the current organizational structure rather than the structure in place when the work was performed. Reorganizations, departures, and role changes silently rewrite the historical record, so past reviews can no longer be attributed to the people and functions that actually conducted them.",
+  sectors:"Cross-sector; severity rises with organizational change frequency and portfolio age",
+  ind:["Historical reports changing values after a reorganization with no underlying record activity","Completed reviews showing reviewers who did not perform them","Departed reviewers disappearing from records they authored","Inability to reproduce a report generated before an organizational change","Reviewer fields that cannot be retired without altering historical records"],
+  causes:["People and organizational units modelled as live references rather than as values captured at the time","No snapshot taken when an assessment is completed","Removing a person from selection also removes them from history","Record design optimized for current-state operation, not for historical integrity"],
+  mit:["Snapshot completed assessments so historical values are fixed at completion","Distinguish archiving from deletion — retire people from future selection while preserving past attribution","Maintain an active/inactive status distinct from presence in the record","Retain organizational attribution as recorded at the time of the work","Test reproducibility of historical reports as part of any organizational change"],
+  map:[
+   ["GxP","ALCOA+ data integrity — specifically the attributable and enduring principles. An electronic record whose author changes retrospectively fails both, and this is the most direct regulatory anchor for this failure mode.","Regulated organization","stayed"],
+   ["21 CFR Part 11 / EU Annex 11","Audit trail integrity — records must identify who performed an action and must not be obscured by later change","Regulated organization","stayed"],
+   ["EU AI Act","Art. 12 logging; Art. 18 documentation retention","Provider","future"],
+   ["NIST AI RMF","GOVERN-1, MANAGE-4 — documentation and records","Organization","stayed"],
+   ["ISO/IEC 42001","Clause 7.5 — documented information, including control of changes","Organization","stayed"],
+   ["SR 26-2","Documentation expectations supporting supervisory review of past decisions","Banking organization","live"]],
+  rel:"AGF-F090, AGF-F042, AGF-F097, AGF-F098",
+  ref:"Rarely recognized until an examination requires reproducing a report from before a reorganization.",
+  tiers:"Tiers 4–5"}},
+ {id:"AGF-F097",name:"Governance data model too rigid to record reality",sev:"Moderate",lay:"The system allows two findings per review. Real reviews routinely produce five. The other three are recorded in a spreadsheet, or not at all — so the official record understates what was actually found."},
+ {id:"AGF-F098",name:"Manual bulk remediation of governance records",sev:"High",lay:"Correcting several hundred governance records has to be done by hand, one at a time, because nothing can safely update them in bulk. Everyone involved knows some of them will end up wrong."}]},
+
+{id:"AGF-TA11",name:"Findings & Remediation",modes:[
+ {id:"AGF-F100",name:"Findings tracked outside the system of record",sev:"Critical",lay:"The review produced eleven action items. They live in a spreadsheet on a shared drive. Whether any of them have been done is anyone's guess.",
+  full:{desc:"Review findings are recorded outside the governance system — typically in spreadsheets, documents, or email threads — so they are disconnected from the use case they concern, invisible in reporting, and dependent on an individual to chase. The review process functions; the remediation process does not exist as a process at all.",
+  sectors:"Cross-sector; the most common gap between programmes that appear mature and programmes that are",
+  ind:["Action items maintained in spreadsheets or documents rather than in the governance record","No way to report open findings without manual compilation","Status updates obtained by individually contacting owners","Findings with no traceable link to the use case that generated them","Items whose current status nobody can state without asking someone"],
+  causes:["Governance tooling implemented for intake and review, with remediation never scoped","Findings treated as an output of review rather than as a tracked object","No owner of the remediation process distinct from the review process","Spreadsheet adopted as a stopgap and never replaced"],
+  mit:["Record findings as first-class objects within the governance system of record","Link every finding to its originating review and use case","Generate portfolio-level open-findings reporting as standing output","Automate status requests rather than relying on individual follow-up","Treat the remediation loop as in scope when implementing governance tooling"],
+  map:[
+   ["ISO/IEC 42001","Clause 10.2 — nonconformity and corrective action. The most direct and specific anchor: the standard requires organizations to react to nonconformity, evaluate the need for action, implement it, and retain documented information on results.","Organization","stayed"],
+   ["GxP","CAPA — corrective and preventive action, including root-cause analysis and effectiveness verification","Regulated organization","stayed"],
+   ["EU AI Act","Art. 9 — risk management as a continuous iterative process requiring identified risks to be addressed","Provider","future"],
+   ["EU AI Act","Art. 72 — post-market monitoring feeding corrective action. Corrected in v0.3 from Art. 61.","Provider","future"],
+   ["NIST AI RMF","MANAGE-4 — risk treatment documentation and post-deployment improvement","Organization","stayed"],
+   ["SR 26-2","Issue management and remediation tracking","Banking organization","live"]],
+  rel:"AGF-F101, AGF-F102, AGF-F103, AGF-F106, AGF-F090",
+  ref:"Presents at audit as an inability to demonstrate that identified issues were resolved.",
+  tiers:"Tiers 3–5"}},
+ {id:"AGF-F101",name:"Findings without owner or due date",sev:"High",lay:"The finding says 'improve monitoring.' It doesn't say who, or by when, so it belongs to everyone and therefore to no one."},
+ {id:"AGF-F102",name:"No escalation on ageing findings",sev:"High",lay:"An action item has been open for seven months. Nothing happens when it ages. Nobody is notified, and it appears on no report."},
+ {id:"AGF-F103",name:"Findings closed without evidence",sev:"Critical",lay:"The owner marked the item complete. There's no attachment, no link, and no description of what they actually did — just a status that changed."},
+ {id:"AGF-F104",name:"No blocked or on-hold status",sev:"Moderate",lay:"The item is stuck waiting on somebody else, but the only available statuses are open and closed. So it looks like the owner is sitting on it, and the metrics blame the wrong person."},
+ {id:"AGF-F105",name:"Findings not linked to the use case record",sev:"High",lay:"The finding exists. The use case it came from exists. Nothing connects them, so anyone reviewing that use case later sees a clean record."},
+ {id:"AGF-F106",name:"No aggregate view of open findings",sev:"High",lay:"Nobody can answer how many open findings exist across the AI portfolio, how old they are, or which are overdue — so remediation is never discussed at the level where it could be resourced."}]}
+];
+
+const STATUSLABEL={live:"In force",future:"Future date",stayed:"Voluntary / standard"};
+
+const matrixEl=document.getElementById("matrix");
+let totalModes=0, fullCount=0;
+
+STAGES.forEach((stage,ci)=>{
+  const col=document.createElement("div");
+  col.className="col";
+  const head=document.createElement("div");
+  head.className="colhead";
+  head.innerHTML=`<span class="cid">${stage.id}</span><span class="cname">${stage.name}</span><span class="ccount">${stage.modes.length} failure modes</span>`;
+  col.appendChild(head);
+
+  stage.modes.forEach((m,mi)=>{
+    totalModes++; if(m.full) fullCount++;
+    const b=document.createElement("button");
+    b.className="cell"+(m.full?" hasfull":"");
+    b.dataset.sev=m.sev;
+    b.dataset.full=m.full?"1":"0";
+    b.style.animationDelay=(ci*36+mi*16)+"ms";
+    b.setAttribute("aria-label",m.id+" "+m.name);
+    const tags=`<i class="tag sev">${m.sev}</i>`+(m.full?`<i class="tag full">FULL</i>`:`<i class="tag open">OPEN</i>`);
+    b.innerHTML=`<span class="fid">${m.id}</span><span class="fname">${m.name}</span><span class="flay">${m.lay}</span><div class="tagrow">${tags}</div>`;
+    b.addEventListener("click",()=>openDrawer(stage,m));
+    col.appendChild(b);
+  });
+  matrixEl.appendChild(col);
+});
+
+const plainToggle=document.getElementById("plainToggle");
+plainToggle.addEventListener("click",()=>{
+  const on=plainToggle.getAttribute("aria-pressed")==="true";
+  plainToggle.setAttribute("aria-pressed",String(!on));
+  document.body.classList.toggle("plainmode",!on);
+});
+
+const chips=document.querySelectorAll(".chip[data-filter]");
+const active=new Set();
+chips.forEach(c=>{
+  c.addEventListener("click",()=>{
+    const f=c.dataset.filter;
+    if(f==="reset"){active.clear();chips.forEach(x=>x.setAttribute("aria-pressed","false"));applyFilters();return;}
+    if(active.has(f)){active.delete(f);c.setAttribute("aria-pressed","false");}
+    else{active.add(f);c.setAttribute("aria-pressed","true");}
+    applyFilters();
+  });
+});
+function applyFilters(){
+  document.querySelectorAll(".cell").forEach(cell=>{
+    let show=true;
+    if(active.has("full")&&cell.dataset.full!=="1")show=false;
+    const sevs=["Critical","High"].filter(s=>active.has(s));
+    if(sevs.length&&!sevs.includes(cell.dataset.sev))show=false;
+    cell.classList.toggle("dim",!show);
+  });
+}
+
+const drawer=document.getElementById("drawer");
+const back=document.getElementById("drawerBack");
+const body=document.getElementById("drawerBody");
+let lastFocus=null;
+
+function fld(label,inner){return `<div class="d-field"><h5>${label}</h5>${inner}</div>`;}
+function list(arr){return "<ul>"+arr.map(x=>`<li>${x}</li>`).join("")+"</ul>";}
+function mapBlock(arr){
+  return arr.map(r=>{
+    const [fw,prov,role,status]=r;
+    const roleCls = (role||"").toLowerCase().includes("deployer") ? "map-role dep" : "map-role";
+    return `<div class="mapitem">
+      <div class="map-top">
+        <span class="map-fw">${fw}</span>
+        <span class="${roleCls}">${role}</span>
+        <span class="map-status ${status}">${STATUSLABEL[status]||status}</span>
+      </div>
+      <div class="map-prov">${prov}</div>
+    </div>`;
+  }).join("");
+}
+
+function openDrawer(stage,m){
+  lastFocus=document.activeElement;
+  let html=`<span class="d-id">${m.id}</span><h2 class="d-name" id="dName">${m.name}</h2>
+  <div class="d-meta"><i class="tag sev">${m.sev}</i><i class="tag ${m.full?'full':'open'}">${m.full?'FULL ENTRY':'OPEN'}</i><i class="tag open">${stage.id}</i></div>`;
+
+  html+=`<div class="d-lay"><h5>In plain terms</h5><p>${m.lay}</p></div>`;
+  html+=fld("Governance lifecycle stage",`<p>${stage.name} <span class="mono" style="color:var(--ink-3);font-size:12px">(${stage.id})</span></p>`);
+
+  if(m.full){
+    const f=m.full;
+    html+=fld("Description",`<p>${f.desc}</p>`);
+    if(f.variants)html+=fld("Failure variants",list(f.variants));
+    html+=fld("Observed in",`<p>${f.sectors}</p>`);
+    html+=fld("Leading indicators",list(f.ind));
+    html+=fld("Root causes",list(f.causes));
+    html+=fld("Mitigations &amp; controls",list(f.mit));
+    html+=fld("Regulatory mapping",mapBlock(f.map)+`<p style="margin-top:12px;font-size:12.5px;color:var(--ink-3)">Each mapping names the instrument, the role the obligation falls on, and its status. NIST AI RMF is mapped at function and category level; subcategory precision is a v1.0 target. Research aid, not legal advice. Current to 18 September 2026.</p>`);
+    html+=fld("Related failure modes",`<p class="mono" style="font-size:13px">${f.rel}</p>`);
+    html+=fld("Reference",`<p>${f.ref}</p>`);
+    html+=fld("Maturity tier relevance",`<p>${f.tiers}</p>`);
+  } else {
+    html+=fld("Entry status",`<div class="d-stub"><b>Enumerated — full entry open for contribution.</b><br><br>This failure mode is part of the v0.3 catalog, its identifier is permanent, and its plain-language example is complete. The remaining schema — indicators, root causes, mitigations, and role-scoped regulatory mappings — has not yet been written and is open.<br><br>${fullCount} of the ${totalModes} enumerated modes carry complete entries. Publishing the remainder as named-but-open is deliberate: an incomplete catalog that is honest about its gaps is more useful than one padded with unverified mappings.</div>`);
+  }
+
+  body.innerHTML=html;
+  drawer.classList.add("open");back.classList.add("open");
+  drawer.focus();
+}
+function closeDrawer(){
+  drawer.classList.remove("open");back.classList.remove("open");
+  if(lastFocus)lastFocus.focus();
+}
+document.getElementById("drawerClose").addEventListener("click",closeDrawer);
+back.addEventListener("click",closeDrawer);
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&drawer.classList.contains("open"))closeDrawer();});
+</script>
+</body>
+</html>

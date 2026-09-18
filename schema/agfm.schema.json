@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://REPLACE-WITH-YOUR-DOMAIN/schema/agfm.schema.json",
+  "title": "AGFM failure mode entry",
+  "description": "Schema for a single entry in the AI Governance Failure Mode framework. Every entry must carry a plain-language example, and every regulatory mapping must carry a role scope naming who the obligation falls on.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "stageId",
+    "stageName",
+    "severity",
+    "plainTerms",
+    "entryStatus"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^AGF-F[0-9]{3}$",
+      "description": "Permanent identifier. Never reused, never renumbered, resolvable after deprecation."
+    },
+    "name": {
+      "type": "string",
+      "description": "Short, neutral, non-accusatory phrasing."
+    },
+    "stageId": {
+      "type": "string",
+      "pattern": "^AGF-TA[0-9]{2}$"
+    },
+    "stageName": { "type": "string" },
+    "severity": {
+      "type": "string",
+      "enum": ["Critical", "High", "Moderate"],
+      "description": "Impact if left unaddressed."
+    },
+    "plainTerms": {
+      "type": "string",
+      "minLength": 20,
+      "description": "One concrete situation in ordinary language. No acronyms, no framework references, no organization identifiable. An entry without this field is incomplete regardless of what else it contains."
+    },
+    "entryStatus": {
+      "type": "string",
+      "enum": ["full", "open"],
+      "description": "'full' carries the complete schema. 'open' is enumerated with a plain-language example and awaits contribution."
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "What the failure is, described generically."
+    },
+    "variants": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Sub-modes where the failure has materially distinct pathways."
+    },
+    "sectors": { "type": ["string", "null"] },
+    "indicators": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Observable detection signals. The most operationally useful field in the schema."
+    },
+    "rootCauses": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Structural reasons the failure occurs. Non-blame-assigning by rule."
+    },
+    "mitigations": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Controls that address it. Tool-agnostic and vendor-neutral by rule."
+    },
+    "mapping": {
+      "type": "array",
+      "description": "Regulatory mappings. A mapping without a role scope is incomplete and does not publish.",
+      "items": {
+        "type": "object",
+        "required": ["framework", "provision", "role", "status"],
+        "properties": {
+          "framework": {
+            "type": "string",
+            "description": "The instrument, e.g. 'EU AI Act', 'ISO/IEC 42001', 'SR 26-2'. Use 'No direct obligation' where a failure mode has no statutory hook."
+          },
+          "provision": {
+            "type": "string",
+            "description": "The specific article, clause, category or footnote, with any qualifying note."
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "Provider",
+              "Deployer",
+              "Provider & deployer",
+              "Developer & deployer",
+              "Organization",
+              "Banking organization",
+              "Regulated organization",
+              "Employer / employment agency"
+            ],
+            "description": "Who the obligation falls on. This is the most common source of error in published crosswalks: citing a provider obligation to a deployer produces a compliance plan for a duty they do not hold."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["live", "future", "stayed"],
+            "description": "'live' = currently enforceable. 'future' = scheduled for a future date. 'stayed' = voluntary standard, or enforcement subject to a stay."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "related": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^AGF-F[0-9]{3}$" },
+      "description": "Adjacent failure mode identifiers. Builds the graph between entries."
+    },
+    "reference": {
+      "type": ["string", "null"],
+      "description": "Public incident or enforcement reference where one exists. Left blank where none does, rather than invented."
+    },
+    "tiers": {
+      "type": ["string", "null"],
+      "description": "Programme maturity tiers at which the failure typically surfaces."
+    }
+  },
+  "additionalProperties": false
+}

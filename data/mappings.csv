@@ -1,0 +1,105 @@
+failureModeId,failureModeName,stageId,framework,provision,role,status
+AGF-F010,Intake bypass,AGF-TA02,EU AI Act,"Art. 26 — deployer obligations, including use in accordance with instructions. Cannot be discharged for a system the organization does not know it operates.",Deployer,future
+AGF-F010,Intake bypass,AGF-TA02,EU AI Act,Art. 4 — AI literacy across staff operating AI systems,Provider & deployer,live
+AGF-F010,Intake bypass,AGF-TA02,NIST AI RMF,"GOVERN-1, MAP-1 — inventory and context establishment",Organization,stayed
+AGF-F010,Intake bypass,AGF-TA02,ISO/IEC 42001,Clause 6.1 planning; Clause 8.1 operational planning and control,Organization,stayed
+AGF-F010,Intake bypass,AGF-TA02,SR 26-2,Model inventory completeness and scope determination,Banking organization,live
+AGF-F011,Unsanctioned AI use,AGF-TA02,EU AI Act,"Art. 4 — AI literacy obligation, in force since 2 Feb 2025. The clearest currently-enforceable hook for ungoverned staff use.",Provider & deployer,live
+AGF-F011,Unsanctioned AI use,AGF-TA02,EU AI Act,"Art. 50 — where unsanctioned output reaches customers, the disclosure duty still attaches",Deployer,live
+AGF-F011,Unsanctioned AI use,AGF-TA02,NIST AI RMF,"GOVERN-1, MAP-1 — inventory and context",Organization,stayed
+AGF-F011,Unsanctioned AI use,AGF-TA02,ISO/IEC 42001,Clause 4.1 context; A.2 policies related to AI; A.9 use of AI systems,Organization,stayed
+AGF-F011,Unsanctioned AI use,AGF-TA02,SR 26-2,Inventory and scope determination,Banking organization,live
+AGF-F018,No triage or routing layer,AGF-TA02,NIST AI RMF,GOVERN-2 — accountability structures and role clarity,Organization,stayed
+AGF-F018,No triage or routing layer,AGF-TA02,ISO/IEC 42001,"Clause 5.3 — organizational roles, responsibilities and authorities",Organization,stayed
+AGF-F018,No triage or routing layer,AGF-TA02,SR 26-2,Governance and accountability expectations,Banking organization,live
+AGF-F018,No triage or routing layer,AGF-TA02,No direct obligation,"Process-design failure with no specific statutory hook. Mapped for completeness, not compliance.",Organization,stayed
+AGF-F023,Transparency-triggering uses not flagged,AGF-TA03,EU AI Act,Art. 50(1) — disclosure that a person is interacting with an AI system,Provider & deployer,live
+AGF-F023,Transparency-triggering uses not flagged,AGF-TA03,EU AI Act,Art. 50(2) — machine-readable marking of synthetic content. Systems placed on the market before 2 Aug 2026 have until 2 Dec 2026.,Provider,live
+AGF-F023,Transparency-triggering uses not flagged,AGF-TA03,EU AI Act,Art. 50(4) — deepfake and public-interest text disclosure,Deployer,live
+AGF-F023,Transparency-triggering uses not flagged,AGF-TA03,Colorado SB 26-189,Pre-use notice that an automated decision-making technology will be used,Developer & deployer,future
+AGF-F023,Transparency-triggering uses not flagged,AGF-TA03,NIST AI RMF,"GOVERN-4, MAP-3 — transparency and impact characterization",Organization,stayed
+AGF-F023,Transparency-triggering uses not flagged,AGF-TA03,ISO/IEC 42001,A.8 — information for interested parties,Organization,stayed
+AGF-F027,Undifferentiated review burden,AGF-TA03,SR 26-2,"Materiality-proportionate validation — the 2026 guidance explicitly moves toward tailoring and risk-based scaling, making undifferentiated review a departure from current supervisory expectation rather than a conservative reading of it",Banking organization,live
+AGF-F027,Undifferentiated review burden,AGF-TA03,EU AI Act,Art. 9 — risk management system proportionate to risk,Provider,future
+AGF-F027,Undifferentiated review burden,AGF-TA03,NIST AI RMF,"MAP-1, MANAGE-1 — risk prioritization and resource allocation",Organization,stayed
+AGF-F027,Undifferentiated review burden,AGF-TA03,ISO/IEC 42001,"Clause 6.1 — actions to address risks and opportunities, proportionate to impact",Organization,stayed
+AGF-F031,Stale approval,AGF-TA04,EU AI Act,"Art. 72 — post-market monitoring system, running across the operational lifetime. Corrected in v0.3 from Art. 61, cited in error in earlier versions.",Provider,future
+AGF-F031,Stale approval,AGF-TA04,EU AI Act,"Art. 9 — risk management as a continuous iterative process, not a one-time assessment",Provider,future
+AGF-F031,Stale approval,AGF-TA04,NIST AI RMF,"MANAGE-2, GOVERN-1 — ongoing management and policy currency",Organization,stayed
+AGF-F031,Stale approval,AGF-TA04,ISO/IEC 42001,Clause 9 performance evaluation; Clause 10 improvement,Organization,stayed
+AGF-F031,Stale approval,AGF-TA04,SR 26-2,Ongoing monitoring and periodic review,Banking organization,live
+AGF-F031,Stale approval,AGF-TA04,GAMP 5,Periodic review requirements,Regulated organization,stayed
+AGF-F032,Use outside approved scope,AGF-TA04,EU AI Act,Art. 26 — deployers must use the system in accordance with the provider's instructions for use. Use outside intended purpose is the clearest deployer-side breach in the Act.,Deployer,future
+AGF-F032,Use outside approved scope,AGF-TA04,EU AI Act,"Art. 50 — a scope extension into customer-facing output activates transparency duties immediately, independent of the high-risk deferral",Deployer,live
+AGF-F032,Use outside approved scope,AGF-TA04,EU AI Act,Art. 25 — a deployer who substantially modifies purpose may itself become a provider,Deployer,future
+AGF-F032,Use outside approved scope,AGF-TA04,NIST AI RMF,"MAP-1, MANAGE-1 — intended purpose and context",Organization,stayed
+AGF-F032,Use outside approved scope,AGF-TA04,ISO/IEC 42001,A.9 — responsible use of AI systems; Clause 8 operational control,Organization,stayed
+AGF-F032,Use outside approved scope,AGF-TA04,GxP,Intended-use documentation and validated state,Regulated organization,stayed
+AGF-F032,Use outside approved scope,AGF-TA04,SR 26-2,Use consistent with validation scope,Banking organization,live
+AGF-F037,No service level on review decisions,AGF-TA04,NIST AI RMF,"GOVERN-2, GOVERN-4 — accountability structures and organizational practice",Organization,stayed
+AGF-F037,No service level on review decisions,AGF-TA04,ISO/IEC 42001,Clause 5.3 roles and authorities; Clause 9.1 monitoring and measurement,Organization,stayed
+AGF-F037,No service level on review decisions,AGF-TA04,SR 26-2,Governance and accountability expectations,Banking organization,live
+AGF-F037,No service level on review decisions,AGF-TA04,No direct obligation,No instrument mandates a governance service level. The regulatory consequence is indirect: latency causes the bypass and unsanctioned-use failures that do carry obligations.,Organization,stayed
+AGF-F038,No precedent reuse,AGF-TA04,NIST AI RMF,"GOVERN-1, GOVERN-4 — policy, process and organizational knowledge",Organization,stayed
+AGF-F038,No precedent reuse,AGF-TA04,ISO/IEC 42001,Clause 7.5 — documented information,Organization,stayed
+AGF-F038,No precedent reuse,AGF-TA04,SR 26-2,Documentation expectations supporting consistent treatment,Banking organization,live
+AGF-F039,Review sequencing mismatch,AGF-TA04,EU AI Act,Art. 17 — quality management system covering the design and sequence of control processes. EN 18286:2026 is the supporting harmonized standard.,Provider,future
+AGF-F039,Review sequencing mismatch,AGF-TA04,NIST AI RMF,"GOVERN-2, MANAGE-1 — process design and accountability",Organization,stayed
+AGF-F039,Review sequencing mismatch,AGF-TA04,ISO/IEC 42001,Clause 8.1 — operational planning and control,Organization,stayed
+AGF-F039,Review sequencing mismatch,AGF-TA04,GAMP 5,Lifecycle stage sequencing and gating,Regulated organization,stayed
+AGF-F039,Review sequencing mismatch,AGF-TA04,SR 26-2,Validation process design,Banking organization,live
+AGF-F040,Missing human-in-the-loop trigger,AGF-TA05,EU AI Act,Art. 14 — human oversight designed into high-risk systems by the provider,Provider,future
+AGF-F040,Missing human-in-the-loop trigger,AGF-TA05,EU AI Act,"Art. 26(2) — deployers must assign human oversight to natural persons with the necessary competence, training and authority",Deployer,future
+AGF-F040,Missing human-in-the-loop trigger,AGF-TA05,Colorado SB 26-189,"Meaningful human review of significant ADMT-driven decisions, on request",Developer & deployer,future
+AGF-F040,Missing human-in-the-loop trigger,AGF-TA05,NIST AI RMF,"MANAGE-1, GOVERN-3 — risk treatment and workforce accountability",Organization,stayed
+AGF-F040,Missing human-in-the-loop trigger,AGF-TA05,ISO/IEC 42001,"A.9 — responsible use, including human oversight of AI systems",Organization,stayed
+AGF-F040,Missing human-in-the-loop trigger,AGF-TA05,SR 26-2,Control environment expectations,Banking organization,live
+AGF-F044,Diffused accountability across functions,AGF-TA05,EU AI Act,"Art. 26(2) — the deployer must assign oversight to identified natural persons, which cannot be satisfied by a committee with no named holder",Deployer,future
+AGF-F044,Diffused accountability across functions,AGF-TA05,NIST AI RMF,GOVERN-2 — accountability structures; GOVERN-4 — organizational culture and process,Organization,stayed
+AGF-F044,Diffused accountability across functions,AGF-TA05,ISO/IEC 42001,"Clause 5.3 — roles, responsibilities and authorities",Organization,stayed
+AGF-F044,Diffused accountability across functions,AGF-TA05,SR 26-2,Governance and accountability expectations,Banking organization,live
+AGF-F065,No fairness testing evidence retained,AGF-TA07,NYC Local Law 144,Annual independent bias audit; published results summary; candidate notice. The primary enforced anchor for this failure mode in the United States.,Employer / employment agency,live
+AGF-F065,No fairness testing evidence retained,AGF-TA07,EU AI Act,Annex III — employment and worker management classified high-risk; Art. 10 data governance including bias examination,Provider,future
+AGF-F065,No fairness testing evidence retained,AGF-TA07,NIST AI RMF,MEASURE-2 — evaluation of AI system performance and trustworthiness characteristics,Organization,stayed
+AGF-F065,No fairness testing evidence retained,AGF-TA07,ISO/IEC 42001,A.5 — assessing impacts of AI systems; A.6 lifecycle controls,Organization,stayed
+AGF-F065,No fairness testing evidence retained,AGF-TA07,Colorado SB 26-189,Not applicable to bias testing. SB 26-189 removed the algorithmic-discrimination duty and the annual impact-assessment mandate that SB 24-205 had contained. Corrected in v0.3.,Developer & deployer,future
+AGF-F066,Generative and agentic systems governed under legacy assumptions,AGF-TA07,SR 26-2,"Footnote 3 to § II places generative and agentic AI outside the scope of model risk management, leaving general safety-and-soundness expectations. Institutions must self-determine controls with no supervisory template.",Banking organization,live
+AGF-F066,Generative and agentic systems governed under legacy assumptions,AGF-TA07,NIST AI RMF,NIST AI 600-1 Generative AI Profile (Jul 2024) — the closest available substitute framework,Organization,stayed
+AGF-F066,Generative and agentic systems governed under legacy assumptions,AGF-TA07,EU AI Act,"GPAI obligations under Chapter V — legal effect since 2 Aug 2025, Commission enforcement powers since 2 Aug 2026",Provider,live
+AGF-F066,Generative and agentic systems governed under legacy assumptions,AGF-TA07,ISO/IEC 42001,Clause 6.1 — planning for risks and opportunities; A.6 lifecycle controls,Organization,stayed
+AGF-F067,No production-readiness gate,AGF-TA07,EU AI Act,"Art. 17 — quality management system covering design, development and pre-market control. EN 18286:2026 is the supporting harmonized standard.",Provider,future
+AGF-F067,No production-readiness gate,AGF-TA07,EU AI Act,"Art. 9, Art. 13, Art. 14 — obligations that must be satisfied before placing on market or putting into service",Provider,future
+AGF-F067,No production-readiness gate,AGF-TA07,NIST AI RMF,"MANAGE-1, MEASURE-1 — pre-deployment treatment and measurement",Organization,stayed
+AGF-F067,No production-readiness gate,AGF-TA07,ISO/IEC 42001,Clause 8.1 operational planning and control; A.6 AI system life cycle,Organization,stayed
+AGF-F067,No production-readiness gate,AGF-TA07,SR 26-2,Validation prior to use,Banking organization,live
+AGF-F067,No production-readiness gate,AGF-TA07,GAMP 5,Release and qualification before operational use,Regulated organization,stayed
+AGF-F080,Absent or undocumented drift review,AGF-TA09,EU AI Act,"Art. 72 — post-market monitoring system, documented and proportionate, running across the system's operational lifetime. The monitoring plan forms part of Annex IV technical documentation. Corrected in v0.3 from Art. 61.",Provider,future
+AGF-F080,Absent or undocumented drift review,AGF-TA09,EU AI Act,Art. 26(5) — deployers must monitor operation in accordance with instructions for use and inform the provider of risks,Deployer,future
+AGF-F080,Absent or undocumented drift review,AGF-TA09,NIST AI RMF,"MEASURE-2, MANAGE-4 — ongoing measurement and post-deployment management",Organization,stayed
+AGF-F080,Absent or undocumented drift review,AGF-TA09,ISO/IEC 42001,Clause 9 — performance evaluation,Organization,stayed
+AGF-F080,Absent or undocumented drift review,AGF-TA09,GAMP 5,Drift detection and periodic review,Regulated organization,stayed
+AGF-F080,Absent or undocumented drift review,AGF-TA09,SR 26-2,Ongoing monitoring,Banking organization,live
+AGF-F090,Evidence gap at audit,AGF-TA10,EU AI Act,Art. 12 — automatic recording of events (logs) over the system lifetime,Provider,future
+AGF-F090,Evidence gap at audit,AGF-TA10,EU AI Act,Art. 18 — retention of technical documentation for 10 years after placing on market,Provider,future
+AGF-F090,Evidence gap at audit,AGF-TA10,EU AI Act,Art. 26(6) — deployers must retain logs generated by high-risk systems for at least 6 months,Deployer,future
+AGF-F090,Evidence gap at audit,AGF-TA10,Colorado SB 26-189,Three-year records retention for ADMT decisions,Developer & deployer,future
+AGF-F090,Evidence gap at audit,AGF-TA10,NIST AI RMF,"GOVERN-1, MANAGE-4 — documented policy and post-deployment records",Organization,stayed
+AGF-F090,Evidence gap at audit,AGF-TA10,ISO/IEC 42001,Clause 7.5 documented information; Clause 9.2 internal audit,Organization,stayed
+AGF-F090,Evidence gap at audit,AGF-TA10,GxP,"Data integrity — ALCOA+ (attributable, legible, contemporaneous, original, accurate, and enduring)",Regulated organization,stayed
+AGF-F090,Evidence gap at audit,AGF-TA10,SR 26-2,Documentation expectations,Banking organization,live
+AGF-F095,No portfolio-level visibility,AGF-TA10,SR 26-2,Aggregate model risk — the 2026 guidance places explicit emphasis on portfolio-level rather than only model-level risk,Banking organization,live
+AGF-F095,No portfolio-level visibility,AGF-TA10,EU AI Act,"Art. 49 and Art. 71 — registration of high-risk systems in the EU database, which presupposes the provider knows its own portfolio",Provider,future
+AGF-F095,No portfolio-level visibility,AGF-TA10,NIST AI RMF,"GOVERN-1, MANAGE-3 — organizational policy and third-party/portfolio risk",Organization,stayed
+AGF-F095,No portfolio-level visibility,AGF-TA10,ISO/IEC 42001,"Clause 9.1 — monitoring, measurement, analysis and evaluation",Organization,stayed
+AGF-F096,Historical attribution lost through organizational change,AGF-TA10,GxP,"ALCOA+ data integrity — specifically the attributable and enduring principles. An electronic record whose author changes retrospectively fails both, and this is the most direct regulatory anchor for this failure mode.",Regulated organization,stayed
+AGF-F096,Historical attribution lost through organizational change,AGF-TA10,21 CFR Part 11 / EU Annex 11,Audit trail integrity — records must identify who performed an action and must not be obscured by later change,Regulated organization,stayed
+AGF-F096,Historical attribution lost through organizational change,AGF-TA10,EU AI Act,Art. 12 logging; Art. 18 documentation retention,Provider,future
+AGF-F096,Historical attribution lost through organizational change,AGF-TA10,NIST AI RMF,"GOVERN-1, MANAGE-4 — documentation and records",Organization,stayed
+AGF-F096,Historical attribution lost through organizational change,AGF-TA10,ISO/IEC 42001,"Clause 7.5 — documented information, including control of changes",Organization,stayed
+AGF-F096,Historical attribution lost through organizational change,AGF-TA10,SR 26-2,Documentation expectations supporting supervisory review of past decisions,Banking organization,live
+AGF-F100,Findings tracked outside the system of record,AGF-TA11,ISO/IEC 42001,"Clause 10.2 — nonconformity and corrective action. The most direct and specific anchor: the standard requires organizations to react to nonconformity, evaluate the need for action, implement it, and retain documented information on results.",Organization,stayed
+AGF-F100,Findings tracked outside the system of record,AGF-TA11,GxP,"CAPA — corrective and preventive action, including root-cause analysis and effectiveness verification",Regulated organization,stayed
+AGF-F100,Findings tracked outside the system of record,AGF-TA11,EU AI Act,Art. 9 — risk management as a continuous iterative process requiring identified risks to be addressed,Provider,future
+AGF-F100,Findings tracked outside the system of record,AGF-TA11,EU AI Act,Art. 72 — post-market monitoring feeding corrective action. Corrected in v0.3 from Art. 61.,Provider,future
+AGF-F100,Findings tracked outside the system of record,AGF-TA11,NIST AI RMF,MANAGE-4 — risk treatment documentation and post-deployment improvement,Organization,stayed
+AGF-F100,Findings tracked outside the system of record,AGF-TA11,SR 26-2,Issue management and remediation tracking,Banking organization,live
