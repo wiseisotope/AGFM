@@ -1,0 +1,70 @@
+{
+  "assessment": {
+    "title": "AGFM self-assessment",
+    "description": "Twenty-eight questions covering the highest-consequence failure modes across all eleven lifecycle stages. Answer honestly rather than aspirationally — the output is only useful if it reflects what actually happens rather than what policy says should happen.",
+    "instructions": "Answer Yes only where the control genuinely operates and could be demonstrated. Answer Unsure where you believe it operates but could not show evidence. Unsure is a real answer and is treated as a likely gap, because at audit an undemonstrable control and an absent control produce the same finding.",
+    "privacy": "This assessment runs entirely in your browser. Nothing is transmitted, stored on any server, or recorded. Closing the page discards the results unless you export them first.",
+    "questions": [
+      { "id": "q01", "mode": "AGF-F001", "text": "Is there an AI policy that an executive has formally approved?" },
+      { "id": "q02", "mode": "AGF-F003", "text": "Do you classify AI use cases into risk tiers, with written criteria and different handling per tier?" },
+      { "id": "q03", "mode": "AGF-F005", "text": "Can you name the single executive accountable for AI risk?" },
+      { "id": "q04", "mode": "AGF-F010", "text": "Is it structurally impossible for a team to put AI into production without entering intake — for example because funding or access depends on it?" },
+      { "id": "q05", "mode": "AGF-F011", "text": "Do you have current visibility into which AI tools staff are using on corporate devices and data?" },
+      { "id": "q06", "mode": "AGF-F015", "text": "Would you find out if a vendor enabled AI capability inside software you already use?" },
+      { "id": "q07", "mode": "AGF-F016", "text": "Does your register distinguish systems that can take actions from systems that only produce output for a person to read?" },
+      { "id": "q08", "mode": "AGF-F018", "text": "Is there a single triage step that routes incoming AI requests, rather than requests circulating between teams?" },
+      { "id": "q09", "mode": "AGF-F023", "text": "Have you identified which AI use cases require you to disclose AI involvement to an end user?" },
+      { "id": "q10", "mode": "AGF-F026", "text": "For any system influencing decisions about people, has fairness been tested within the last twelve months?" },
+      { "id": "q11", "mode": "AGF-F027", "text": "Do low-risk AI use cases follow a materially shorter review path than high-risk ones?" },
+      { "id": "q12", "mode": "AGF-F031", "text": "Do approvals expire, or trigger re-review when the model, vendor, data or regulation changes?" },
+      { "id": "q13", "mode": "AGF-F032", "text": "Is there a written statement of intended use for each approved system, and does anything check actual use against it?" },
+      { "id": "q14", "mode": "AGF-F033", "text": "When approval is granted subject to conditions, does someone verify the conditions were met?" },
+      { "id": "q15", "mode": "AGF-F037", "text": "Is there a published turnaround commitment for governance decisions, with escalation when it is missed?" },
+      { "id": "q16", "mode": "AGF-F038", "text": "Can a reviewer look up how a materially identical question was answered previously?" },
+      { "id": "q17", "mode": "AGF-F040", "text": "Where policy requires human review of a decision, is that review enforced by the system rather than only described in policy?" },
+      { "id": "q18", "mode": "AGF-F042", "text": "Does every deployed AI system have a current, named owner who still works here in that role?" },
+      { "id": "q19", "mode": "AGF-F045", "text": "Can a person affected by an automated decision ask for human review, and does that request reach someone who can act?" },
+      { "id": "q20", "mode": "AGF-F050", "text": "For each AI system, can you document where its data came from?" },
+      { "id": "q21", "mode": "AGF-F051", "text": "Has someone verified you hold the rights to use each dataset the way your AI systems use it?" },
+      { "id": "q22", "mode": "AGF-F060", "text": "Is AI validated by someone independent of the team that built it?" },
+      { "id": "q23", "mode": "AGF-F067", "text": "Is there a checkpoint before go-live, separate from the approval given at the concept stage?" },
+      { "id": "q24", "mode": "AGF-F070", "text": "Are changes to models, prompts and vendor configuration under recorded change control?" },
+      { "id": "q25", "mode": "AGF-F080", "text": "Is there a documented, dated performance review for each deployed system within its defined review period?" },
+      { "id": "q26", "mode": "AGF-F082", "text": "Is there a written definition of an AI incident and a channel for reporting one?" },
+      { "id": "q27", "mode": "AGF-F090", "text": "If an examiner asked today for evidence that a control operated, could you produce it without a reconstruction exercise?" },
+      { "id": "q28", "mode": "AGF-F100", "text": "Are findings from AI reviews tracked in a system with owners, due dates and escalation — rather than in a spreadsheet?" }
+    ]
+  },
+  "starterSets": [
+    {
+      "slug": "start-here",
+      "title": "Start here — the first ten",
+      "blurb": "If you have just inherited AI governance and need somewhere to begin, these ten failure modes are the ones most likely to be present, most consequential when they are, and most tractable to address early. Four of them are cheap to fix and unlock everything else.",
+      "modes": ["AGF-F010", "AGF-F011", "AGF-F003", "AGF-F005", "AGF-F027", "AGF-F037", "AGF-F040", "AGF-F090", "AGF-F100", "AGF-F101"]
+    },
+    {
+      "slug": "banking",
+      "title": "Banking and financial services",
+      "blurb": "Model risk guidance was superseded in April 2026, and the replacement expressly places generative and agentic AI outside its scope. That carve-out, plus the shift to materiality-proportionate validation and portfolio-level aggregation, defines where most banking governance gaps now sit.",
+      "modes": ["AGF-F066", "AGF-F016", "AGF-F060", "AGF-F061", "AGF-F025", "AGF-F031", "AGF-F040", "AGF-F080", "AGF-F090", "AGF-F095", "AGF-F100", "AGF-F108", "AGF-F107", "AGF-F039"]
+    },
+    {
+      "slug": "biopharma",
+      "title": "Biopharma and life sciences",
+      "blurb": "Existing computer systems validation and data integrity expectations already cover most of what AI governance requires — the gap is usually that AI is not being run through them. Attribution, provenance, intended use and CAPA are the load-bearing concepts.",
+      "modes": ["AGF-F050", "AGF-F051", "AGF-F055", "AGF-F063", "AGF-F060", "AGF-F067", "AGF-F070", "AGF-F080", "AGF-F096", "AGF-F090", "AGF-F100", "AGF-F103", "AGF-F108"]
+    },
+    {
+      "slug": "insurance",
+      "title": "Insurance",
+      "blurb": "Consequential decisions about individuals, at volume, with a long tail of legacy models and a growing layer of generative tooling on top. Human oversight, fairness evidence and appeal routes carry the most regulatory weight.",
+      "modes": ["AGF-F040", "AGF-F041", "AGF-F045", "AGF-F026", "AGF-F065", "AGF-F022", "AGF-F023", "AGF-F031", "AGF-F080", "AGF-F090", "AGF-F095"]
+    },
+    {
+      "slug": "manufacturing",
+      "title": "Manufacturing and industrial",
+      "blurb": "AI arrives largely through vendors and embedded platform capability rather than through internal build, and governance ownership usually sits with someone whose main job is something else. Discovery and capacity are the defining constraints.",
+      "modes": ["AGF-F015", "AGF-F010", "AGF-F011", "AGF-F046", "AGF-F032", "AGF-F071", "AGF-F074", "AGF-F081", "AGF-F084", "AGF-F008", "AGF-F095"]
+    }
+  ]
+}

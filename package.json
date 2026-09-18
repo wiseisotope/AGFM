@@ -1,13 +1,14 @@
 {
   "name": "agfm",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "private": true,
   "description": "AI Governance Failure Mode framework (AGFM) — an open catalog of how enterprise AI governance processes fail.",
   "license": "CC-BY-4.0",
   "scripts": {
     "build:data": "node scripts/build-data.js",
-    "build": "node scripts/build-data.js",
-    "dev": "npx --yes serve . -l 3000",
-    "check": "node scripts/build-data.js"
+    "build:site": "node scripts/build.js",
+    "build": "npm run build:data && npm run build:site",
+    "check": "node scripts/build-data.js",
+    "dev": "npm run build && npx --yes serve site -l 3000"
   }
 }

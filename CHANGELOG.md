@@ -6,6 +6,44 @@ renumbered, and deprecated entries stay published with a pointer to their succes
 Corrections to previously published mappings are recorded here explicitly rather than
 edited silently.
 
+## v1.0 — 18 September 2026
+
+First release with per-entry pages, working tools, and a defined core set.
+
+### Added
+
+- **Per-entry pages.** Every failure mode now has its own URL at `/entries/AGF-Fxxx`, with its
+  own title, meta description, canonical URL and structured data. Identifiers are now linkable,
+  citable and indexable rather than buried in a script array — which is what makes them behave
+  like MITRE technique IDs rather than strings in a page.
+- **Self-assessment** — 28 questions covering the highest-consequence failure modes across all
+  eleven stages. Produces a ranked list of failure modes likely present, grouped by stage, with
+  JSON export and print. Runs entirely client-side: nothing is transmitted, no email capture,
+  no analytics on results.
+- **Coverage map** — mark each of the 89 failure modes present, addressed or not applicable.
+  Persists in local storage, exports and re-imports as JSON so a colleague can pick it up.
+- **Starter sets** — a first-ten entry point plus curated sector sets for banking, biopharma,
+  insurance and manufacturing.
+- **Filterable crosswalk** covering all 161 mappings by instrument, role scope and status.
+- **Backlog page** making the 57 incomplete entries visible and contributable rather than
+  scattered through the matrix.
+- **Printable primer** — a two-page introduction for circulation.
+- **Search and filtering with URL state**, so a filtered view can be shared.
+- Two failure modes in Findings & Remediation: `AGF-F107` no challenge or rework path, and
+  `AGF-F108` remediation closed by its own owner.
+- Ten entries upgraded from enumerated to complete: `AGF-F003`, `AGF-F015`, `AGF-F016`,
+  `AGF-F033`, `AGF-F042`, `AGF-F051`, `AGF-F071`, `AGF-F082`, `AGF-F101`, `AGF-F103`.
+  The core set is now 32, and every lifecycle stage has at least one complete entry.
+
+### Changed
+
+- **Architecture inverted.** `data/catalog.json` is now the single source of truth and the site
+  is generated from it. Previously the catalog lived inside the HTML and the data files were
+  extracted from it, which meant every new feature had to be built twice and the two could drift.
+- Integrity checks extended: an entry marked complete must carry indicators, mitigations and
+  mappings; role and status values are validated against a closed list.
+- Stewardship named: The Governance Commons.
+
 ## v0.3 — 18 September 2026
 
 ### Corrected

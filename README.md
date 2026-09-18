@@ -4,24 +4,32 @@ An open, community-maintained catalog of the ways enterprise AI **governance pro
 
 Existing frameworks catalog attacks on AI systems (MITRE ATLAS), vulnerabilities in AI applications (OWASP Top 10 for LLM), and prescribed good practice (NIST AI RMF, ISO/IEC 42001). None of them catalog governance-process failure: the use case that reached production without approval, the human review that exists in policy but not in the system, the approval nobody revisited after the model changed, the action item that has been open for seven months.
 
-**v0.3 · 11 lifecycle stages · 87 failure modes · 104 role-scoped regulatory mappings · mappings current to 18 September 2026**
+**v1.0 · 11 lifecycle stages · 89 failure modes · 32 complete entries · 161 role-scoped regulatory mappings · current to 18 September 2026**
 
 ---
 
 ## What's in here
 
 ```
-index.html                  The framework site. Single source of truth for the catalog.
-data/agfm.json              Full catalog, nested by lifecycle stage
-data/agfm.flat.json         Flat array of all 87 failure modes
-data/agfm.csv               One row per failure mode
-data/mappings.csv           One row per regulatory mapping, with role scope and status
+data/catalog.json           THE SOURCE OF TRUTH. The whole catalog.
+data/sets.json              Assessment questions and curated starter sets
+data/agfm.json              Generated — full catalog, nested by stage
+data/agfm.flat.json         Generated — flat array of all failure modes
+data/agfm.csv               Generated — one row per failure mode
+data/mappings.csv           Generated — one row per regulatory mapping
 schema/agfm.schema.json     JSON Schema for the entry format
-scripts/build-data.js       Extracts the data files from index.html, runs integrity checks
-.github/ISSUE_TEMPLATE/     Contribution templates for submissions and mapping corrections
+assets/agfm.css             Site stylesheet
+scripts/build-data.js       Emits data files, runs integrity checks
+scripts/build.js            Site generator (matrix, entries, core, backlog)
+scripts/build-pages.js      Site generator (assess, coverage, crosswalk, etc.)
+site/                       Generated output — not committed
+archive/                    The pre-v1.0 single-file site, kept for reference
+.github/ISSUE_TEMPLATE/     Contribution templates
 ```
 
-The catalog lives inside `index.html` and the data files are generated from it. That is deliberate: one source of truth means the published dataset can never disagree with the published site. Edit the catalog in `index.html`, then run `npm run build:data`.
+`data/catalog.json` is the single source of truth. The site, the data distributions and the exports are all generated from it, so they cannot disagree with each other. Edit the catalog, then run `npm run build`.
+
+**Pages generated:** the matrix, one page per failure mode (89), the core set, the backlog, the self-assessment, the coverage map, the filterable crosswalk, the patterns essay, five starter sets, a printable primer, the changelog and the about page — 105 pages in total, plus sitemap and robots.
 
 ---
 
@@ -32,8 +40,8 @@ The catalog lives inside `index.html` and the data files are generated from it. 
 1. Push this directory to a new GitHub repository.
 2. In Vercel, **Add New → Project → Import Git Repository** and select it.
 3. Vercel will detect `vercel.json`. Leave the framework preset as **Other**. Confirm:
-   - Build Command: `npm run build:data`
-   - Output Directory: `.`
+   - Build Command: `npm run build`
+   - Output Directory: `site`
    - Install Command: leave blank (there are no dependencies)
 4. Deploy.
 
@@ -51,9 +59,9 @@ vercel --prod   # production deploy
 
 Three files contain a placeholder domain that needs replacing:
 
-- `robots.txt` — the `Sitemap:` line
-- `sitemap.xml` — the `<loc>` value
+- `scripts/build.js` — the `SITE` constant near the top (this feeds robots.txt, sitemap.xml and all structured data)
 - `schema/agfm.schema.json` — the `$id` value
+- `.github/ISSUE_TEMPLATE/config.yml` — the CONTRIBUTING link
 
 Replace `REPLACE-WITH-YOUR-DOMAIN` with your real hostname and redeploy. The sitemap and schema `$id` matter more than usual here: this catalog is designed to be found and cited, and answer engines use both.
 
@@ -62,66 +70,61 @@ Replace `REPLACE-WITH-YOUR-DOMAIN` with your real hostname and redeploy. The sit
 ## Working on it locally
 
 ```bash
-npm run dev          # serves on http://localhost:3000
-npm run build:data   # regenerate data files and run integrity checks
+npm run dev          # build, then serve on http://localhost:3000
+npm run build        # data + site
+npm run check        # integrity checks only
 ```
 
-There is no build step for the site itself and no dependencies to install. `index.html` is fully self-contained apart from Google Fonts.
+No dependencies to install. The generator is plain Node; the site is static HTML, one stylesheet, and small inline scripts. The self-assessment and coverage map run entirely client-side — no backend, no analytics on results, no data leaves the visitor's browser. That is a deliberate constraint, not a limitation: a neutral catalog that captures leads from its own diagnostic stops being neutral.
 
 ### Integrity checks
 
-`npm run build:data` fails the build if any of the framework's public promises are broken:
+`npm run build:data` fails the build if any of the framework's public promises are broken: a duplicate or malformed identifier, a missing plain-language example, an entry marked complete without indicators, mitigations or mappings, a mapping with no role scope, an unrecognized role or status value, or a dangling `related` reference.
 
-- a duplicate identifier
-- an identifier that does not match `AGF-Fxxx`
-- a failure mode with no plain-language example
-- a regulatory mapping with no role scope
-- a mapping with an unrecognized status
-- a `related` reference pointing at an identifier that does not exist
-
-These run on every Vercel build, so a broken catalog cannot reach production.
+These run on every Vercel build and on every pull request, so a catalog that violates its own stated rules cannot reach production.
 
 ---
 
 ## Editing the catalog
 
-The catalog is the `STAGES` array near the top of the `<script>` block in `index.html`.
+The catalog is `data/catalog.json`.
 
 A minimal entry — enumerated, awaiting full schema:
 
-```js
+```json
 {
-  id: "AGF-F107",
-  name: "Short neutral name",
-  sev: "High",                       // Critical | High | Moderate
-  lay: "One concrete situation in ordinary language. No acronyms."
+  "id": "AGF-F109",
+  "name": "Short neutral name",
+  "severity": "High",
+  "plainTerms": "One concrete situation in ordinary language. No acronyms.",
+  "entryStatus": "open"
 }
 ```
 
-A full entry adds a `full` object:
+A complete entry sets `entryStatus` to `full` and fills the rest:
 
-```js
+```json
 {
-  id: "AGF-F107",
-  name: "Short neutral name",
-  sev: "High",
-  lay: "One concrete situation in ordinary language.",
-  full: {
-    desc: "What the failure is, generically.",
-    variants: [".01 A materially distinct pathway"],   // optional
-    sectors: "Cross-sector",
-    ind: ["Observable signal", "Another observable signal"],
-    causes: ["Structural reason", "Another structural reason"],
-    mit: ["A control", "Another control"],
-    map: [
-      // [framework, provision, role, status]
-      ["EU AI Act", "Art. 26 — deployer obligations", "Deployer", "future"],
-      ["ISO/IEC 42001", "Clause 10.2 — corrective action", "Organization", "stayed"]
-    ],
-    rel: "AGF-F010, AGF-F037",
-    ref: "Where this shows up in practice, or blank if there is no public reference.",
-    tiers: "Tiers 2–4"
-  }
+  "id": "AGF-F109",
+  "name": "Short neutral name",
+  "severity": "High",
+  "plainTerms": "One concrete situation in ordinary language.",
+  "entryStatus": "full",
+  "description": "What the failure is, generically.",
+  "variants": [".01 A materially distinct pathway"],
+  "sectors": "Cross-sector",
+  "indicators": ["Observable signal", "Another observable signal"],
+  "rootCauses": ["Structural reason", "Another structural reason"],
+  "mitigations": ["A control", "Another control"],
+  "mapping": [
+    { "framework": "EU AI Act", "provision": "Art. 26 — deployer obligations",
+      "role": "Deployer", "status": "future" },
+    { "framework": "ISO/IEC 42001", "provision": "Clause 10.2 — corrective action",
+      "role": "Organization", "status": "stayed" }
+  ],
+  "related": ["AGF-F010", "AGF-F037"],
+  "reference": "Where this shows up in practice, or null if there is no public reference.",
+  "tiers": "Tiers 2–4"
 }
 ```
 
@@ -129,7 +132,7 @@ A full entry adds a `full` object:
 
 **Mapping role values:** `Provider` · `Deployer` · `Provider & deployer` · `Developer & deployer` · `Organization` · `Banking organization` · `Regulated organization` · `Employer / employment agency`.
 
-Run `npm run build:data` after any edit.
+Run `npm run build` after any edit. The integrity checks will reject a duplicate or malformed identifier, a missing plain-language example, a complete entry with no indicators or mappings, a mapping with no role scope, an unrecognized role or status, or a `related` reference pointing at an entry that does not exist.
 
 ---
 
@@ -161,10 +164,12 @@ Reuse, adapt and redistribute freely, including commercially, with attribution. 
 ## Citing
 
 ```
-AI Governance Failure Mode framework, AGF-F040 "Missing human-in-the-loop trigger", v0.3 (2026).
+AI Governance Failure Mode framework, AGF-F040 "Missing human-in-the-loop trigger", v1.0 (2026).
 ```
 
-Always record the framework version alongside any mapping reproduced in a report or control document. Four of the instruments cited in v0.3 changed materially in the eighteen months to September 2026; a mapping quoted without its version cannot be checked against the instrument as it stood at the time.
+Every failure mode has its own permanent URL at `/entries/AGF-Fxxx`.
+
+Always record the framework version alongside any mapping reproduced in a report or control document. Four of the instruments cited in v1.0 changed materially in the eighteen months to September 2026; a mapping quoted without its version cannot be checked against the instrument as it stood at the time.
 
 ---
 

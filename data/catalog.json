@@ -8,21 +8,7 @@
     "license": {
       "content": "CC-BY-4.0",
       "code": "Apache-2.0"
-    },
-    "generated": "2026-09-18",
-    "counts": {
-      "stages": 11,
-      "failureModes": 89,
-      "fullEntries": 32,
-      "openEntries": 57,
-      "mappings": 161
-    },
-    "notes": [
-      "NIST AI RMF is mapped at function and category level. Subcategory-level mapping is a v1.1 target.",
-      "Every mapping carries a role scope naming who the obligation falls on. Mappings without a role scope do not publish.",
-      "Regulatory mappings are research aids and do not constitute legal advice or establish compliance.",
-      "Plain-language examples are composites written for recognition, not descriptions of any specific organization."
-    ]
+    }
   },
   "stages": [
     {

@@ -2,22 +2,23 @@
   "meta": {
     "framework": "AI Governance Failure Mode framework",
     "abbreviation": "AGFM",
-    "version": "0.3",
+    "version": "1.0",
+    "steward": "The Governance Commons",
     "mappingsCurrentTo": "2026-09-18",
-    "generated": "2026-09-18",
     "license": {
       "content": "CC-BY-4.0",
       "code": "Apache-2.0"
     },
+    "generated": "2026-09-18",
     "counts": {
       "stages": 11,
-      "failureModes": 87,
-      "fullEntries": 20,
-      "openEntries": 67,
-      "mappings": 104
+      "failureModes": 89,
+      "fullEntries": 32,
+      "openEntries": 57,
+      "mappings": 161
     },
     "notes": [
-      "NIST AI RMF is mapped at function and category level. Subcategory-level mapping is a v1.0 target.",
+      "NIST AI RMF is mapped at function and category level. Subcategory-level mapping is a v1.1 target.",
       "Every mapping carries a role scope naming who the obligation falls on. Mappings without a role scope do not publish.",
       "Regulatory mappings are research aids and do not constitute legal advice or establish compliance.",
       "Plain-language examples are composites written for recognition, not descriptions of any specific organization."
@@ -27,8 +28,6 @@
     {
       "id": "AGF-F001",
       "name": "No executive-approved AI policy",
-      "stageId": "AGF-TA01",
-      "stageName": "Strategy, Scope & Policy",
       "severity": "High",
       "plainTerms": "Nobody has written down what the company will and won't do with AI. Every team decides for itself, and no two teams decide the same way.",
       "entryStatus": "open",
@@ -41,13 +40,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA01",
+      "stageName": "Strategy, Scope & Policy"
     },
     {
       "id": "AGF-F002",
       "name": "Policy not mapped to operations",
-      "stageId": "AGF-TA01",
-      "stageName": "Strategy, Scope & Policy",
       "severity": "High",
       "plainTerms": "There's a twelve-page AI policy. It lives in a shared drive. Nobody's day-to-day work changed when it was published.",
       "entryStatus": "open",
@@ -60,32 +59,75 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA01",
+      "stageName": "Strategy, Scope & Policy"
     },
     {
       "id": "AGF-F003",
       "name": "No risk-tier taxonomy",
-      "stageId": "AGF-TA01",
-      "stageName": "Strategy, Scope & Policy",
       "severity": "High",
       "plainTerms": "Every AI project is treated the same. A tool that suggests lunch spots gets the same scrutiny as one that declines loan applications.",
-      "entryStatus": "open",
-      "description": null,
+      "entryStatus": "full",
+      "description": "No agreed scheme exists for classifying AI use cases by risk, so every use case is implicitly treated as equivalent. Without tiers there is nothing to route on, nothing to scale review depth against, and no defensible basis for treating two use cases differently.",
       "variants": [],
-      "sectors": null,
-      "indicators": [],
-      "rootCauses": [],
-      "mitigations": [],
-      "mapping": [],
-      "related": [],
-      "reference": null,
-      "tiers": null
+      "sectors": "Cross-sector; foundational across all industries",
+      "indicators": [
+        "No documented tier definitions or classification criteria",
+        "Review depth identical across materially different use cases",
+        "Reviewers unable to state which tier a given use case sits in",
+        "Risk language in policy that maps to no operational routing decision"
+      ],
+      "rootCauses": [
+        "Policy written before any volume of use cases existed to classify",
+        "Disagreement between functions about what counts as high risk, resolved by omitting the question",
+        "Concern that publishing tiers invites teams to argue their way into a lower one"
+      ],
+      "mitigations": [
+        "Define a small number of tiers with written classification criteria",
+        "Tie each tier to a concrete routing consequence, not just a label",
+        "Classify the existing portfolio retrospectively, not only new intake",
+        "Publish the criteria so classification can be challenged and is repeatable"
+      ],
+      "mapping": [
+        {
+          "framework": "EU AI Act",
+          "provision": "Art. 6 and Annex III — high-risk classification. An organization with no internal tiering cannot determine which of its systems fall inside the regime.",
+          "role": "Provider & deployer",
+          "status": "future"
+        },
+        {
+          "framework": "SR 26-2",
+          "provision": "Materiality-based scoping — the 2026 guidance expects tailoring to model risk profile, which presupposes a classification scheme",
+          "role": "Banking organization",
+          "status": "live"
+        },
+        {
+          "framework": "NIST AI RMF",
+          "provision": "MAP-1 — context and categorization",
+          "role": "Organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "ISO/IEC 42001",
+          "provision": "Clause 6.1 risk planning; A.5 assessing impacts of AI systems",
+          "role": "Organization",
+          "status": "stayed"
+        }
+      ],
+      "related": [
+        "AGF-F020",
+        "AGF-F022",
+        "AGF-F027"
+      ],
+      "reference": "Precedes most other assessment failures. An organization without tiering cannot exhibit proportionate review, because there is nothing to be proportionate to.",
+      "tiers": "Tiers 1–2",
+      "stageId": "AGF-TA01",
+      "stageName": "Strategy, Scope & Policy"
     },
     {
       "id": "AGF-F004",
       "name": "Prohibited-use categories unenforced",
-      "stageId": "AGF-TA01",
-      "stageName": "Strategy, Scope & Policy",
       "severity": "Critical",
       "plainTerms": "The policy says the company will never use AI for a particular purpose. Nothing in any system actually prevents someone from doing it.",
       "entryStatus": "open",
@@ -98,13 +140,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA01",
+      "stageName": "Strategy, Scope & Policy"
     },
     {
       "id": "AGF-F005",
       "name": "No accountable executive owner",
-      "stageId": "AGF-TA01",
-      "stageName": "Strategy, Scope & Policy",
       "severity": "High",
       "plainTerms": "Ask who owns AI risk and you get four names, a committee, and a shrug.",
       "entryStatus": "open",
@@ -117,13 +159,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA01",
+      "stageName": "Strategy, Scope & Policy"
     },
     {
       "id": "AGF-F006",
       "name": "Policy unversioned / no change control",
-      "stageId": "AGF-TA01",
-      "stageName": "Strategy, Scope & Policy",
       "severity": "Moderate",
       "plainTerms": "Someone edited the AI policy in March. Nobody can say what it said in February, or who changed it, or why.",
       "entryStatus": "open",
@@ -136,13 +178,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA01",
+      "stageName": "Strategy, Scope & Policy"
     },
     {
       "id": "AGF-F007",
       "name": "Strategy–execution disconnect",
-      "stageId": "AGF-TA01",
-      "stageName": "Strategy, Scope & Policy",
       "severity": "Moderate",
       "plainTerms": "Leadership announced an AI strategy. The projects actually being funded have very little to do with it.",
       "entryStatus": "open",
@@ -155,13 +197,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA01",
+      "stageName": "Strategy, Scope & Policy"
     },
     {
       "id": "AGF-F008",
       "name": "No value measurement for the AI programme",
-      "stageId": "AGF-TA01",
-      "stageName": "Strategy, Scope & Policy",
       "severity": "Moderate",
       "plainTerms": "The AI programme has been running eighteen months. When the CFO asks what it delivered, the answer is a list of projects, not a number — so at the next budget cycle, governance reads as pure cost.",
       "entryStatus": "open",
@@ -174,13 +216,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA01",
+      "stageName": "Strategy, Scope & Policy"
     },
     {
       "id": "AGF-F010",
       "name": "Intake bypass",
-      "stageId": "AGF-TA02",
-      "stageName": "Intake & Discovery",
       "severity": "High",
       "plainTerms": "A team bought an AI tool on a corporate card, rolled it out to forty people, and the governance team found out when someone mentioned it in an unrelated meeting.",
       "entryStatus": "full",
@@ -250,13 +292,13 @@
         "AGF-F091"
       ],
       "reference": "No single canonical public incident. Prevalence is supported by Verizon DBIR 2026 and IBM/Ponemon 2025 findings on unauthorized AI use.",
-      "tiers": "Tiers 1–2"
+      "tiers": "Tiers 1–2",
+      "stageId": "AGF-TA02",
+      "stageName": "Intake & Discovery"
     },
     {
       "id": "AGF-F011",
       "name": "Unsanctioned AI use",
-      "stageId": "AGF-TA02",
-      "stageName": "Intake & Discovery",
       "severity": "Critical",
       "plainTerms": "Half the department is pasting work into a free chatbot on their phones. It isn't on any list, because nobody ever decided to use it — people just started.",
       "entryStatus": "full",
@@ -319,13 +361,13 @@
         "AGF-F037"
       ],
       "reference": "Widely reported corporate source-code exposure through consumer AI assistants (2023) led to internal prohibitions at several large manufacturers. Netskope 2026 reports 47% of generative AI users on personal, unmanaged accounts.",
-      "tiers": "Tier 1"
+      "tiers": "Tier 1",
+      "stageId": "AGF-TA02",
+      "stageName": "Intake & Discovery"
     },
     {
       "id": "AGF-F012",
       "name": "Incomplete intake — context, data or owner missing",
-      "stageId": "AGF-TA02",
-      "stageName": "Intake & Discovery",
       "severity": "Moderate",
       "plainTerms": "The intake form was submitted with 'TBD' for data sources and 'various' for the owner. It was approved anyway, because sending it back would have taken another three weeks.",
       "entryStatus": "open",
@@ -338,13 +380,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA02",
+      "stageName": "Intake & Discovery"
     },
     {
       "id": "AGF-F013",
       "name": "No continuous or adaptive intake",
-      "stageId": "AGF-TA02",
-      "stageName": "Intake & Discovery",
       "severity": "Moderate",
       "plainTerms": "Intake happens once a quarter in a big batch. Anything that comes up in between either waits three months or quietly skips the process.",
       "entryStatus": "open",
@@ -357,13 +399,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA02",
+      "stageName": "Intake & Discovery"
     },
     {
       "id": "AGF-F014",
       "name": "Duplicate use cases undetected",
-      "stageId": "AGF-TA02",
-      "stageName": "Intake & Discovery",
       "severity": "Moderate",
       "plainTerms": "Three teams built three versions of the same document summarizer. None of them knew about the others. All three went through review separately.",
       "entryStatus": "open",
@@ -376,51 +418,147 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA02",
+      "stageName": "Intake & Discovery"
     },
     {
       "id": "AGF-F015",
       "name": "Vendor-supplied AI uncaptured in inventory",
-      "stageId": "AGF-TA02",
-      "stageName": "Intake & Discovery",
       "severity": "High",
       "plainTerms": "The HR system the company has used for years quietly added AI-driven candidate ranking in an update. It's now an AI system, but it's still filed as an HR system.",
-      "entryStatus": "open",
-      "description": null,
+      "entryStatus": "full",
+      "description": "AI capability arrives inside software the organization already owns — a vendor adds a feature, enables a model, or ships an assistant in an update. The system remains registered under its original non-AI category, so no AI governance control ever attaches to it.",
       "variants": [],
-      "sectors": null,
-      "indicators": [],
-      "rootCauses": [],
-      "mitigations": [],
-      "mapping": [],
-      "related": [],
-      "reference": null,
-      "tiers": null
+      "sectors": "Cross-sector; heaviest exposure where core operational platforms are vendor-supplied",
+      "indicators": [
+        "Vendor release notes describing AI capability with no corresponding governance event",
+        "Software categorized by original function rather than current capability",
+        "Contract renewals with AI terms for systems absent from the AI register",
+        "AI features enabled by default in existing tools with no configuration decision recorded"
+      ],
+      "rootCauses": [
+        "Inventory built once at procurement and never revisited as capability changed",
+        "No process watching vendor roadmaps or release notes for AI additions",
+        "Vendor management and AI governance operate as separate functions with no trigger between them",
+        "AI features enabled by default, so adoption requires no decision anyone records"
+      ],
+      "mitigations": [
+        "Add AI capability disclosure and change notification to vendor contract terms",
+        "Review vendor release notes against the register on a defined cadence",
+        "Re-screen the existing software estate for AI features rather than only assessing new purchases",
+        "Treat a vendor enabling AI capability as a governance event requiring re-intake",
+        "Require vendors to notify before enabling new AI capability, not after"
+      ],
+      "mapping": [
+        {
+          "framework": "EU AI Act",
+          "provision": "Art. 26 — deployer obligations attach regardless of whether the organization realises the system is in scope",
+          "role": "Deployer",
+          "status": "future"
+        },
+        {
+          "framework": "EU AI Act",
+          "provision": "Art. 50 — transparency duties attach by system function, including where the function arrived in a vendor update",
+          "role": "Deployer",
+          "status": "live"
+        },
+        {
+          "framework": "NIST AI RMF",
+          "provision": "MAP-1 inventory and context; MANAGE-3 third-party risk",
+          "role": "Organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "ISO/IEC 42001",
+          "provision": "A.10 — third-party and customer relationships; Clause 8.1 operational control",
+          "role": "Organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "SR 26-2",
+          "provision": "Vendor and third-party model inventory",
+          "role": "Banking organization",
+          "status": "live"
+        }
+      ],
+      "related": [
+        "AGF-F010",
+        "AGF-F071",
+        "AGF-F016"
+      ],
+      "reference": "The dominant route by which regulated organizations acquire ungoverned AI. Distinct from unsanctioned use in that the organization bought the software deliberately; only the AI capability is unnoticed.",
+      "tiers": "Tiers 1–3",
+      "stageId": "AGF-TA02",
+      "stageName": "Intake & Discovery"
     },
     {
       "id": "AGF-F016",
       "name": "Agentic components not distinguished from models",
-      "stageId": "AGF-TA02",
-      "stageName": "Intake & Discovery",
       "severity": "High",
       "plainTerms": "The register says 'AI assistant.' It's actually an agent that can send emails and update records on its own — which is a completely different risk, recorded as if it were the same one.",
-      "entryStatus": "open",
-      "description": null,
+      "entryStatus": "full",
+      "description": "Systems that can take actions — call tools, write to records, send communications, invoke other systems — are registered and governed as though they only produce text for a human to read. The risk profile of an agent differs fundamentally from that of a model, and the register cannot tell them apart.",
       "variants": [],
-      "sectors": null,
-      "indicators": [],
-      "rootCauses": [],
-      "mitigations": [],
-      "mapping": [],
-      "related": [],
-      "reference": null,
-      "tiers": null
+      "sectors": "Cross-sector; consequence rises sharply in banking and anywhere systems hold write access",
+      "indicators": [
+        "Register entries describing capability in generic terms such as assistant or copilot",
+        "No field recording autonomy level, tool access, or write permissions",
+        "Systems with production write access whose governance record shows read-only assessment",
+        "No inventory of what actions a given deployment is permitted to take"
+      ],
+      "rootCauses": [
+        "Register schema designed before agentic deployment was common",
+        "Agentic capability added incrementally to a system already approved as a model",
+        "Vendor terminology obscures the distinction, and the register inherits it",
+        "No one has defined what autonomy levels the organization recognizes"
+      ],
+      "mitigations": [
+        "Record autonomy level, tool access, and write scope as mandatory register fields",
+        "Maintain an agent registry distinct from the model inventory",
+        "Require re-assessment when a system gains the ability to act rather than only to advise",
+        "Define recognized autonomy levels so the field has consistent meaning",
+        "Inventory permissions held by agent service accounts as part of assessment"
+      ],
+      "mapping": [
+        {
+          "framework": "SR 26-2",
+          "provision": "Footnote 3 to § II excludes agentic AI from model risk management scope, so no supervisory template exists and institutions must self-determine controls",
+          "role": "Banking organization",
+          "status": "live"
+        },
+        {
+          "framework": "EU AI Act",
+          "provision": "Art. 6 and Annex III classification — an agent taking consequential action may fall in scope where an advisory model does not",
+          "role": "Provider & deployer",
+          "status": "future"
+        },
+        {
+          "framework": "NIST AI RMF",
+          "provision": "MAP-1 context and capability; MANAGE-1 risk treatment",
+          "role": "Organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "ISO/IEC 42001",
+          "provision": "A.6 AI system life cycle; A.9 responsible use",
+          "role": "Organization",
+          "status": "stayed"
+        }
+      ],
+      "related": [
+        "AGF-F066",
+        "AGF-F015",
+        "AGF-F032"
+      ],
+      "reference": "A classification gap created by rapid capability change rather than by process failure. The register is usually accurate as of the date it was designed.",
+      "tiers": "Tiers 2–4",
+      "stageId": "AGF-TA02",
+      "stageName": "Intake & Discovery"
     },
     {
       "id": "AGF-F017",
       "name": "Fragmented intake surfaces",
-      "stageId": "AGF-TA02",
-      "stageName": "Intake & Discovery",
       "severity": "High",
       "plainTerms": "Submitting an idea means filling out four different forms owned by four different teams, with most of the questions repeated across all of them. Most people fill out one and stop.",
       "entryStatus": "open",
@@ -433,13 +571,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA02",
+      "stageName": "Intake & Discovery"
     },
     {
       "id": "AGF-F018",
       "name": "No triage or routing layer",
-      "stageId": "AGF-TA02",
-      "stageName": "Intake & Discovery",
       "severity": "High",
       "plainTerms": "An idea gets submitted, sits with the wrong team for two weeks, is forwarded to a second team, who forward it to a third. Nobody rejected it. It just circulated until the submitter gave up.",
       "entryStatus": "full",
@@ -498,13 +636,13 @@
         "AGF-F086"
       ],
       "reference": "Manifests as submitter attrition and shadow adoption rather than as a reportable incident.",
-      "tiers": "Tiers 1–3"
+      "tiers": "Tiers 1–3",
+      "stageId": "AGF-TA02",
+      "stageName": "Intake & Discovery"
     },
     {
       "id": "AGF-F020",
       "name": "No consistent scoring methodology",
-      "stageId": "AGF-TA03",
-      "stageName": "Risk Assessment & Tiering",
       "severity": "High",
       "plainTerms": "Two reviewers assess similar projects and reach different conclusions, because the scoring criteria exist in their heads rather than on paper.",
       "entryStatus": "open",
@@ -517,13 +655,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA03",
+      "stageName": "Risk Assessment & Tiering"
     },
     {
       "id": "AGF-F021",
       "name": "Tier assigned once, never revisited",
-      "stageId": "AGF-TA03",
-      "stageName": "Risk Assessment & Tiering",
       "severity": "High",
       "plainTerms": "A tool was rated low risk when it drafted internal emails. It now drafts customer communications. It is still rated low risk.",
       "entryStatus": "open",
@@ -536,13 +674,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA03",
+      "stageName": "Risk Assessment & Tiering"
     },
     {
       "id": "AGF-F022",
       "name": "Miscategorization — high-impact rated low",
-      "stageId": "AGF-TA03",
-      "stageName": "Risk Assessment & Tiering",
       "severity": "Critical",
       "plainTerms": "A system that influences who gets hired was filed as a productivity tool, because it doesn't make the final call — a person does, after reading its ranking.",
       "entryStatus": "open",
@@ -555,13 +693,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA03",
+      "stageName": "Risk Assessment & Tiering"
     },
     {
       "id": "AGF-F023",
       "name": "Transparency-triggering uses not flagged",
-      "stageId": "AGF-TA03",
-      "stageName": "Risk Assessment & Tiering",
       "severity": "High",
       "plainTerms": "Customers are chatting with an AI agent and nobody told them. Nothing in the assessment ever asked whether they would need to be told.",
       "entryStatus": "full",
@@ -630,13 +768,13 @@
         "AGF-F092"
       ],
       "reference": "Art. 50 became enforceable 2 Aug 2026. Applies by system function, not risk tier, so mainstream generative deployments are in scope regardless of the Annex III deferral to Dec 2027.",
-      "tiers": "Tiers 2–3"
+      "tiers": "Tiers 2–3",
+      "stageId": "AGF-TA03",
+      "stageName": "Risk Assessment & Tiering"
     },
     {
       "id": "AGF-F024",
       "name": "No regulatory trigger built into assessment",
-      "stageId": "AGF-TA03",
-      "stageName": "Risk Assessment & Tiering",
       "severity": "High",
       "plainTerms": "The assessment asks thorough questions about data and security. It never asks which laws apply, so nobody finds out until someone in legal reads about it in the news.",
       "entryStatus": "open",
@@ -649,13 +787,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA03",
+      "stageName": "Risk Assessment & Tiering"
     },
     {
       "id": "AGF-F025",
       "name": "Aggregate portfolio risk unassessed",
-      "stageId": "AGF-TA03",
-      "stageName": "Risk Assessment & Tiering",
       "severity": "High",
       "plainTerms": "Every individual AI project is low risk. Nobody has asked what it means that forty of them now depend on the same vendor's model.",
       "entryStatus": "open",
@@ -668,13 +806,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA03",
+      "stageName": "Risk Assessment & Tiering"
     },
     {
       "id": "AGF-F026",
       "name": "Bias and fairness risk unassessed",
-      "stageId": "AGF-TA03",
-      "stageName": "Risk Assessment & Tiering",
       "severity": "Critical",
       "plainTerms": "A screening tool has been running for two years. Nobody has ever checked whether it treats different groups of applicants the same way.",
       "entryStatus": "open",
@@ -687,13 +825,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA03",
+      "stageName": "Risk Assessment & Tiering"
     },
     {
       "id": "AGF-F027",
       "name": "Undifferentiated review burden",
-      "stageId": "AGF-TA03",
-      "stageName": "Risk Assessment & Tiering",
       "severity": "High",
       "plainTerms": "Every AI request — including one to summarize meeting notes — goes through the full security, architecture, privacy and legal review. It takes eleven weeks, the reviewers are drowning, and teams have quietly stopped asking.",
       "entryStatus": "full",
@@ -754,13 +892,13 @@
         "AGF-F037"
       ],
       "reference": "Presents as reviewer burnout and shadow adoption. Rarely reported as an incident, because the failure is the absence of governance rather than its malfunction.",
-      "tiers": "Tiers 2–4"
+      "tiers": "Tiers 2–4",
+      "stageId": "AGF-TA03",
+      "stageName": "Risk Assessment & Tiering"
     },
     {
       "id": "AGF-F030",
       "name": "Unauthorized or unqualified approver",
-      "stageId": "AGF-TA04",
-      "stageName": "Approval & Authorization",
       "severity": "High",
       "plainTerms": "The approval was signed by whoever was available that week, not by anyone with the authority or the background to judge it.",
       "entryStatus": "open",
@@ -773,13 +911,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA04",
+      "stageName": "Approval & Authorization"
     },
     {
       "id": "AGF-F031",
       "name": "Stale approval",
-      "stageId": "AGF-TA04",
-      "stageName": "Approval & Authorization",
       "severity": "High",
       "plainTerms": "The system was approved two years ago. The vendor has swapped the underlying model twice since then. The record still says 'approved,' and technically it is.",
       "entryStatus": "full",
@@ -850,13 +988,13 @@
         "AGF-F094"
       ],
       "reference": "Typically surfaced during examination or inspection rather than as a publicly reported incident.",
-      "tiers": "Tiers 4–5"
+      "tiers": "Tiers 4–5",
+      "stageId": "AGF-TA04",
+      "stageName": "Approval & Authorization"
     },
     {
       "id": "AGF-F032",
       "name": "Use outside approved scope",
-      "stageId": "AGF-TA04",
-      "stageName": "Approval & Authorization",
       "severity": "High",
       "plainTerms": "A tool approved to draft internal summaries is now generating content that goes to customers. No new approval was sought, because to everyone involved it felt like the same tool doing the same thing.",
       "entryStatus": "full",
@@ -930,32 +1068,84 @@
         "AGF-F015"
       ],
       "reference": "Commonly identified during internal audit rather than through public incident reporting.",
-      "tiers": "Tiers 3–4"
+      "tiers": "Tiers 3–4",
+      "stageId": "AGF-TA04",
+      "stageName": "Approval & Authorization"
     },
     {
       "id": "AGF-F033",
       "name": "Conditional-approval conditions never verified",
-      "stageId": "AGF-TA04",
-      "stageName": "Approval & Authorization",
       "severity": "High",
       "plainTerms": "Approval was granted on condition the team added human review and logging before launch. They launched. Nobody ever checked whether they added either.",
-      "entryStatus": "open",
-      "description": null,
+      "entryStatus": "full",
+      "description": "Approval is granted subject to conditions — add human review, implement logging, complete testing before launch. The conditions are recorded in the approval and then never checked. The system operates as though fully approved while the basis of that approval was never satisfied.",
       "variants": [],
-      "sectors": null,
-      "indicators": [],
-      "rootCauses": [],
-      "mitigations": [],
-      "mapping": [],
-      "related": [],
-      "reference": null,
-      "tiers": null
+      "sectors": "Cross-sector; most consequential in banking, insurance and biopharma",
+      "indicators": [
+        "Approvals containing conditions with no corresponding verification record",
+        "No field distinguishing conditional approval from unconditional",
+        "Conditions expressed as prose in a comment rather than as tracked items",
+        "No owner or due date attached to any condition",
+        "Systems in production whose approval conditions remain open"
+      ],
+      "rootCauses": [
+        "Conditions captured as narrative text rather than as tracked obligations",
+        "No mechanism links a condition to a verification event",
+        "Conditional approval treated as approval, because operationally it releases the same permissions",
+        "The reviewer who set the condition has no visibility after the decision"
+      ],
+      "mitigations": [
+        "Record each condition as a tracked item with an owner and a due date",
+        "Distinguish conditional from unconditional approval in the record and in reporting",
+        "Require positive verification evidence before a condition is closed",
+        "Escalate overdue conditions on the same basis as overdue findings",
+        "Report open conditions on deployed systems as a standing metric"
+      ],
+      "mapping": [
+        {
+          "framework": "ISO/IEC 42001",
+          "provision": "Clause 10.2 — corrective action, including verification of effectiveness",
+          "role": "Organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "EU AI Act",
+          "provision": "Art. 9 — risk management measures must be implemented, not only identified",
+          "role": "Provider",
+          "status": "future"
+        },
+        {
+          "framework": "GxP",
+          "provision": "CAPA effectiveness verification; conditional release controls",
+          "role": "Regulated organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "SR 26-2",
+          "provision": "Issue management and validation findings closure",
+          "role": "Banking organization",
+          "status": "live"
+        },
+        {
+          "framework": "NIST AI RMF",
+          "provision": "MANAGE-1, MANAGE-4 — risk treatment and its documentation",
+          "role": "Organization",
+          "status": "stayed"
+        }
+      ],
+      "related": [
+        "AGF-F100",
+        "AGF-F103",
+        "AGF-F067"
+      ],
+      "reference": "Structurally identical to the findings-and-remediation failures in TA11, but occurring at the approval gate rather than after review. Organizations frequently fix one and not the other.",
+      "tiers": "Tiers 3–5",
+      "stageId": "AGF-TA04",
+      "stageName": "Approval & Authorization"
     },
     {
       "id": "AGF-F034",
       "name": "No defined responsibility model for approval",
-      "stageId": "AGF-TA04",
-      "stageName": "Approval & Authorization",
       "severity": "Moderate",
       "plainTerms": "Four people have to sign off. None of them can say which parts they are each responsible for, so each waits to see what the others do first.",
       "entryStatus": "open",
@@ -968,13 +1158,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA04",
+      "stageName": "Approval & Authorization"
     },
     {
       "id": "AGF-F035",
       "name": "Approval without substantive review",
-      "stageId": "AGF-TA04",
-      "stageName": "Approval & Authorization",
       "severity": "High",
       "plainTerms": "The committee approves everything. Nobody can recall the last time a request was sent back with a material objection.",
       "entryStatus": "open",
@@ -987,13 +1177,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA04",
+      "stageName": "Approval & Authorization"
     },
     {
       "id": "AGF-F036",
       "name": "Emergency approval with no subsequent review",
-      "stageId": "AGF-TA04",
-      "stageName": "Approval & Authorization",
       "severity": "High",
       "plainTerms": "Something urgent got approved in a hallway conversation to hit a deadline. The proper review was going to happen right after launch. That was a year ago.",
       "entryStatus": "open",
@@ -1006,13 +1196,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA04",
+      "stageName": "Approval & Authorization"
     },
     {
       "id": "AGF-F037",
       "name": "No service level on review decisions",
-      "stageId": "AGF-TA04",
-      "stageName": "Approval & Authorization",
       "severity": "High",
       "plainTerms": "Teams submit a request and hear nothing for six weeks. There's no published turnaround time, so nothing is ever technically late — and people stop waiting and start improvising.",
       "entryStatus": "full",
@@ -1073,13 +1263,13 @@
         "AGF-F086"
       ],
       "reference": "Presents as shadow adoption and submitter attrition rather than as a reportable incident. The causal link between review latency and unsanctioned use is the most consistent pattern in this catalog.",
-      "tiers": "Tiers 2–4"
+      "tiers": "Tiers 2–4",
+      "stageId": "AGF-TA04",
+      "stageName": "Approval & Authorization"
     },
     {
       "id": "AGF-F038",
       "name": "No precedent reuse",
-      "stageId": "AGF-TA04",
-      "stageName": "Approval & Authorization",
       "severity": "Moderate",
       "plainTerms": "The same question — can we use this kind of model with this kind of data — has now been answered eight times by eight different reviewers. There's no record of the previous answers, so the ninth team starts from scratch.",
       "entryStatus": "full",
@@ -1132,13 +1322,13 @@
         "AGF-F091"
       ],
       "reference": "Presents as persistent reviewer load and inconsistent treatment of comparable cases.",
-      "tiers": "Tiers 3–5"
+      "tiers": "Tiers 3–5",
+      "stageId": "AGF-TA04",
+      "stageName": "Approval & Authorization"
     },
     {
       "id": "AGF-F039",
       "name": "Review sequencing mismatch",
-      "stageId": "AGF-TA04",
-      "stageName": "Approval & Authorization",
       "severity": "High",
       "plainTerms": "Review step three requires test results that only get produced at step five. Every request reaches step three, gets sent back, and goes around again. Everyone involved knows. Nobody has changed the order.",
       "entryStatus": "full",
@@ -1204,13 +1394,13 @@
         "AGF-F086"
       ],
       "reference": "Widely experienced, rarely documented — the loop is usually described as a resourcing problem rather than a design defect.",
-      "tiers": "Tiers 3–5"
+      "tiers": "Tiers 3–5",
+      "stageId": "AGF-TA04",
+      "stageName": "Approval & Authorization"
     },
     {
       "id": "AGF-F040",
       "name": "Missing human-in-the-loop trigger",
-      "stageId": "AGF-TA05",
-      "stageName": "Human Oversight & Accountability",
       "severity": "Critical",
       "plainTerms": "The policy says a person reviews every high-value decision. In the actual system, there is no screen where a person could do that, and no record that anyone ever has.",
       "entryStatus": "full",
@@ -1278,13 +1468,13 @@
         "AGF-F043"
       ],
       "reference": "A recurring contributing factor across publicly reported automated-decision harms in the AI Incident Database.",
-      "tiers": "Tiers 3–5"
+      "tiers": "Tiers 3–5",
+      "stageId": "AGF-TA05",
+      "stageName": "Human Oversight & Accountability"
     },
     {
       "id": "AGF-F041",
       "name": "Human review present but not substantive",
-      "stageId": "AGF-TA05",
-      "stageName": "Human Oversight & Accountability",
       "severity": "Critical",
       "plainTerms": "There is a review step. The reviewer processes four hundred items an hour. It is a button, not a judgement.",
       "entryStatus": "open",
@@ -1297,32 +1487,78 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA05",
+      "stageName": "Human Oversight & Accountability"
     },
     {
       "id": "AGF-F042",
       "name": "Orphaned ownership",
-      "stageId": "AGF-TA05",
-      "stageName": "Human Oversight & Accountability",
       "severity": "High",
       "plainTerms": "The person who built and owned the system left in March. The system is still running, still making decisions, and has no owner.",
-      "entryStatus": "open",
-      "description": null,
+      "entryStatus": "full",
+      "description": "A deployed system has no current owner. The person who built or sponsored it has left, changed role, or moved team, and ownership was never reassigned. The system continues to operate, make decisions, and consume data with nobody accountable for it.",
       "variants": [],
-      "sectors": null,
-      "indicators": [],
-      "rootCauses": [],
-      "mitigations": [],
-      "mapping": [],
-      "related": [],
-      "reference": null,
-      "tiers": null
+      "sectors": "Cross-sector; prevalence rises with organizational change frequency",
+      "indicators": [
+        "Register entries whose named owner no longer appears in the directory",
+        "Owner fields populated with a team name rather than a person",
+        "Systems with no governance activity for an extended period",
+        "Review requests returning undeliverable",
+        "No reassignment step in the leaver or internal-transfer process"
+      ],
+      "rootCauses": [
+        "Ownership captured at intake and never revisited",
+        "Offboarding processes cover access and equipment but not governance ownership",
+        "Reassignment has no trigger, so it depends on someone noticing",
+        "Ownership recorded as an individual with no defined successor or accountable role"
+      ],
+      "mitigations": [
+        "Trigger ownership reassignment from the leaver and internal-transfer processes",
+        "Record an accountable role alongside the named individual",
+        "Run periodic ownership attestation across the register",
+        "Report unowned systems as a standing exception",
+        "Block approval renewal on a system with no current owner"
+      ],
+      "mapping": [
+        {
+          "framework": "EU AI Act",
+          "provision": "Art. 26(2) — the deployer must assign human oversight to identified natural persons with the necessary competence and authority",
+          "role": "Deployer",
+          "status": "future"
+        },
+        {
+          "framework": "NIST AI RMF",
+          "provision": "GOVERN-2 — accountability structures and defined roles",
+          "role": "Organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "ISO/IEC 42001",
+          "provision": "Clause 5.3 — roles, responsibilities and authorities",
+          "role": "Organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "SR 26-2",
+          "provision": "Model ownership and accountability expectations",
+          "role": "Banking organization",
+          "status": "live"
+        }
+      ],
+      "related": [
+        "AGF-F096",
+        "AGF-F044",
+        "AGF-F094"
+      ],
+      "reference": "Frequently discovered during an audit or an incident, when someone needs to reach the owner and finds there is not one.",
+      "tiers": "Tiers 2–4",
+      "stageId": "AGF-TA05",
+      "stageName": "Human Oversight & Accountability"
     },
     {
       "id": "AGF-F043",
       "name": "No escalation path",
-      "stageId": "AGF-TA05",
-      "stageName": "Human Oversight & Accountability",
       "severity": "High",
       "plainTerms": "Someone on the front line notices the AI is producing something wrong. There is no route for that concern to go anywhere, so they work around it and tell a colleague.",
       "entryStatus": "open",
@@ -1335,13 +1571,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA05",
+      "stageName": "Human Oversight & Accountability"
     },
     {
       "id": "AGF-F044",
       "name": "Diffused accountability across functions",
-      "stageId": "AGF-TA05",
-      "stageName": "Human Oversight & Accountability",
       "severity": "High",
       "plainTerms": "A decision needs risk, legal, data, and the business to agree. Getting them in the same room takes three weeks. The decision itself takes ten minutes.",
       "entryStatus": "full",
@@ -1398,13 +1634,13 @@
         "AGF-F018"
       ],
       "reference": "Manifests as slow delivery and unattributable failure rather than as a discrete incident.",
-      "tiers": "Tiers 2–4"
+      "tiers": "Tiers 2–4",
+      "stageId": "AGF-TA05",
+      "stageName": "Human Oversight & Accountability"
     },
     {
       "id": "AGF-F045",
       "name": "No override or appeal route for affected individuals",
-      "stageId": "AGF-TA05",
-      "stageName": "Human Oversight & Accountability",
       "severity": "Critical",
       "plainTerms": "A customer was declined by an automated decision. There is no way for them to ask a human to look at it again, and no one inside the company who could act if they did.",
       "entryStatus": "open",
@@ -1417,13 +1653,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA05",
+      "stageName": "Human Oversight & Accountability"
     },
     {
       "id": "AGF-F046",
       "name": "Governance owner without capacity",
-      "stageId": "AGF-TA05",
-      "stageName": "Human Oversight & Accountability",
       "severity": "High",
       "plainTerms": "One person owns AI governance. It is not their only job, or their second. They are in meetings all day, and the governance work happens on weekends — or it doesn't.",
       "entryStatus": "open",
@@ -1436,13 +1672,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA05",
+      "stageName": "Human Oversight & Accountability"
     },
     {
       "id": "AGF-F047",
       "name": "Process communication diverges from routing logic",
-      "stageId": "AGF-TA05",
-      "stageName": "Human Oversight & Accountability",
       "severity": "Moderate",
       "plainTerms": "The screen tells the submitter their request is going to expert review. The rules actually send it somewhere else entirely. Nobody notices until someone goes looking for a review that never happened.",
       "entryStatus": "open",
@@ -1455,13 +1691,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA05",
+      "stageName": "Human Oversight & Accountability"
     },
     {
       "id": "AGF-F050",
       "name": "Undocumented data lineage",
-      "stageId": "AGF-TA06",
-      "stageName": "Data Governance & Provenance",
       "severity": "High",
       "plainTerms": "Ask where the training data came from and the answer is the name of a person who might remember.",
       "entryStatus": "open",
@@ -1474,32 +1710,84 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA06",
+      "stageName": "Data Governance & Provenance"
     },
     {
       "id": "AGF-F051",
       "name": "Data-use rights and consent unverified",
-      "stageId": "AGF-TA06",
-      "stageName": "Data Governance & Provenance",
       "severity": "Critical",
       "plainTerms": "Customer data collected for billing is now training a model. Nobody checked whether customers agreed to that when they handed it over.",
-      "entryStatus": "open",
-      "description": null,
+      "entryStatus": "full",
+      "description": "Data is used to train, tune, or prompt an AI system without anyone verifying that the organization holds the rights to use it that way. Collection for one purpose does not establish permission for another, and the check is frequently never made.",
       "variants": [],
-      "sectors": null,
-      "indicators": [],
-      "rootCauses": [],
-      "mitigations": [],
-      "mapping": [],
-      "related": [],
-      "reference": null,
-      "tiers": null
+      "sectors": "Cross-sector; acute wherever personal, customer, or licensed third-party data is involved",
+      "indicators": [
+        "No recorded rights determination against any training or retrieval dataset",
+        "Privacy notices that do not contemplate AI use of the data they describe",
+        "Third-party data used in AI contexts with no licence review",
+        "Datasets whose collection basis nobody can state",
+        "Assessment forms with no data-rights question"
+      ],
+      "rootCauses": [
+        "Rights assessed at the point of collection and never re-assessed for new purposes",
+        "Data governance and AI governance operate as separate processes with no handoff",
+        "Assumption that internally held data is internally usable for any purpose",
+        "Licence terms for third-party data not reviewed for AI use specifically"
+      ],
+      "mitigations": [
+        "Require a recorded data-rights determination before any AI use of a dataset",
+        "Review privacy notices and consent bases against actual AI use",
+        "Check third-party data licences for AI, training, and derivative-work terms",
+        "Maintain a data-rights register linked to use cases",
+        "Make the rights question a blocking field on intake"
+      ],
+      "mapping": [
+        {
+          "framework": "EU AI Act",
+          "provision": "Art. 10 — data and data governance, including examination of suitability and provenance of datasets",
+          "role": "Provider",
+          "status": "future"
+        },
+        {
+          "framework": "NIST AI RMF",
+          "provision": "MAP-4 — risks from third-party data and software; GOVERN-6 third-party policy",
+          "role": "Organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "ISO/IEC 42001",
+          "provision": "A.7 — data for AI systems, including provenance and quality",
+          "role": "Organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "GxP",
+          "provision": "Data provenance and integrity for data supporting regulated decisions",
+          "role": "Regulated organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "SR 26-2",
+          "provision": "Data quality and appropriateness for model use",
+          "role": "Banking organization",
+          "status": "live"
+        }
+      ],
+      "related": [
+        "AGF-F050",
+        "AGF-F054",
+        "AGF-F055"
+      ],
+      "reference": "Among the most difficult failure modes to remediate after the fact, because retraining or rebuilding may be the only available correction.",
+      "tiers": "Tiers 2–4",
+      "stageId": "AGF-TA06",
+      "stageName": "Data Governance & Provenance"
     },
     {
       "id": "AGF-F052",
       "name": "Sensitive data in ungoverned tools",
-      "stageId": "AGF-TA06",
-      "stageName": "Data Governance & Provenance",
       "severity": "Critical",
       "plainTerms": "Confidential documents are being pasted into tools the company doesn't control, to get a quick summary before a meeting.",
       "entryStatus": "open",
@@ -1512,13 +1800,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA06",
+      "stageName": "Data Governance & Provenance"
     },
     {
       "id": "AGF-F053",
       "name": "No data-quality gate before use",
-      "stageId": "AGF-TA06",
-      "stageName": "Data Governance & Provenance",
       "severity": "High",
       "plainTerms": "The model started producing strange results. It turns out the input data has been broken for five weeks. Nothing was checking.",
       "entryStatus": "open",
@@ -1531,13 +1819,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA06",
+      "stageName": "Data Governance & Provenance"
     },
     {
       "id": "AGF-F054",
       "name": "Residency and cross-border rules unenforced",
-      "stageId": "AGF-TA06",
-      "stageName": "Data Governance & Provenance",
       "severity": "High",
       "plainTerms": "Data that is supposed to stay in one country is being processed by a service running somewhere else. Nobody set out to do that; it's just where the vendor's capacity was.",
       "entryStatus": "open",
@@ -1550,13 +1838,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA06",
+      "stageName": "Data Governance & Provenance"
     },
     {
       "id": "AGF-F055",
       "name": "Retention and deletion not applied to AI artifacts",
-      "stageId": "AGF-TA06",
-      "stageName": "Data Governance & Provenance",
       "severity": "High",
       "plainTerms": "The company deletes customer records after seven years. The prompts and AI outputs containing those same records are kept indefinitely, because nobody classified them as records.",
       "entryStatus": "open",
@@ -1569,13 +1857,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA06",
+      "stageName": "Data Governance & Provenance"
     },
     {
       "id": "AGF-F056",
       "name": "Conflicting sources of truth",
-      "stageId": "AGF-TA06",
-      "stageName": "Data Governance & Provenance",
       "severity": "High",
       "plainTerms": "Two dashboards show different numbers for the same thing, because they pull from two systems that disagree. Both are being used to make decisions, and nobody knows which one is right.",
       "entryStatus": "open",
@@ -1588,13 +1876,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA06",
+      "stageName": "Data Governance & Provenance"
     },
     {
       "id": "AGF-F060",
       "name": "No independent validation before first use",
-      "stageId": "AGF-TA07",
-      "stageName": "Validation, Testing & Documentation",
       "severity": "Critical",
       "plainTerms": "The team that built the model is the team that checked whether it works.",
       "entryStatus": "open",
@@ -1607,13 +1895,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA07",
+      "stageName": "Validation, Testing & Documentation"
     },
     {
       "id": "AGF-F061",
       "name": "Validation not proportionate to materiality",
-      "stageId": "AGF-TA07",
-      "stageName": "Validation, Testing & Documentation",
       "severity": "High",
       "plainTerms": "A model that sets pricing across the whole business received the same one-page review as a tool that reformats slides.",
       "entryStatus": "open",
@@ -1626,13 +1914,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA07",
+      "stageName": "Validation, Testing & Documentation"
     },
     {
       "id": "AGF-F062",
       "name": "System documentation incomplete",
-      "stageId": "AGF-TA07",
-      "stageName": "Validation, Testing & Documentation",
       "severity": "Moderate",
       "plainTerms": "The documentation is a screenshot and a sentence. Nobody outside the original team could work out what the system actually does.",
       "entryStatus": "open",
@@ -1645,13 +1933,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA07",
+      "stageName": "Validation, Testing & Documentation"
     },
     {
       "id": "AGF-F063",
       "name": "No intended-use statement",
-      "stageId": "AGF-TA07",
-      "stageName": "Validation, Testing & Documentation",
       "severity": "High",
       "plainTerms": "There is no written statement of what the system is for, so when someone asks whether a new use is in scope, there is nothing to compare it against.",
       "entryStatus": "open",
@@ -1664,13 +1952,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA07",
+      "stageName": "Validation, Testing & Documentation"
     },
     {
       "id": "AGF-F064",
       "name": "Assumptions and limitations undocumented",
-      "stageId": "AGF-TA07",
-      "stageName": "Validation, Testing & Documentation",
       "severity": "High",
       "plainTerms": "The model assumes customers behave the way they did three years ago. That assumption is real, load-bearing, and written down nowhere.",
       "entryStatus": "open",
@@ -1683,13 +1971,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA07",
+      "stageName": "Validation, Testing & Documentation"
     },
     {
       "id": "AGF-F065",
       "name": "No fairness testing evidence retained",
-      "stageId": "AGF-TA07",
-      "stageName": "Validation, Testing & Documentation",
       "severity": "Critical",
       "plainTerms": "Fairness testing was done once, by the team that built it, in a notebook on somebody's laptop. Then the auditor asked for evidence.",
       "entryStatus": "full",
@@ -1751,13 +2039,13 @@
         "AGF-F060"
       ],
       "reference": "Compliance studies since 2023 have repeatedly found low rates of published audit summaries among employers apparently in scope of NYC Local Law 144.",
-      "tiers": "Tiers 3–5"
+      "tiers": "Tiers 3–5",
+      "stageId": "AGF-TA07",
+      "stageName": "Validation, Testing & Documentation"
     },
     {
       "id": "AGF-F066",
       "name": "Generative and agentic systems governed under legacy assumptions",
-      "stageId": "AGF-TA07",
-      "stageName": "Validation, Testing & Documentation",
       "severity": "Critical",
       "plainTerms": "A generative assistant is being validated using the checklist written for statistical credit models. The checklist asks for things that don't apply and misses everything that does.",
       "entryStatus": "full",
@@ -1813,13 +2101,13 @@
         "AGF-F081"
       ],
       "reference": "A structural gap rather than a discrete incident, created by the 17 Apr 2026 supersession of SR 11-7 and its explicit carve-out.",
-      "tiers": "Tiers 3–5"
+      "tiers": "Tiers 3–5",
+      "stageId": "AGF-TA07",
+      "stageName": "Validation, Testing & Documentation"
     },
     {
       "id": "AGF-F067",
       "name": "No production-readiness gate",
-      "stageId": "AGF-TA07",
-      "stageName": "Validation, Testing & Documentation",
       "severity": "Critical",
       "plainTerms": "The idea was reviewed and approved at the concept stage, when it was a slide. It was then built, changed substantially along the way, and went live. Nothing looked at it again before launch.",
       "entryStatus": "full",
@@ -1891,13 +2179,13 @@
         "AGF-F070"
       ],
       "reference": "Commonly identified when a production incident traces back to a system whose governance record appears complete because it was assessed at concept stage.",
-      "tiers": "Tiers 2–4"
+      "tiers": "Tiers 2–4",
+      "stageId": "AGF-TA07",
+      "stageName": "Validation, Testing & Documentation"
     },
     {
       "id": "AGF-F070",
       "name": "No change control over model, prompt or vendor changes",
-      "stageId": "AGF-TA08",
-      "stageName": "Deployment & Change Management",
       "severity": "Critical",
       "plainTerms": "Someone changed the prompt driving a customer-facing assistant. It was a two-line edit. There's no record of who, when, or why, and no way to get back to the old one.",
       "entryStatus": "open",
@@ -1910,32 +2198,90 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA08",
+      "stageName": "Deployment & Change Management"
     },
     {
       "id": "AGF-F071",
       "name": "Silent vendor model update",
-      "stageId": "AGF-TA08",
-      "stageName": "Deployment & Change Management",
       "severity": "Critical",
       "plainTerms": "The vendor upgraded their model over a weekend. Output quality changed noticeably on Monday. Nobody was told in advance and nothing was re-checked afterwards.",
-      "entryStatus": "open",
-      "description": null,
+      "entryStatus": "full",
+      "description": "A vendor changes the model underneath a deployed system without advance notice. Behaviour shifts, output quality moves, and the organization discovers it from downstream effects rather than from the vendor. Nothing in the governance record marks the change.",
       "variants": [],
-      "sectors": null,
-      "indicators": [],
-      "rootCauses": [],
-      "mitigations": [],
-      "mapping": [],
-      "related": [],
-      "reference": null,
-      "tiers": null
+      "sectors": "Cross-sector; universal wherever AI capability is consumed as a service",
+      "indicators": [
+        "Output quality or behaviour shifting with no corresponding internal change",
+        "Vendor release notes that postdate the behaviour change",
+        "No contractual notice requirement for model changes",
+        "No monitoring baseline against which a change would be visible",
+        "Model version absent from the governance record"
+      ],
+      "rootCauses": [
+        "Model updates treated by the vendor as routine service maintenance",
+        "No contractual notice requirement negotiated at procurement",
+        "No performance baseline, so change is invisible rather than merely unannounced",
+        "Model version not captured in the record, so there is nothing to compare against"
+      ],
+      "mitigations": [
+        "Negotiate advance notice of model changes into vendor contracts",
+        "Record the specific model version in the governance record and monitor for drift from it",
+        "Maintain a performance baseline sensitive enough to detect behavioural change",
+        "Pin model versions where the vendor supports it",
+        "Treat a detected vendor change as a re-review trigger"
+      ],
+      "mapping": [
+        {
+          "framework": "EU AI Act",
+          "provision": "Art. 25 — a substantial modification may shift provider obligations onto the party making or adopting it",
+          "role": "Provider & deployer",
+          "status": "future"
+        },
+        {
+          "framework": "EU AI Act",
+          "provision": "Art. 72 — post-market monitoring must detect changes in real-world performance",
+          "role": "Provider",
+          "status": "future"
+        },
+        {
+          "framework": "NIST AI RMF",
+          "provision": "MANAGE-3 third-party risk; MEASURE-2 ongoing evaluation",
+          "role": "Organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "ISO/IEC 42001",
+          "provision": "A.10 third-party relationships; Clause 8.1 change control",
+          "role": "Organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "GAMP 5",
+          "provision": "Change control and revalidation triggers for supplier-initiated change",
+          "role": "Regulated organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "SR 26-2",
+          "provision": "Ongoing monitoring and vendor model risk",
+          "role": "Banking organization",
+          "status": "live"
+        }
+      ],
+      "related": [
+        "AGF-F031",
+        "AGF-F070",
+        "AGF-F081"
+      ],
+      "reference": "The clearest case in the catalog of a governance failure originating outside the organization. The failure is not the vendor change; it is the absence of any mechanism that would notice one.",
+      "tiers": "Tiers 3–5",
+      "stageId": "AGF-TA08",
+      "stageName": "Deployment & Change Management"
     },
     {
       "id": "AGF-F072",
       "name": "Change misclassified as non-material",
-      "stageId": "AGF-TA08",
-      "stageName": "Deployment & Change Management",
       "severity": "High",
       "plainTerms": "'We just switched models' was logged as a minor configuration change, so it skipped review entirely.",
       "entryStatus": "open",
@@ -1948,13 +2294,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA08",
+      "stageName": "Deployment & Change Management"
     },
     {
       "id": "AGF-F073",
       "name": "No rollback plan",
-      "stageId": "AGF-TA08",
-      "stageName": "Deployment & Change Management",
       "severity": "High",
       "plainTerms": "The new version is behaving badly. There is no agreed, tested way to go back to the old one, so the choice is to leave it running or turn it off.",
       "entryStatus": "open",
@@ -1967,13 +2313,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA08",
+      "stageName": "Deployment & Change Management"
     },
     {
       "id": "AGF-F074",
       "name": "Environment drift between test and production",
-      "stageId": "AGF-TA08",
-      "stageName": "Deployment & Change Management",
       "severity": "High",
       "plainTerms": "It worked in testing. Production has different data, different settings, and different permissions, so it doesn't.",
       "entryStatus": "open",
@@ -1986,13 +2332,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA08",
+      "stageName": "Deployment & Change Management"
     },
     {
       "id": "AGF-F075",
       "name": "Governance tooling configuration drift",
-      "stageId": "AGF-TA08",
-      "stageName": "Deployment & Change Management",
       "severity": "High",
       "plainTerms": "The governance workflow in the test system and the one in the live system aren't the same. Records moved between them quietly lose fields, and items disappear from the queues people actually work from.",
       "entryStatus": "open",
@@ -2005,13 +2351,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA08",
+      "stageName": "Deployment & Change Management"
     },
     {
       "id": "AGF-F080",
       "name": "Absent or undocumented drift review",
-      "stageId": "AGF-TA09",
-      "stageName": "Monitoring, Drift & Incident",
       "severity": "Critical",
       "plainTerms": "The model's accuracy has been sliding for eight months. Nobody looked, because looking wasn't anybody's job.",
       "entryStatus": "full",
@@ -2079,13 +2425,13 @@
         "AGF-F031"
       ],
       "reference": "Among the most frequently cited technical contributors across AI Incident Database entries involving deployed production systems.",
-      "tiers": "Tier 5"
+      "tiers": "Tier 5",
+      "stageId": "AGF-TA09",
+      "stageName": "Monitoring, Drift & Incident"
     },
     {
       "id": "AGF-F081",
       "name": "No performance thresholds defined",
-      "stageId": "AGF-TA09",
-      "stageName": "Monitoring, Drift & Incident",
       "severity": "High",
       "plainTerms": "Everyone agrees performance should be monitored. Nobody has said what 'bad' looks like, so nothing ever triggers and the monitoring is decorative.",
       "entryStatus": "open",
@@ -2098,32 +2444,90 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA09",
+      "stageName": "Monitoring, Drift & Incident"
     },
     {
       "id": "AGF-F082",
       "name": "No AI-incident definition or reporting channel",
-      "stageId": "AGF-TA09",
-      "stageName": "Monitoring, Drift & Incident",
       "severity": "Critical",
       "plainTerms": "Something went wrong with an AI system. Nobody was sure whether it counted as an incident, or who to tell, so it was handled as a bug.",
-      "entryStatus": "open",
-      "description": null,
+      "entryStatus": "full",
+      "description": "The organization has no working definition of what constitutes an AI incident and no channel for reporting one. Events that would trigger regulatory reporting obligations elsewhere are handled as ordinary defects, and the reporting clock runs without anyone knowing it has started.",
       "variants": [],
-      "sectors": null,
-      "indicators": [],
-      "rootCauses": [],
-      "mitigations": [],
-      "mapping": [],
-      "related": [],
-      "reference": null,
-      "tiers": null
+      "sectors": "Cross-sector; regulatory consequence highest for EU-facing high-risk deployments",
+      "indicators": [
+        "No written definition of an AI incident",
+        "AI failures resolved through the standard defect process with no governance visibility",
+        "No named recipient for an AI incident report",
+        "Staff unable to say who they would tell",
+        "No log of AI incidents, which is usually read as an absence of incidents"
+      ],
+      "rootCauses": [
+        "Incident processes designed for security and availability, not for AI behaviour",
+        "No agreed threshold distinguishing a defect from an incident",
+        "Reporting obligations not mapped to internal triggers",
+        "Fear that logging incidents creates exposure, so they are logged as defects"
+      ],
+      "mitigations": [
+        "Publish a written definition of an AI incident with worked examples",
+        "Route AI incidents through a channel with governance visibility, not only engineering",
+        "Map external reporting obligations and deadlines to internal detection triggers",
+        "Capture near-misses alongside incidents",
+        "Rehearse the reporting path before it is needed"
+      ],
+      "mapping": [
+        {
+          "framework": "EU AI Act",
+          "provision": "Art. 73 — serious incident reporting to market surveillance authorities: 15 days by default, 2 days for widespread or severe incidents, 10 days where death is involved",
+          "role": "Provider",
+          "status": "future"
+        },
+        {
+          "framework": "EU AI Act",
+          "provision": "Art. 26(5) — deployers must inform the provider and relevant authorities where a risk is identified",
+          "role": "Deployer",
+          "status": "future"
+        },
+        {
+          "framework": "EU AI Act",
+          "provision": "Art. 72 — post-market monitoring as the system expected to surface such events",
+          "role": "Provider",
+          "status": "future"
+        },
+        {
+          "framework": "NIST AI RMF",
+          "provision": "MANAGE-4 — incident response and communication",
+          "role": "Organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "ISO/IEC 42001",
+          "provision": "Clause 10.2 nonconformity and corrective action",
+          "role": "Organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "GxP",
+          "provision": "Deviation management and reportable-event determination",
+          "role": "Regulated organization",
+          "status": "stayed"
+        }
+      ],
+      "related": [
+        "AGF-F083",
+        "AGF-F085",
+        "AGF-F100"
+      ],
+      "reference": "The reporting deadlines under Art. 73 are measured in days. An organization without a detection and escalation path will generally exhaust them before the obligation is recognized.",
+      "tiers": "Tiers 3–5",
+      "stageId": "AGF-TA09",
+      "stageName": "Monitoring, Drift & Incident"
     },
     {
       "id": "AGF-F083",
       "name": "No feedback loop from incidents into governance",
-      "stageId": "AGF-TA09",
-      "stageName": "Monitoring, Drift & Incident",
       "severity": "Moderate",
       "plainTerms": "The same problem has happened three times. Each time it was fixed. Nothing changed in how things get approved, so it will happen a fourth time.",
       "entryStatus": "open",
@@ -2136,13 +2540,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA09",
+      "stageName": "Monitoring, Drift & Incident"
     },
     {
       "id": "AGF-F084",
       "name": "No monitoring owner or service level",
-      "stageId": "AGF-TA09",
-      "stageName": "Monitoring, Drift & Incident",
       "severity": "High",
       "plainTerms": "There's a monitoring dashboard. It's genuinely good. No one has opened it since the week it was built.",
       "entryStatus": "open",
@@ -2155,13 +2559,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA09",
+      "stageName": "Monitoring, Drift & Incident"
     },
     {
       "id": "AGF-F085",
       "name": "Near-misses uncaptured",
-      "stageId": "AGF-TA09",
-      "stageName": "Monitoring, Drift & Incident",
       "severity": "Moderate",
       "plainTerms": "The system nearly caused a serious error and somebody caught it by luck. It was fixed quietly and never written down, so the luck isn't reproducible.",
       "entryStatus": "open",
@@ -2174,13 +2578,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA09",
+      "stageName": "Monitoring, Drift & Incident"
     },
     {
       "id": "AGF-F086",
       "name": "No stage-aging or cycle-time metric",
-      "stageId": "AGF-TA09",
-      "stageName": "Monitoring, Drift & Incident",
       "severity": "High",
       "plainTerms": "Leadership asks how long approvals are taking. The system can show which stage each item is in, but not how long it's been sitting there — so the real answer is a guess, and it's usually optimistic.",
       "entryStatus": "open",
@@ -2193,13 +2597,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA09",
+      "stageName": "Monitoring, Drift & Incident"
     },
     {
       "id": "AGF-F090",
       "name": "Evidence gap at audit",
-      "stageId": "AGF-TA10",
-      "stageName": "Audit, Evidence & Record Integrity",
       "severity": "Critical",
       "plainTerms": "Every control worked exactly as designed. The auditor asked for proof. The proof was in someone's email, someone else's chat, and a folder nobody could find.",
       "entryStatus": "full",
@@ -2279,13 +2683,13 @@
         "AGF-F103"
       ],
       "reference": "A common category of finding in model and AI governance examinations, where the deficiency is evidentiary rather than operational.",
-      "tiers": "Tiers 4–5"
+      "tiers": "Tiers 4–5",
+      "stageId": "AGF-TA10",
+      "stageName": "Audit, Evidence & Record Integrity"
     },
     {
       "id": "AGF-F091",
       "name": "No single system of record",
-      "stageId": "AGF-TA10",
-      "stageName": "Audit, Evidence & Record Integrity",
       "severity": "High",
       "plainTerms": "AI governance records live in a spreadsheet, a ticketing system, three inboxes and a shared drive. There is no single place that is authoritative, so every question has several answers.",
       "entryStatus": "open",
@@ -2298,13 +2702,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA10",
+      "stageName": "Audit, Evidence & Record Integrity"
     },
     {
       "id": "AGF-F092",
       "name": "No regulatory mapping maintained",
-      "stageId": "AGF-TA10",
-      "stageName": "Audit, Evidence & Record Integrity",
       "severity": "High",
       "plainTerms": "The company has controls. Nobody has mapped which control satisfies which regulatory requirement, so every audit starts from zero and takes six weeks.",
       "entryStatus": "open",
@@ -2317,13 +2721,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA10",
+      "stageName": "Audit, Evidence & Record Integrity"
     },
     {
       "id": "AGF-F093",
       "name": "Reactive evidence assembly",
-      "stageId": "AGF-TA10",
-      "stageName": "Audit, Evidence & Record Integrity",
       "severity": "Moderate",
       "plainTerms": "Six weeks before the examination, four people stop their day jobs to reconstruct evidence for the previous two years.",
       "entryStatus": "open",
@@ -2336,13 +2740,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA10",
+      "stageName": "Audit, Evidence & Record Integrity"
     },
     {
       "id": "AGF-F094",
       "name": "No periodic re-attestation",
-      "stageId": "AGF-TA10",
-      "stageName": "Audit, Evidence & Record Integrity",
       "severity": "High",
       "plainTerms": "Systems were approved once. There is no point at which anyone is asked to confirm they're still appropriate, still used as described, or still needed.",
       "entryStatus": "open",
@@ -2355,13 +2759,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA10",
+      "stageName": "Audit, Evidence & Record Integrity"
     },
     {
       "id": "AGF-F095",
       "name": "No portfolio-level visibility",
-      "stageId": "AGF-TA10",
-      "stageName": "Audit, Evidence & Record Integrity",
       "severity": "High",
       "plainTerms": "The board asks how many AI systems the company runs. The honest answer is that nobody knows.",
       "entryStatus": "full",
@@ -2417,13 +2821,13 @@
         "AGF-F106"
       ],
       "reference": "Surfaces as an inability to answer supervisory or board questions rather than as an operational incident.",
-      "tiers": "Tier 5"
+      "tiers": "Tier 5",
+      "stageId": "AGF-TA10",
+      "stageName": "Audit, Evidence & Record Integrity"
     },
     {
       "id": "AGF-F096",
       "name": "Historical attribution lost through organizational change",
-      "stageId": "AGF-TA10",
-      "stageName": "Audit, Evidence & Record Integrity",
       "severity": "High",
       "plainTerms": "A reorganization moved people between teams. Historical records now show the new structure, so reports about last year's reviews no longer match what actually happened — and the reviewers who did the work have vanished from their own reviews.",
       "entryStatus": "full",
@@ -2495,13 +2899,13 @@
         "AGF-F098"
       ],
       "reference": "Rarely recognized until an examination requires reproducing a report from before a reorganization.",
-      "tiers": "Tiers 4–5"
+      "tiers": "Tiers 4–5",
+      "stageId": "AGF-TA10",
+      "stageName": "Audit, Evidence & Record Integrity"
     },
     {
       "id": "AGF-F097",
       "name": "Governance data model too rigid to record reality",
-      "stageId": "AGF-TA10",
-      "stageName": "Audit, Evidence & Record Integrity",
       "severity": "Moderate",
       "plainTerms": "The system allows two findings per review. Real reviews routinely produce five. The other three are recorded in a spreadsheet, or not at all — so the official record understates what was actually found.",
       "entryStatus": "open",
@@ -2514,13 +2918,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA10",
+      "stageName": "Audit, Evidence & Record Integrity"
     },
     {
       "id": "AGF-F098",
       "name": "Manual bulk remediation of governance records",
-      "stageId": "AGF-TA10",
-      "stageName": "Audit, Evidence & Record Integrity",
       "severity": "High",
       "plainTerms": "Correcting several hundred governance records has to be done by hand, one at a time, because nothing can safely update them in bulk. Everyone involved knows some of them will end up wrong.",
       "entryStatus": "open",
@@ -2533,13 +2937,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA10",
+      "stageName": "Audit, Evidence & Record Integrity"
     },
     {
       "id": "AGF-F100",
       "name": "Findings tracked outside the system of record",
-      "stageId": "AGF-TA11",
-      "stageName": "Findings & Remediation",
       "severity": "Critical",
       "plainTerms": "The review produced eleven action items. They live in a spreadsheet on a shared drive. Whether any of them have been done is anyone's guess.",
       "entryStatus": "full",
@@ -2612,32 +3016,78 @@
         "AGF-F090"
       ],
       "reference": "Presents at audit as an inability to demonstrate that identified issues were resolved.",
-      "tiers": "Tiers 3–5"
+      "tiers": "Tiers 3–5",
+      "stageId": "AGF-TA11",
+      "stageName": "Findings & Remediation"
     },
     {
       "id": "AGF-F101",
       "name": "Findings without owner or due date",
-      "stageId": "AGF-TA11",
-      "stageName": "Findings & Remediation",
       "severity": "High",
       "plainTerms": "The finding says 'improve monitoring.' It doesn't say who, or by when, so it belongs to everyone and therefore to no one.",
-      "entryStatus": "open",
-      "description": null,
+      "entryStatus": "full",
+      "description": "A finding is recorded without a named owner or a date by which it must be resolved. It belongs to everyone and therefore to nobody, cannot be chased, cannot age, and cannot appear on any credible overdue report.",
       "variants": [],
-      "sectors": null,
-      "indicators": [],
-      "rootCauses": [],
-      "mitigations": [],
-      "mapping": [],
-      "related": [],
-      "reference": null,
-      "tiers": null
+      "sectors": "Cross-sector",
+      "indicators": [
+        "Findings with empty owner or due-date fields",
+        "Owners recorded as a team or function rather than a person",
+        "No overdue report, because nothing can be overdue",
+        "Findings resolved only when someone remembers them",
+        "Age of open findings unknown or uncalculated"
+      ],
+      "rootCauses": [
+        "Owner and due date optional rather than required at creation",
+        "Reviewers reluctant to assign work to people outside their reporting line",
+        "No agreed convention for setting due dates by severity",
+        "Findings created in a document that has no concept of ownership"
+      ],
+      "mitigations": [
+        "Make owner and due date mandatory at finding creation",
+        "Record a named individual, with the accountable role alongside",
+        "Set default due dates by severity so the date requires a decision to extend, not to set",
+        "Report unowned and undated findings as an exception class",
+        "Reassign automatically when an owner leaves or changes role"
+      ],
+      "mapping": [
+        {
+          "framework": "ISO/IEC 42001",
+          "provision": "Clause 10.2 — corrective action requires determining what will be done, by whom, and by when",
+          "role": "Organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "GxP",
+          "provision": "CAPA ownership and due-date assignment",
+          "role": "Regulated organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "NIST AI RMF",
+          "provision": "GOVERN-2 accountability; MANAGE-4 risk treatment documentation",
+          "role": "Organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "SR 26-2",
+          "provision": "Issue management, ownership and tracking to closure",
+          "role": "Banking organization",
+          "status": "live"
+        }
+      ],
+      "related": [
+        "AGF-F100",
+        "AGF-F102",
+        "AGF-F042"
+      ],
+      "reference": "The single cheapest failure mode in this stage to fix, and the one that unlocks escalation, ageing, and reporting.",
+      "tiers": "Tiers 3–5",
+      "stageId": "AGF-TA11",
+      "stageName": "Findings & Remediation"
     },
     {
       "id": "AGF-F102",
       "name": "No escalation on ageing findings",
-      "stageId": "AGF-TA11",
-      "stageName": "Findings & Remediation",
       "severity": "High",
       "plainTerms": "An action item has been open for seven months. Nothing happens when it ages. Nobody is notified, and it appears on no report.",
       "entryStatus": "open",
@@ -2650,32 +3100,84 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA11",
+      "stageName": "Findings & Remediation"
     },
     {
       "id": "AGF-F103",
       "name": "Findings closed without evidence",
-      "stageId": "AGF-TA11",
-      "stageName": "Findings & Remediation",
       "severity": "Critical",
       "plainTerms": "The owner marked the item complete. There's no attachment, no link, and no description of what they actually did — just a status that changed.",
-      "entryStatus": "open",
-      "description": null,
+      "entryStatus": "full",
+      "description": "A finding is marked complete with no artifact, link, or description of what was done. The record shows resolution; nothing demonstrates it. At audit the closure is indistinguishable from an unresolved finding that someone clicked closed.",
       "variants": [],
-      "sectors": null,
-      "indicators": [],
-      "rootCauses": [],
-      "mitigations": [],
-      "mapping": [],
-      "related": [],
-      "reference": null,
-      "tiers": null
+      "sectors": "Banking, biopharma, insurance — anywhere closure is examined externally",
+      "indicators": [
+        "Closed findings with no attachment or linked artifact",
+        "Closure comments consisting of a single word",
+        "Closure rates rising sharply before reporting cycles",
+        "No field requiring evidence at closure",
+        "Closures performed by the assignee with no second party involved"
+      ],
+      "rootCauses": [
+        "Evidence optional rather than required at closure",
+        "Closure treated as a status change rather than as an assertion requiring proof",
+        "No independent verification step, so nothing tests the assertion",
+        "Pressure to reduce open-finding counts before a reporting date"
+      ],
+      "mitigations": [
+        "Require an evidence artifact or link before a finding can move to closed",
+        "Separate the assignee from the reviewer who confirms closure",
+        "Capture who confirmed closure and when, as part of the record",
+        "Sample closed findings for verification on a defined basis",
+        "Report closure-without-evidence as a control failure in its own right"
+      ],
+      "mapping": [
+        {
+          "framework": "ISO/IEC 42001",
+          "provision": "Clause 10.2 — corrective action including review of effectiveness; Clause 7.5 documented information",
+          "role": "Organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "GxP",
+          "provision": "CAPA effectiveness verification and closure documentation; ALCOA+ attributable and accurate",
+          "role": "Regulated organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "EU AI Act",
+          "provision": "Art. 12 logging; Art. 18 documentation retention",
+          "role": "Provider",
+          "status": "future"
+        },
+        {
+          "framework": "SR 26-2",
+          "provision": "Issue closure evidence and validation of remediation",
+          "role": "Banking organization",
+          "status": "live"
+        },
+        {
+          "framework": "NIST AI RMF",
+          "provision": "MANAGE-4 — documentation of risk treatment outcomes",
+          "role": "Organization",
+          "status": "stayed"
+        }
+      ],
+      "related": [
+        "AGF-F090",
+        "AGF-F100",
+        "AGF-F108"
+      ],
+      "reference": "Closure without evidence is a common finding in regulated examinations precisely because it is invisible in internal metrics — the dashboard shows the item closed.",
+      "tiers": "Tiers 3–5",
+      "stageId": "AGF-TA11",
+      "stageName": "Findings & Remediation"
     },
     {
       "id": "AGF-F104",
       "name": "No blocked or on-hold status",
-      "stageId": "AGF-TA11",
-      "stageName": "Findings & Remediation",
       "severity": "Moderate",
       "plainTerms": "The item is stuck waiting on somebody else, but the only available statuses are open and closed. So it looks like the owner is sitting on it, and the metrics blame the wrong person.",
       "entryStatus": "open",
@@ -2688,13 +3190,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA11",
+      "stageName": "Findings & Remediation"
     },
     {
       "id": "AGF-F105",
       "name": "Findings not linked to the use case record",
-      "stageId": "AGF-TA11",
-      "stageName": "Findings & Remediation",
       "severity": "High",
       "plainTerms": "The finding exists. The use case it came from exists. Nothing connects them, so anyone reviewing that use case later sees a clean record.",
       "entryStatus": "open",
@@ -2707,13 +3209,13 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA11",
+      "stageName": "Findings & Remediation"
     },
     {
       "id": "AGF-F106",
       "name": "No aggregate view of open findings",
-      "stageId": "AGF-TA11",
-      "stageName": "Findings & Remediation",
       "severity": "High",
       "plainTerms": "Nobody can answer how many open findings exist across the AI portfolio, how old they are, or which are overdue — so remediation is never discussed at the level where it could be resourced.",
       "entryStatus": "open",
@@ -2726,7 +3228,142 @@
       "mapping": [],
       "related": [],
       "reference": null,
-      "tiers": null
+      "tiers": null,
+      "stageId": "AGF-TA11",
+      "stageName": "Findings & Remediation"
+    },
+    {
+      "id": "AGF-F107",
+      "name": "No challenge or rework path on remediation",
+      "severity": "Moderate",
+      "plainTerms": "The reviewer thinks the work isn't good enough, but the only buttons are approve and close. So they either accept something substandard or email the person and hope — and either way the record shows a clean approval.",
+      "entryStatus": "full",
+      "description": "The remediation workflow allows a reviewer to accept work but not to return it with a reason. Inadequate remediation is either accepted or handled informally outside the system, and in both cases the record shows an unqualified closure that nothing distinguishes from good work.",
+      "sectors": "Cross-sector",
+      "indicators": [
+        "No rejected or returned state in the workflow",
+        "Rework negotiated over email or chat rather than in the record",
+        "No record of any finding ever being sent back",
+        "Reviewers approving work they describe informally as incomplete",
+        "No count of rework cycles per finding"
+      ],
+      "rootCauses": [
+        "Workflow modelled as a linear path to closed, with no return edge",
+        "Reluctance to formally reject a colleague's work, in the absence of a neutral mechanism",
+        "Rejection assumed to be rare and therefore not designed for",
+        "Metrics reward closure rate, which a return path reduces"
+      ],
+      "mitigations": [
+        "Provide an explicit challenge state that returns the item to the assignee with a recorded reason",
+        "Capture rework cycles as a quality signal rather than as a failure",
+        "Distinguish first-pass acceptance from accepted-after-rework in reporting",
+        "Make the reason for return a required field so the record explains itself"
+      ],
+      "mapping": [
+        {
+          "framework": "ISO/IEC 42001",
+          "provision": "Clause 10.2 — corrective action including review of whether the action was effective",
+          "role": "Organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "GxP",
+          "provision": "CAPA effectiveness review and rejection handling",
+          "role": "Regulated organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "SR 26-2",
+          "provision": "Effective challenge — a core expectation of model risk governance, which requires a mechanism for challenge to be expressed and recorded",
+          "role": "Banking organization",
+          "status": "live"
+        },
+        {
+          "framework": "NIST AI RMF",
+          "provision": "GOVERN-4 — organizational practices supporting critical examination",
+          "role": "Organization",
+          "status": "stayed"
+        }
+      ],
+      "related": [
+        "AGF-F103",
+        "AGF-F108",
+        "AGF-F035"
+      ],
+      "reference": "Effective challenge is explicit supervisory language in US model risk guidance. A workflow with no return path cannot evidence it.",
+      "tiers": "Tiers 3–5",
+      "stageId": "AGF-TA11",
+      "stageName": "Findings & Remediation"
+    },
+    {
+      "id": "AGF-F108",
+      "name": "Remediation closed by its own owner",
+      "severity": "High",
+      "plainTerms": "The person who was asked to fix the problem is also the person who decides it was fixed. Nobody else looks. The record shows a completed action item and an approval that is really the same signature twice.",
+      "entryStatus": "full",
+      "description": "The assignee of a finding is also the party who closes it, with no independent confirmation. Self-certified closure is structurally the same weakness as self-validation at AGF-F060, occurring at the remediation stage instead of the validation stage.",
+      "sectors": "Banking, biopharma, insurance — anywhere independence is an explicit expectation",
+      "indicators": [
+        "Closure recorded by the same identity as the assignment",
+        "No reviewer field distinct from the owner field",
+        "No record of who confirmed completion",
+        "Closure timestamps identical to completion timestamps",
+        "Independence assumed from organizational distance rather than recorded"
+      ],
+      "rootCauses": [
+        "Workflow provides a single actor role rather than separate assignee and reviewer",
+        "Reviewer capacity treated as overhead and removed under load",
+        "Assumption that the owner is best placed to judge completion, which is true of the work and not of the assurance",
+        "No policy stating who may close what"
+      ],
+      "mitigations": [
+        "Separate assignee and reviewer as distinct required roles in the workflow",
+        "Prevent the assignee from performing the closing action on their own item",
+        "Record reviewer identity and timestamp as part of the closure",
+        "Scale independence to severity — critical findings reviewed outside the owning function",
+        "Sample self-closed historical items where the separation was introduced late"
+      ],
+      "mapping": [
+        {
+          "framework": "SR 26-2",
+          "provision": "Independent review and effective challenge, applied proportionately to materiality",
+          "role": "Banking organization",
+          "status": "live"
+        },
+        {
+          "framework": "ISO/IEC 42001",
+          "provision": "Clause 9.2 internal audit independence; Clause 10.2 corrective action review",
+          "role": "Organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "GxP",
+          "provision": "CAPA review and approval by a party independent of the person performing the action; ALCOA+ attributable",
+          "role": "Regulated organization",
+          "status": "stayed"
+        },
+        {
+          "framework": "EU AI Act",
+          "provision": "Art. 9 — risk management measures and their verification",
+          "role": "Provider",
+          "status": "future"
+        },
+        {
+          "framework": "NIST AI RMF",
+          "provision": "GOVERN-3, GOVERN-4 — workforce accountability and critical examination",
+          "role": "Organization",
+          "status": "stayed"
+        }
+      ],
+      "related": [
+        "AGF-F060",
+        "AGF-F103",
+        "AGF-F107"
+      ],
+      "reference": "Independence of review is one of the oldest expectations in regulated assurance. Its absence in AI remediation workflows is usually a tooling limitation rather than a policy decision.",
+      "tiers": "Tiers 3–5",
+      "stageId": "AGF-TA11",
+      "stageName": "Findings & Remediation"
     }
   ]
 }
