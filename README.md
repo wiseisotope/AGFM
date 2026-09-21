@@ -4,7 +4,7 @@ An open, community-maintained catalog of the ways enterprise AI **governance pro
 
 Existing frameworks catalog attacks on AI systems (MITRE ATLAS), vulnerabilities in AI applications (OWASP Top 10 for LLM), and prescribed good practice (NIST AI RMF, ISO/IEC 42001). None of them catalog governance-process failure: the use case that reached production without approval, the human review that exists in policy but not in the system, the approval nobody revisited after the model changed, the action item that has been open for seven months.
 
-**v1.0 · 11 lifecycle stages · 89 failure modes · 32 complete entries · 161 role-scoped regulatory mappings · current to 18 September 2026**
+**v1.1 · 11 lifecycle stages · 89 failure modes · 32 complete entries, each tagged systematic / partial / judgment-required · 161 role-scoped regulatory mappings · current to 18 September 2026**
 
 ---
 
@@ -29,7 +29,9 @@ archive/                    The pre-v1.0 single-file site, kept for reference
 
 `data/catalog.json` is the single source of truth. The site, the data distributions and the exports are all generated from it, so they cannot disagree with each other. Edit the catalog, then run `npm run build`.
 
-**Pages generated:** the matrix, one page per failure mode (89), the core set, the backlog, the self-assessment, the coverage map, the filterable crosswalk, the patterns essay, five starter sets, a printable primer, the changelog and the about page — 105 pages in total, plus sitemap and robots.
+**Pages generated:** the matrix, one page per failure mode (89), the core set, the backlog, the automation-potential breakdown (`/automate`), the self-assessment, the coverage map, the filterable crosswalk, the patterns essay, five starter sets, a printable primer, the changelog and the about page — 105 pages in total, plus sitemap and robots.
+
+**Automation-potential tagging.** Every complete entry carries an `automationPotential` field — `systematic` (a rule or gate that runs with no person in the loop), `partial` (the mechanics can be automated, a decision point still needs a person), or `judgment` (automating the decision away recreates the failure mode rather than fixing it) — plus a one-line `automationNote` explaining why. This exists to keep the catalog from reading as a pure caution argument: most of what's here is an engineering fix, not a case for moving slower. Definitions live in `data/sets.json` under `automationTiers`; the tagging script is `scripts/content-v2.js`. `/automate` groups all 32 tagged entries by tier, and the self-assessment surfaces the tier on every identified gap.
 
 ---
 

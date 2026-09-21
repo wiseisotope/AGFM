@@ -33,14 +33,18 @@ const sevClass = (s) => (s === 'Critical' ? 'crit' : s === 'High' ? 'high' : 'se
 
 const NAV = [
   ['/', 'Matrix'],
-  ['/core', 'Core set'],
+  ['/crosswalk', 'Crosswalk'],
+  ['/automate', 'Where to automate'],
   ['/assess', 'Self-assessment'],
   ['/coverage', 'Coverage map'],
-  ['/crosswalk', 'Crosswalk'],
+  ['/core', 'Core set'],
   ['/patterns', 'Patterns'],
   ['/sectors', 'Starter sets'],
   ['/about', 'About'],
 ];
+
+const TIER_LABEL = { systematic: 'Systematic', partial: 'Partial', judgment: 'Judgment-required' };
+const TIER_TAGCLASS = { systematic: 'tier-sys', partial: 'tier-par', judgment: 'tier-jdg' };
 
 function layout({ title, desc, current, body, jsonld, bodyClass = '', extraHead = '' }) {
   return `<!DOCTYPE html>
@@ -82,16 +86,17 @@ ${body}
   </div>
   <p><b>AI Governance Failure Mode framework · v${META.version} · ${META.mappingsCurrentTo}</b> · stewarded by ${esc(META.steward)}</p>
   <p>Content licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Schema and tooling licensed Apache 2.0.</p>
-  <p>Regulatory references are accurate as reported at the date of publication and are subject to change. Colorado enforcement is subject to an active federal stay and pending attorney-general rulemaking. NIST AI RMF mappings are stated at function and category level; subcategory-level mapping is a v1.1 target. Regulatory mappings are research aids and do not constitute legal advice or establish compliance with any obligation. Plain-language examples are composites written for recognition, not descriptions of any specific organization. AGFM is not affiliated with MITRE, OWASP, NIST, ISO, ISPE, or any regulatory authority.</p>
+  <p>Regulatory references are accurate as reported at the date of publication and are subject to change. Colorado enforcement is subject to an active federal stay and pending attorney-general rulemaking. NIST AI RMF mappings are stated at function and category level; subcategory-level mapping is a v1.2 target. Automation-potential tags describe the nature of the control, not a recommendation to deploy any specific tool, and remain subject to independent legal and risk judgment. Regulatory mappings are research aids and do not constitute legal advice or establish compliance with any obligation. Plain-language examples are composites written for recognition, not descriptions of any specific organization. AGFM is not affiliated with MITRE, OWASP, NIST, ISO, ISPE, or any regulatory authority.</p>
 </div></footer>
 </body>
 </html>
 `;
 }
 
-function cellHtml(m, { link = true } = {}) {
+function cellHtml(m, { link = true, showTier = false } = {}) {
   const tags = `<span class="tag ${sevClass(m.severity)}">${m.severity}</span>` +
-    (m.entryStatus === 'full' ? '<span class="tag full">Full</span>' : '<span class="tag open">Open</span>');
+    (m.entryStatus === 'full' ? '<span class="tag full">Full</span>' : '<span class="tag open">Open</span>') +
+    (showTier && m.automationPotential ? `<span class="tag ${TIER_TAGCLASS[m.automationPotential]}">${TIER_LABEL[m.automationPotential]}</span>` : '');
   const inner = `<span class="fid">${m.id}</span><span class="fname">${esc(m.name)}</span>` +
     `<span class="flay">${esc(m.plainTerms)}</span><span class="tagrow">${tags}</span>`;
   const attrs = `class="cell${m.entryStatus === 'full' ? ' hasfull' : ''}" data-sev="${m.severity}" ` +
@@ -206,7 +211,7 @@ write('index.html', layout({
   body: `<header class="masthead"><div class="wrap">
   <span class="eyebrow">An open catalog · stewarded by ${esc(META.steward)}</span>
   <h1>How AI governance <em>actually fails</em></h1>
-  <p class="deck">Existing frameworks catalog attacks on AI systems and vulnerabilities in AI applications. <strong>AGFM catalogs the failures of the governance process itself</strong> — the use case that reached production without approval, the human review that exists in policy but not in the system, the approval nobody revisited after the model changed, the action item that has been open for seven months.</p>
+  <p class="deck">Existing frameworks catalog attacks on AI systems and vulnerabilities in AI applications. <strong>AGFM catalogs the failures of the governance process itself</strong> — the use case that reached production without approval, the human review that exists in policy but not in the system, the approval nobody revisited after the model changed, the action item that has been open for seven months. Most of that friction isn't necessary. Some of it has to stay. The catalog says which is which.</p>
   <dl class="statgrid">
     <div><dt>Version</dt><dd>v${META.version}</dd></div>
     <div><dt>Lifecycle stages</dt><dd>${STAGES.length}</dd></div>
@@ -218,10 +223,10 @@ write('index.html', layout({
 
 <section><div class="wrap">
   <div class="cards">
-    <div class="card"><a class="cardlink" href="/assess"><span class="ck">Start here</span><h3>Self-assessment</h3><p>Twenty-eight questions, about fifteen minutes. Tells you which failure modes are likely present in your programme. Runs entirely in your browser — nothing is transmitted or stored.</p></a></div>
-    <div class="card"><a class="cardlink" href="/sectors/start-here"><span class="ck">New to this</span><h3>The first ten</h3><p>If you have just inherited AI governance, these are the ten failure modes most likely to be present and most tractable to address early.</p></a></div>
+    <div class="card"><a class="cardlink" href="/crosswalk"><span class="ck">Start here</span><h3>Regulatory crosswalk</h3><p>What actually applies to you, and to whom. All ${MAPPING_COUNT} mappings in one filterable table — instrument, provision, whether the obligation falls on a provider or a deployer, and whether it's in force yet.</p></a></div>
+    <div class="card"><a class="cardlink" href="/automate"><span class="ck">Speed vs. rigor</span><h3>Where to automate</h3><p>Every complete failure mode is tagged systematic, partial, or judgment-required. Most governance friction can be built away. Some of it is the point.</p></a></div>
+    <div class="card"><a class="cardlink" href="/assess"><span class="ck">Fifteen minutes</span><h3>Self-assessment</h3><p>Twenty-eight questions. Tells you which failure modes are likely present, and which of those are quick systematic fixes versus genuine judgment calls. Runs entirely in your browser.</p></a></div>
     <div class="card"><a class="cardlink" href="/coverage"><span class="ck">Track it</span><h3>Coverage map</h3><p>Mark each failure mode as present, addressed or not applicable. Export the state and re-import it later. Your data stays on your machine.</p></a></div>
-    <div class="card"><a class="cardlink" href="/crosswalk"><span class="ck">Regulatory</span><h3>Crosswalk</h3><p>All ${MAPPING_COUNT} mappings in one filterable table, each naming the instrument, the role the obligation falls on, and whether it is in force.</p></a></div>
   </div>
 </div></section>
 
@@ -253,6 +258,7 @@ write('index.html', layout({
     <span class="eyebrow">Why plain language is a design rule, not a courtesy</span>
     <p>AI governance is new work for most of the people now responsible for it — often a risk manager, a quality lead, or an operations director rather than a specialist. A catalog that only makes sense to people who already understand the problem cannot help the people who need it most. Every entry opens with <b>"In plain terms"</b>: one concrete situation, no acronyms, no framework references. If a failure mode cannot be described that way, the entry is not finished.</p>
   </div>
+  <p>Read one way, this catalog is a list of what to watch for — useful to a risk or compliance reader deciding where a control still needs to hold. Read the other way, it's a map of what no longer needs to be slow — useful to an operations reader trying to move faster without guessing where that's safe. Neither reading is more correct than the other. Most of what shows up as governance friction turns out to be automatable once it's named precisely; a smaller set is a human decision that automation would only hide rather than remove, and the catalog tags every complete entry with which is which on the <a href="/automate">automation page</a>. The point isn't choosing a side between speed and rigor — it's being specific enough about each failure mode that the two stop trading off against each other.</p>
   <p><a href="/about">Scope, structure, stewardship and how to cite →</a></p>
 </div></section>
 <script>${FILTER_JS}</script>`,
@@ -269,6 +275,7 @@ ALL.forEach((m, idx) => {
   <div class="field"><h5>Description</h5><p>${esc(m.description)}</p></div>
   ${m.variants && m.variants.length ? `<div class="field"><h5>Failure variants</h5><ul>${m.variants.map((v) => `<li>${esc(v)}</li>`).join('')}</ul></div>` : ''}
   <div class="field"><h5>Observed in</h5><p>${esc(m.sectors)}</p></div>
+  ${m.automationPotential ? `<div class="field"><h5>Automation potential</h5><p><span class="tag ${TIER_TAGCLASS[m.automationPotential]}">${TIER_LABEL[m.automationPotential]}</span></p><p style="margin-top:10px">${esc(m.automationNote)}</p><p style="margin-top:10px;font-size:13px;color:var(--ink-3)">See <a href="/automate">where to automate</a> for how this tier is defined.</p></div>` : ''}
   <div class="field"><h5>Leading indicators</h5><ul>${m.indicators.map((v) => `<li>${esc(v)}</li>`).join('')}</ul></div>
   <div class="field"><h5>Root causes</h5><ul>${m.rootCauses.map((v) => `<li>${esc(v)}</li>`).join('')}</ul></div>
   <div class="field"><h5>Mitigations and controls</h5><ul>${m.mitigations.map((v) => `<li>${esc(v)}</li>`).join('')}</ul></div>
@@ -343,11 +350,12 @@ write('core.html', layout({
     if (!f.length) return '';
     return `<div class="col" data-stage="${s.id}">
       <div class="colhead"><span class="cid">${s.id}</span><span class="cname">${esc(s.name)}</span><span class="ccount">${f.length} complete</span></div>
-      ${f.map((m) => cellHtml(m)).join('\n')}
+      ${f.map((m) => cellHtml(m, { showTier: true })).join('\n')}
     </div>`;
   }).join('')}
   </div></div>
   <p class="emptymsg" id="emptymsg" hidden>No entries match those filters.</p>
+  <p style="margin-top:22px;font-size:14.5px;color:var(--ink-2)">The colored tag on each entry shows its <a href="/automate">automation potential</a> — systematic, partial, or judgment-required.</p>
 </div></section>
 <script>${FILTER_JS}</script>`,
 }));

@@ -11,11 +11,19 @@ const {
 const ROOT = path.join(__dirname, '..');
 const A = sets.assessment;
 const STARTERS = sets.starterSets;
+const TIERS = sets.automationTiers;
+const TIER_LABEL2 = { systematic: 'Systematic', partial: 'Partial', judgment: 'Judgment-required' };
+const TIER_CLASS = { systematic: 'tier-sys', partial: 'tier-par', judgment: 'tier-jdg' };
+const TAGGED = FULL.filter((m) => m.automationPotential);
 
 /* =================== SELF-ASSESSMENT =================== */
 const qData = A.questions.map((q) => {
   const m = BY_ID[q.mode];
-  return { id: q.id, text: q.text, mode: q.mode, name: m.name, sev: m.severity, lay: m.plainTerms, stage: m.stageId, stageName: m.stageName };
+  return {
+    id: q.id, text: q.text, mode: q.mode, name: m.name, sev: m.severity, lay: m.plainTerms,
+    stage: m.stageId, stageName: m.stageName,
+    tier: m.automationPotential || null, tierNote: m.automationNote || null,
+  };
 });
 
 write('assess.html', layout({
@@ -53,6 +61,8 @@ write('assess.html', layout({
 <script>
 var Q=${JSON.stringify(qData)};
 var STAGES=${JSON.stringify(STAGES.map((s) => ({ id: s.id, name: s.name })))};
+var TIER_LABEL={systematic:'Systematic',partial:'Partial',judgment:'Judgment-required'};
+var TIER_CLASS={systematic:'tier-sys',partial:'tier-par',judgment:'tier-jdg'};
 var answers={};
 var qEl=document.getElementById('questions');
 
@@ -126,18 +136,23 @@ function render(){
   if(!gaps.length){
     h+='<div class="callout"><p style="margin-bottom:0">No gaps identified from the questions you answered. That is an unusual result. Before treating it as a clean bill of health, check whether each Yes could actually be evidenced to an examiner — the most common reason for a result like this is answering from policy rather than from practice.</p></div>';
   } else {
-    h+='<div class="callout"><p style="margin-bottom:0"><b>'+gaps.length+' failure mode'+(gaps.length===1?'':'s')+' likely present.</b> Answers of Unsure are included, because an undemonstrable control and an absent control produce the same finding at audit. Work the <a href="/patterns">cross-cutting patterns</a> rather than this list in identifier order — fixing throughput before enforcing bypass, and building the remediation loop before adding review depth, will outperform working top to bottom.</p></div>';
+    var tierCounts={systematic:0,partial:0,judgment:0,untagged:0};
+    gaps.forEach(function(g){ tierCounts[g.tier||'untagged']++; });
+    h+='<div class="callout"><p><b>'+gaps.length+' failure mode'+(gaps.length===1?'':'s')+' likely present.</b> Answers of Unsure are included, because an undemonstrable control and an absent control produce the same finding at audit.</p>'+
+       '<p style="margin-bottom:0">Of those, <b>'+tierCounts.systematic+'</b> can likely be closed with a systematic control, <b>'+tierCounts.partial+'</b> need automation plus a human decision point, and <b>'+tierCounts.judgment+'</b> are judgment calls no tooling replaces. Start with systematic — it is usually the fastest ground to cover — then work the <a href="/patterns">cross-cutting patterns</a> rather than this list in identifier order.</p></div>';
     STAGES.forEach(function(s){
       var items=byStage[s.id]; if(!items) return;
       h+='<div class="rstage"><h3>'+s.id+' · '+s.name+'</h3>';
       h+='<div class="rmeta">'+items.length+' likely present</div><ul class="rlist">';
       items.forEach(function(g){
-        h+='<li data-sev="'+g.sev+'"><span class="rid">'+g.mode+' · '+g.sev+' · '+(g.level==='likely'?'answered No':'answered Unsure')+'</span>'+
+        var tierTag=g.tier?' <span class="tag '+TIER_CLASS[g.tier]+'">'+TIER_LABEL[g.tier]+'</span>':'';
+        h+='<li data-sev="'+g.sev+'"><span class="rid">'+g.mode+' · '+g.sev+' · '+(g.level==='likely'?'answered No':'answered Unsure')+tierTag+'</span>'+
            '<a class="rname" href="/entries/'+g.mode+'">'+g.name+'</a>'+
-           '<span class="rlay">'+g.lay+'</span></li>';
+           '<span class="rlay">'+g.lay+(g.tierNote?' <span style="color:var(--ink-3)">— '+g.tierNote+'</span>':'')+'</span></li>';
       });
       h+='</ul></div>';
     });
+    h+='<p style="margin-top:10px"><a href="/automate">See the full automation breakdown →</a></p>';
   }
 
   h+='<div class="rstage"><h3>Take this with you</h3>'+
@@ -154,7 +169,7 @@ function render(){
   document.getElementById('exportBtn').addEventListener('click',function(){
     var payload={framework:'AGFM',version:'${META.version}',generated:new Date().toISOString(),
       summary:{answered:answered,operating:yes,unsure:unsure,likelyGap:no},
-      gaps:gaps.map(function(g){return {id:g.mode,name:g.name,severity:g.sev,stage:g.stage,level:g.level};}),
+      gaps:gaps.map(function(g){return {id:g.mode,name:g.name,severity:g.sev,stage:g.stage,level:g.level,automationPotential:g.tier||null};}),
       answers:answers};
     var blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
     var a=document.createElement('a');
@@ -298,6 +313,12 @@ write('crosswalk.html', layout({
   <p class="deck">The most useful and the fastest-decaying part of this catalog. It is therefore governed by explicit conventions rather than presented as settled fact.</p>
 </div></header>
 
+<section style="padding-top:36px"><div class="wrap">
+  <div class="callout">
+    <p style="margin-bottom:0">This is usually the fastest way into the catalog: skip the taxonomy, find the provision you're actually worried about, and see which failure mode it maps to and who it applies to. Knowing precisely which obligation is yours — and which is a provider's, not a deployer's — is what lets you stop over-applying caution everywhere and move fast on the parts that were never actually in question. See <a href="/automate">where to automate</a> for the other half of that argument.</p>
+  </div>
+</div></section>
+
 <section><div class="wrap">
   <div class="sechead"><span class="secnum">01</span><h2>How to read a mapping</h2></div>
   <p>Every mapping carries three things beyond the citation itself.</p>
@@ -390,6 +411,60 @@ write('crosswalk.html', layout({
   apply();
 })();
 </script>`,
+}));
+
+/* =================== WHERE TO AUTOMATE =================== */
+const byTier = { systematic: [], partial: [], judgment: [] };
+TAGGED.forEach((m) => byTier[m.automationPotential].push(m));
+
+function tierSection(slug) {
+  const t = TIERS.tiers.find((x) => x.slug === slug);
+  const items = byTier[slug];
+  return `<div class="tierhead ${slug}">
+    <h2>${esc(t.label)} <span class="mono" style="font-size:13px;color:var(--ink-3);font-weight:400">— ${items.length} of ${TAGGED.length}</span></h2>
+    <p class="tdef">${esc(t.definition)}</p>
+  </div>
+  <div class="tierlist">
+  ${items.map((m) => `<a class="tieritem" href="/entries/${m.id}">
+    <span class="tid">${m.id} · ${m.severity} · ${m.stageId}</span>
+    <span class="tname">${esc(m.name)}</span>
+    <span class="tnote">${esc(m.automationNote)}</span>
+  </a>`).join('\n')}
+  </div>`;
+}
+
+write('automate.html', layout({
+  title: 'Where to automate, where to slow down — AGFM',
+  desc: 'Every complete AGFM failure mode is tagged systematic, partial, or judgment-required — a precise answer to which governance controls can be built away and which are meant to stay a human decision.',
+  current: '/automate',
+  body: `<header class="masthead"><div class="wrap">
+  <span class="eyebrow">Speed and rigor, named separately</span>
+  <h1>Where to automate, where to slow down</h1>
+  <p class="deck">${esc(TIERS.intro)}</p>
+</div></header>
+
+<section style="padding-top:36px"><div class="wrap">
+  <div class="callout">
+    <p style="margin-bottom:0"><b>The pattern behind this page:</b> uniform, heavyweight review applied to every AI request — regardless of actual risk — is what causes intake bypass and unsanctioned use, not what prevents it. Reviewer time spent on low-risk items is time not spent on the ones that need it, and the delay pushes people around the process rather than through it. See <a href="/patterns">"Friction causes evasion"</a> for the full argument. The fix isn't less rigor. It's being precise about which parts of rigor are mechanical and which parts are a decision — so the mechanical parts stop taking up a person's time, and the decisions get one.</p>
+  </div>
+
+  <div class="statgrid" style="margin-top:34px">
+    <div><dt>Systematic</dt><dd>${byTier.systematic.length} failure modes</dd></div>
+    <div><dt>Partial</dt><dd>${byTier.partial.length} failure modes</dd></div>
+    <div><dt>Judgment-required</dt><dd>${byTier.judgment.length} failure modes</dd></div>
+    <div><dt>Tagged of complete</dt><dd>${TAGGED.length} of ${FULL.length}</dd></div>
+    <div><dt>Untagged</dt><dd>${OPEN.length} open entries</dd></div>
+  </div>
+
+  ${tierSection('systematic')}
+  ${tierSection('partial')}
+  ${tierSection('judgment')}
+
+  <div class="callout" style="margin-top:40px">
+    <p style="margin-bottom:0"><b>Only complete entries are tagged.</b> The ${OPEN.length} entries in the <a href="/backlog">backlog</a> don't yet carry an automation-potential tag, for the same reason they don't yet carry a regulatory mapping — tagging a failure mode you haven't fully specified would be a guess dressed as an answer. As entries move from open to complete, they get tagged here too.</p>
+  </div>
+  <p style="margin-top:26px"><a href="/assess">Take the self-assessment</a> to see which of these apply to your programme, ranked by severity and tagged with the same tier. <a href="/crosswalk">See the regulatory crosswalk</a> for what each one is actually required by.</p>
+</div></section>`,
 }));
 
 /* =================== STARTER SETS =================== */
@@ -527,7 +602,15 @@ write('about.html', layout({
 <hr class="rule">
 
 <section><div class="wrap">
-  <div class="sechead"><span class="secnum">03</span><h2>Structure and identifiers</h2></div>
+  <div class="sechead"><span class="secnum">03</span><h2>Automation potential</h2></div>
+  <p>Every complete entry is tagged with one of three tiers, answering a question the catalog gets asked constantly: is fixing this about slowing down, or is it about building something once? ${esc(TIERS.tiers.map((t) => `<b>${t.label}</b> — ${t.short.toLowerCase()}`).join('; '))}.</p>
+  <p>The distinction matters because organizations under pressure to move fast tend to read any governance catalog as an argument for more caution. Most of what's in this catalog isn't that. A structural gate, once built, removes the need for anyone to slow down and check — it's an engineering fix, not a policy of caution. The minority tagged judgment-required are the ones where the catalog is making a different argument: not that things should move slower everywhere, but that this specific decision should stay a person's to make. See the full breakdown on <a href="/automate">where to automate</a>.</p>
+</div></section>
+
+<hr class="rule">
+
+<section><div class="wrap">
+  <div class="sechead"><span class="secnum">04</span><h2>Structure and identifiers</h2></div>
   <div class="tablewrap"><table>
     <thead><tr><th>Level</th><th>AGFM element</th><th>ATT&amp;CK equivalent</th><th class="mono">Format</th></tr></thead>
     <tbody>
@@ -551,7 +634,7 @@ write('about.html', layout({
 <hr class="rule">
 
 <section><div class="wrap">
-  <div class="sechead"><span class="secnum">04</span><h2>Stewardship and licensing</h2></div>
+  <div class="sechead"><span class="secnum">05</span><h2>Stewardship and licensing</h2></div>
   <div class="tablewrap"><table>
     <thead><tr><th style="min-width:150px">Element</th><th>Position</th></tr></thead>
     <tbody>
@@ -572,7 +655,7 @@ write('about.html', layout({
 <hr class="rule">
 
 <section><div class="wrap">
-  <div class="sechead"><span class="secnum">05</span><h2>Citing AGFM</h2></div>
+  <div class="sechead"><span class="secnum">06</span><h2>Citing AGFM</h2></div>
   <div class="cite">
     <b style="color:var(--ink)">Entry</b><br>
     ${esc(META.framework)}, AGF-F040 "Missing human-in-the-loop trigger", v${META.version} (2026).<br><br>
@@ -611,6 +694,7 @@ write('primer.html', layout({
     <li><b>Plain-language examples.</b> Every entry opens with one concrete situation, no acronyms — so the risk manager who just inherited AI governance can use it on day one.</li>
     <li><b>Detection signals.</b> Complete entries lead with observable indicators, so a team can determine what is present without engaging anyone.</li>
     <li><b>${MAPPING_COUNT} role-scoped regulatory mappings.</b> Each names the instrument, the provision, <em>who the obligation falls on</em>, and whether it is in force. Role scope is the element most published crosswalks omit and the one most likely to send an organization down the wrong path.</li>
+    <li><b>Automation-potential tags.</b> Every complete entry is marked systematic, partial, or judgment-required — a direct answer to which failures can be engineered away and which are meant to stay a human decision.</li>
     <li><b>A self-assessment.</b> ${A.questions.length} questions, fifteen minutes, entirely in the browser — nothing transmitted or stored.</li>
   </ul>
 
@@ -694,23 +778,6 @@ write('changelog.html', layout({
   <p class="deck">Identifiers are permanent. Corrections to previously published mappings are recorded here explicitly rather than edited silently — a catalog that hides its own errors has no standing to catalog anyone else's.</p>
 </div></header>
 <section><div class="wrap narrow">
-<h2 style="margin-top:0;font-size:24px">v${META.version} — ${META.mappingsCurrentTo}</h2>
-<h3>Added</h3>
-<ul>
-  <li><b>Per-entry pages.</b> Every failure mode now has its own URL, title, description and structured data, so identifiers are linkable, citable and indexable rather than buried in a script.</li>
-  <li><b>Self-assessment</b> — ${A.questions.length} questions covering the highest-consequence failure modes across all ${STAGES.length} stages. Runs entirely client-side; nothing is transmitted or stored.</li>
-  <li><b>Coverage map</b> — mark each failure mode present, addressed or not applicable, with export and re-import as JSON.</li>
-  <li><b>Starter sets</b> — a first-ten entry point plus curated sector sets for banking, biopharma, insurance and manufacturing.</li>
-  <li><b>Filterable crosswalk</b> covering all ${MAPPING_COUNT} mappings by instrument, role scope and status.</li>
-  <li><b>Printable primer</b> for circulation and meetings.</li>
-  <li>Two failure modes in Findings &amp; Remediation: <a href="/entries/AGF-F107">AGF-F107</a> no challenge or rework path, and <a href="/entries/AGF-F108">AGF-F108</a> remediation closed by its own owner.</li>
-  <li>Ten entries upgraded from enumerated to complete, taking the core set to ${FULL.length} and giving every lifecycle stage at least one complete entry.</li>
-</ul>
-<h3>Changed</h3>
-<ul>
-  <li><b>Architecture inverted.</b> The catalog is now held in <span class="mono">data/catalog.json</span> as the single source of truth, and the site is generated from it. Previously the data was extracted from the site, which made every feature harder to build and the two able to drift.</li>
-  <li>Search and filter state is now reflected in the URL, so a filtered view can be shared.</li>
-</ul>
 ${miniMd(changelogMd.split('\n## ').slice(1).map((s) => `## ${s}`).join('\n'))}
 </div></section>`,
 }));

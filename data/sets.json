@@ -1,4 +1,27 @@
 {
+  "automationTiers": {
+    "intro": "Not every failure mode needs the same fix. Some are gaps that a system can close on its own, once built. Some need automation for the mechanics but a person for the decision. And some are, by design, decisions that should stay human — automating them away doesn't fix the failure mode, it recreates it. Every complete entry is tagged with one of the three.",
+    "tiers": [
+      {
+        "slug": "systematic",
+        "label": "Systematic",
+        "short": "Can run as a rule, gate or check with no person in the loop.",
+        "definition": "The control can be implemented as a structural rule — a gate, a required field, an automatic trigger, a timer — that operates without anyone deciding case by case. The test: could this be enforced by a system with no person in the loop, and would that fully address the failure mode? If yes, it's systematic. Building it takes a decision, once. Running it doesn't."
+      },
+      {
+        "slug": "partial",
+        "label": "Partial",
+        "short": "The mechanics can be automated; a decision point still needs a person.",
+        "definition": "Some of the work — detection, routing, evidence capture, reminders, scheduling — can run automatically. But the failure mode contains a point where a person has to exercise judgment specific to the case in front of them. The test: does automating the surrounding mechanics reduce how often or how badly this fails, while a human decision point still has to remain at the core? If yes, it's partial. Automate everything up to the decision. Not the decision."
+      },
+      {
+        "slug": "judgment",
+        "label": "Judgment-required",
+        "short": "The failure mode is about human accountability. It should stay that way.",
+        "definition": "The failure mode is fundamentally about a human decision, a form of accountability, or a discretion that the law, the risk, or the consequence requires a person to hold. The test: would automating the decision itself recreate or worsen the failure mode rather than fix it? If yes, it's judgment-required. These are the failure modes where speed is the wrong axis to optimize — the point isn't to go faster here, it's to make sure the person who's supposed to be deciding actually is."
+      }
+    ]
+  },
   "assessment": {
     "title": "AGFM self-assessment",
     "description": "Twenty-eight questions covering the highest-consequence failure modes across all eleven lifecycle stages. Answer honestly rather than aspirationally — the output is only useful if it reflects what actually happens rather than what policy says should happen.",

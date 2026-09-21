@@ -6,6 +6,37 @@ renumbered, and deprecated entries stay published with a pointer to their succes
 Corrections to previously published mappings are recorded here explicitly rather than
 edited silently.
 
+## v1.1 — 18 September 2026
+
+Automation-potential tagging, and a reframing pass so the catalog reads as a speed
+argument as much as a rigor argument.
+
+### Added
+
+- **Automation-potential tags** on all 32 complete entries: `Systematic` (can run as a
+  rule, gate or check with no person in the loop), `Partial` (the mechanics can be
+  automated, a decision point still needs a person), or `Judgment-required` (the
+  failure mode is about human accountability and automating it away recreates the
+  problem rather than fixing it). 16 systematic, 13 partial, 3 judgment-required.
+- **New page `/automate`** — every tagged failure mode grouped by tier, with the
+  reasoning for each tag and a link back to the throughput argument on `/patterns`.
+- **Self-assessment results now show automation tier** per identified gap, plus a
+  summary line ("6 systematic, 2 partial, 1 judgment-required") so results translate
+  directly into what to build versus what to decide.
+- Automation tier now visible on the core set matrix and on every tagged entry page.
+
+### Changed
+
+- **Crosswalk promoted** to the primary entry point on the homepage and in navigation,
+  with a new framing paragraph at the top explaining why it's the fastest way in:
+  knowing precisely which obligation is yours (and whether it's a provider's or a
+  deployer's) is what lets you stop over-applying caution everywhere else.
+- **Homepage reframed** to read for two audiences explicitly rather than defaulting to
+  one: a risk/compliance reading (what to watch for) and an operations reading (what no
+  longer needs to be slow), without treating either as more correct than the other.
+- `/about` gained a short section on automation potential, and the version note on
+  NIST subcategory-level mapping moved its target from v1.1 to v1.2.
+
 ## v1.0 — 18 September 2026
 
 First release with per-entry pages, working tools, and a defined core set.

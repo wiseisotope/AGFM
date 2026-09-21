@@ -80,6 +80,22 @@ td.mono,th.mono{font-family:var(--f-mono);font-size:12px}
 .tag.sev{color:var(--ink-3)}
 .tag.crit{color:var(--crit)}
 .tag.high{color:var(--high)}
+.tag.tier-sys{color:var(--ok);border-color:var(--ok)}
+.tag.tier-par{color:var(--high);border-color:var(--high)}
+.tag.tier-jdg{color:var(--indigo);border-color:var(--indigo)}
+.tierhead{border-top:3px solid var(--rule);padding-top:14px;margin:44px 0 6px}
+.tierhead.systematic{border-top-color:var(--ok)}
+.tierhead.partial{border-top-color:var(--high)}
+.tierhead.judgment{border-top-color:var(--indigo)}
+.tierhead h2{margin:0}
+.tierhead .tdef{font-size:15.5px;color:var(--ink-2);max-width:70ch;margin:10px 0 0}
+.tierlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;margin-top:16px}
+.tieritem{display:block;background:var(--panel);border:1px solid var(--rule-2);padding:14px 16px;border-left:3px solid var(--rule)}
+.tieritem:hover{border-color:var(--ink-3)}
+.tieritem .tid{font-family:var(--f-mono);font-size:10px;color:var(--ink-3)}
+.tieritem .tname{font-family:var(--f-display);font-weight:600;font-size:14.5px;display:block;margin:2px 0 6px}
+.tieritem .tnote{font-size:13.5px;color:var(--ink-2);line-height:1.5}
+.rgap{font-family:var(--f-mono);font-size:9px;letter-spacing:.05em;padding:1px 5px;border:1px solid currentColor;text-transform:uppercase;display:inline-block;margin-left:6px}
 
 /* matrix */
 .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:0 0 16px;border-bottom:1px solid var(--rule);margin-bottom:18px}

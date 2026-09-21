@@ -79,6 +79,10 @@ for (const m of modes) {
     if (!m.indicators.length) problems.push(`${m.id} is marked full but has no indicators`);
     if (!m.mitigations.length) problems.push(`${m.id} is marked full but has no mitigations`);
     if (!m.mapping.length) problems.push(`${m.id} is marked full but has no regulatory mapping`);
+    if (!['systematic', 'partial', 'judgment'].includes(m.automationPotential)) {
+      problems.push(`${m.id} is marked full but has no valid automationPotential`);
+    }
+    if (!m.automationNote) problems.push(`${m.id} is marked full but has no automationNote`);
   }
   for (const x of m.mapping) {
     if (!x.role) problems.push(`${m.id} has a mapping with no role scope: ${x.framework}`);

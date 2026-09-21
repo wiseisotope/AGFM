@@ -2,14 +2,14 @@
   "meta": {
     "framework": "AI Governance Failure Mode framework",
     "abbreviation": "AGFM",
-    "version": "1.0",
+    "version": "1.1",
     "steward": "The Governance Commons",
     "mappingsCurrentTo": "2026-09-18",
     "license": {
       "content": "CC-BY-4.0",
       "code": "Apache-2.0"
     },
-    "generated": "2026-09-18",
+    "generated": "2026-09-21",
     "counts": {
       "stages": 11,
       "failureModes": 89,
@@ -122,6 +122,8 @@
       ],
       "reference": "Precedes most other assessment failures. An organization without tiering cannot exhibit proportionate review, because there is nothing to be proportionate to.",
       "tiers": "Tiers 1–2",
+      "automationPotential": "systematic",
+      "automationNote": "Once tiers and routing rules are defined, classification and routing run as a rule engine. The judgment is in setting the tiers once, not in applying them case by case.",
       "stageId": "AGF-TA01",
       "stageName": "Strategy, Scope & Policy"
     },
@@ -293,6 +295,8 @@
       ],
       "reference": "No single canonical public incident. Prevalence is supported by Verizon DBIR 2026 and IBM/Ponemon 2025 findings on unauthorized AI use.",
       "tiers": "Tiers 1–2",
+      "automationPotential": "systematic",
+      "automationNote": "Tying intake to a structural gate — funding release, access provisioning — removes the need for anyone to remember or choose to submit.",
       "stageId": "AGF-TA02",
       "stageName": "Intake & Discovery"
     },
@@ -362,6 +366,8 @@
       ],
       "reference": "Widely reported corporate source-code exposure through consumer AI assistants (2023) led to internal prohibitions at several large manufacturers. Netskope 2026 reports 47% of generative AI users on personal, unmanaged accounts.",
       "tiers": "Tier 1",
+      "automationPotential": "partial",
+      "automationNote": "Detecting unsanctioned use is systematic (telemetry, tool discovery). Deciding how to respond to a given instance — block, redirect, allow with conditions — needs judgment.",
       "stageId": "AGF-TA02",
       "stageName": "Intake & Discovery"
     },
@@ -489,6 +495,8 @@
       ],
       "reference": "The dominant route by which regulated organizations acquire ungoverned AI. Distinct from unsanctioned use in that the organization bought the software deliberately; only the AI capability is unnoticed.",
       "tiers": "Tiers 1–3",
+      "automationPotential": "partial",
+      "automationNote": "Scanning vendor release notes and contract terms for new AI capability can be automated. Determining the resulting risk tier and required controls needs a person.",
       "stageId": "AGF-TA02",
       "stageName": "Intake & Discovery"
     },
@@ -553,6 +561,8 @@
       ],
       "reference": "A classification gap created by rapid capability change rather than by process failure. The register is usually accurate as of the date it was designed.",
       "tiers": "Tiers 2–4",
+      "automationPotential": "partial",
+      "automationNote": "Flagging systems with tool-access or write permissions can be automated. Classifying the resulting risk still needs judgment.",
       "stageId": "AGF-TA02",
       "stageName": "Intake & Discovery"
     },
@@ -637,6 +647,8 @@
       ],
       "reference": "Manifests as submitter attrition and shadow adoption rather than as a reportable incident.",
       "tiers": "Tiers 1–3",
+      "automationPotential": "systematic",
+      "automationNote": "Routing criteria, once defined, apply as rules. No one needs to decide case by case which queue a submission belongs in.",
       "stageId": "AGF-TA02",
       "stageName": "Intake & Discovery"
     },
@@ -769,6 +781,8 @@
       ],
       "reference": "Art. 50 became enforceable 2 Aug 2026. Applies by system function, not risk tier, so mainstream generative deployments are in scope regardless of the Annex III deferral to Dec 2027.",
       "tiers": "Tiers 2–3",
+      "automationPotential": "partial",
+      "automationNote": "A rule can flag customer-facing or EU-touching use cases automatically. Confirming the specific disclosure requirement and implementing it needs a person.",
       "stageId": "AGF-TA03",
       "stageName": "Risk Assessment & Tiering"
     },
@@ -893,6 +907,8 @@
       ],
       "reference": "Presents as reviewer burnout and shadow adoption. Rarely reported as an incident, because the failure is the absence of governance rather than its malfunction.",
       "tiers": "Tiers 2–4",
+      "automationPotential": "systematic",
+      "automationNote": "The core fix here is structural: tiered routing by risk score removes the need for a person to decide review depth every time.",
       "stageId": "AGF-TA03",
       "stageName": "Risk Assessment & Tiering"
     },
@@ -989,6 +1005,8 @@
       ],
       "reference": "Typically surfaced during examination or inspection rather than as a publicly reported incident.",
       "tiers": "Tiers 4–5",
+      "automationPotential": "systematic",
+      "automationNote": "Expiry dates and change-triggered re-review can run as automatic triggers. No one needs to remember to check.",
       "stageId": "AGF-TA04",
       "stageName": "Approval & Authorization"
     },
@@ -1069,6 +1087,8 @@
       ],
       "reference": "Commonly identified during internal audit rather than through public incident reporting.",
       "tiers": "Tiers 3–4",
+      "automationPotential": "partial",
+      "automationNote": "Monitoring usage against a declared boundary can be automated as a flag. Deciding whether a deviation is acceptable needs judgment.",
       "stageId": "AGF-TA04",
       "stageName": "Approval & Authorization"
     },
@@ -1140,6 +1160,8 @@
       ],
       "reference": "Structurally identical to the findings-and-remediation failures in TA11, but occurring at the approval gate rather than after review. Organizations frequently fix one and not the other.",
       "tiers": "Tiers 3–5",
+      "automationPotential": "partial",
+      "automationNote": "Tracking whether a condition has an attached evidence artifact can be automated. Judging whether the evidence actually satisfies the condition needs a person.",
       "stageId": "AGF-TA04",
       "stageName": "Approval & Authorization"
     },
@@ -1264,6 +1286,8 @@
       ],
       "reference": "Presents as shadow adoption and submitter attrition rather than as a reportable incident. The causal link between review latency and unsanctioned use is the most consistent pattern in this catalog.",
       "tiers": "Tiers 2–4",
+      "automationPotential": "systematic",
+      "automationNote": "SLA timers and escalation triggers are exactly the kind of thing a system should run without anyone watching a clock.",
       "stageId": "AGF-TA04",
       "stageName": "Approval & Authorization"
     },
@@ -1323,6 +1347,8 @@
       ],
       "reference": "Presents as persistent reviewer load and inconsistent treatment of comparable cases.",
       "tiers": "Tiers 3–5",
+      "automationPotential": "partial",
+      "automationNote": "Surfacing similar past decisions to a reviewer can be automated as search and retrieval. Applying or distinguishing the precedent needs judgment.",
       "stageId": "AGF-TA04",
       "stageName": "Approval & Authorization"
     },
@@ -1395,6 +1421,8 @@
       ],
       "reference": "Widely experienced, rarely documented — the loop is usually described as a resourcing problem rather than a design defect.",
       "tiers": "Tiers 3–5",
+      "automationPotential": "systematic",
+      "automationNote": "This is a one-time process-design fix — reordering gates or adding a prerequisite-artifact stage — not a recurring judgment call.",
       "stageId": "AGF-TA04",
       "stageName": "Approval & Authorization"
     },
@@ -1469,6 +1497,8 @@
       ],
       "reference": "A recurring contributing factor across publicly reported automated-decision harms in the AI Incident Database.",
       "tiers": "Tiers 3–5",
+      "automationPotential": "judgment",
+      "automationNote": "The clearest case in this catalog. The checkpoint that enforces review can and should be automated — but the review itself is specifically the decision that must stay human. Automating the human step away is the failure mode, not the fix.",
       "stageId": "AGF-TA05",
       "stageName": "Human Oversight & Accountability"
     },
@@ -1553,6 +1583,8 @@
       ],
       "reference": "Frequently discovered during an audit or an incident, when someone needs to reach the owner and finds there is not one.",
       "tiers": "Tiers 2–4",
+      "automationPotential": "partial",
+      "automationNote": "Detecting an ownership gap — owner absent from the directory, a leaver event — can be automated. Reassigning ownership needs a person to accept accountability.",
       "stageId": "AGF-TA05",
       "stageName": "Human Oversight & Accountability"
     },
@@ -1635,6 +1667,8 @@
       ],
       "reference": "Manifests as slow delivery and unattributable failure rather than as a discrete incident.",
       "tiers": "Tiers 2–4",
+      "automationPotential": "judgment",
+      "automationNote": "Naming a single accountable owner and defining authority is an organizational decision. No system can make it for you.",
       "stageId": "AGF-TA05",
       "stageName": "Human Oversight & Accountability"
     },
@@ -1782,6 +1816,8 @@
       ],
       "reference": "Among the most difficult failure modes to remediate after the fact, because retraining or rebuilding may be the only available correction.",
       "tiers": "Tiers 2–4",
+      "automationPotential": "partial",
+      "automationNote": "Checking a dataset against a rights register can be automated. The initial rights determination itself needs legal judgment.",
       "stageId": "AGF-TA06",
       "stageName": "Data Governance & Provenance"
     },
@@ -2040,6 +2076,8 @@
       ],
       "reference": "Compliance studies since 2023 have repeatedly found low rates of published audit summaries among employers apparently in scope of NYC Local Law 144.",
       "tiers": "Tiers 3–5",
+      "automationPotential": "partial",
+      "automationNote": "Scheduling tests and retaining evidence can be automated. Interpreting the results and deciding on remediation needs a person.",
       "stageId": "AGF-TA07",
       "stageName": "Validation, Testing & Documentation"
     },
@@ -2102,6 +2140,8 @@
       ],
       "reference": "A structural gap rather than a discrete incident, created by the 17 Apr 2026 supersession of SR 11-7 and its explicit carve-out.",
       "tiers": "Tiers 3–5",
+      "automationPotential": "judgment",
+      "automationNote": "There is no rule to automate yet. What a fit-for-purpose control framework for generative and agentic systems should look like is itself an open judgment call.",
       "stageId": "AGF-TA07",
       "stageName": "Validation, Testing & Documentation"
     },
@@ -2180,6 +2220,8 @@
       ],
       "reference": "Commonly identified when a production incident traces back to a system whose governance record appears complete because it was assessed at concept stage.",
       "tiers": "Tiers 2–4",
+      "automationPotential": "systematic",
+      "automationNote": "A defined readiness checklist — rollback plan exists, monitoring configured, oversight assigned — can be enforced as an automatic gate before deployment.",
       "stageId": "AGF-TA07",
       "stageName": "Validation, Testing & Documentation"
     },
@@ -2276,6 +2318,8 @@
       ],
       "reference": "The clearest case in the catalog of a governance failure originating outside the organization. The failure is not the vendor change; it is the absence of any mechanism that would notice one.",
       "tiers": "Tiers 3–5",
+      "automationPotential": "partial",
+      "automationNote": "Detecting a vendor version change can be automated through monitoring or contractual notice triggers. Deciding whether the change requires re-review needs judgment.",
       "stageId": "AGF-TA08",
       "stageName": "Deployment & Change Management"
     },
@@ -2426,6 +2470,8 @@
       ],
       "reference": "Among the most frequently cited technical contributors across AI Incident Database entries involving deployed production systems.",
       "tiers": "Tier 5",
+      "automationPotential": "partial",
+      "automationNote": "Scheduling reviews and flagging missed ones can be automated. Interpreting whether observed drift is acceptable needs a person.",
       "stageId": "AGF-TA09",
       "stageName": "Monitoring, Drift & Incident"
     },
@@ -2522,6 +2568,8 @@
       ],
       "reference": "The reporting deadlines under Art. 73 are measured in days. An organization without a detection and escalation path will generally exhaust them before the obligation is recognized.",
       "tiers": "Tiers 3–5",
+      "automationPotential": "systematic",
+      "automationNote": "Once a definition and a reporting channel are agreed — a one-time decision — routing and deadline tracking against statutory day-counts can run automatically.",
       "stageId": "AGF-TA09",
       "stageName": "Monitoring, Drift & Incident"
     },
@@ -2684,6 +2732,8 @@
       ],
       "reference": "A common category of finding in model and AI governance examinations, where the deficiency is evidentiary rather than operational.",
       "tiers": "Tiers 4–5",
+      "automationPotential": "systematic",
+      "automationNote": "Capturing evidence automatically at the moment a control operates removes the need for anyone to remember to document it after the fact.",
       "stageId": "AGF-TA10",
       "stageName": "Audit, Evidence & Record Integrity"
     },
@@ -2822,6 +2872,8 @@
       ],
       "reference": "Surfaces as an inability to answer supervisory or board questions rather than as an operational incident.",
       "tiers": "Tier 5",
+      "automationPotential": "systematic",
+      "automationNote": "Aggregating register data into a standing dashboard is exactly the kind of reporting a system should generate without manual compilation.",
       "stageId": "AGF-TA10",
       "stageName": "Audit, Evidence & Record Integrity"
     },
@@ -2900,6 +2952,8 @@
       ],
       "reference": "Rarely recognized until an examination requires reproducing a report from before a reorganization.",
       "tiers": "Tiers 4–5",
+      "automationPotential": "systematic",
+      "automationNote": "Snapshotting records at completion is a one-time architectural decision, not a recurring judgment.",
       "stageId": "AGF-TA10",
       "stageName": "Audit, Evidence & Record Integrity"
     },
@@ -3017,6 +3071,8 @@
       ],
       "reference": "Presents at audit as an inability to demonstrate that identified issues were resolved.",
       "tiers": "Tiers 3–5",
+      "automationPotential": "systematic",
+      "automationNote": "This is fundamentally a tooling gap. Recording findings as tracked objects in the system of record is a structural fix, not a per-finding decision.",
       "stageId": "AGF-TA11",
       "stageName": "Findings & Remediation"
     },
@@ -3082,6 +3138,8 @@
       ],
       "reference": "The single cheapest failure mode in this stage to fix, and the one that unlocks escalation, ageing, and reporting.",
       "tiers": "Tiers 3–5",
+      "automationPotential": "systematic",
+      "automationNote": "Making owner and due date mandatory fields is a structural constraint a system enforces, not something that needs judgment each time.",
       "stageId": "AGF-TA11",
       "stageName": "Findings & Remediation"
     },
@@ -3172,6 +3230,8 @@
       ],
       "reference": "Closure without evidence is a common finding in regulated examinations precisely because it is invisible in internal metrics — the dashboard shows the item closed.",
       "tiers": "Tiers 3–5",
+      "automationPotential": "partial",
+      "automationNote": "Requiring an evidence attachment before closure can be enforced automatically. Judging whether the evidence is actually adequate needs a person.",
       "stageId": "AGF-TA11",
       "stageName": "Findings & Remediation"
     },
@@ -3292,6 +3352,8 @@
       ],
       "reference": "Effective challenge is explicit supervisory language in US model risk guidance. A workflow with no return path cannot evidence it.",
       "tiers": "Tiers 3–5",
+      "automationPotential": "systematic",
+      "automationNote": "Adding a return-with-reason state to a workflow is a structural feature. It does not require judgment to exist — only to use.",
       "stageId": "AGF-TA11",
       "stageName": "Findings & Remediation"
     },
@@ -3362,6 +3424,8 @@
       ],
       "reference": "Independence of review is one of the oldest expectations in regulated assurance. Its absence in AI remediation workflows is usually a tooling limitation rather than a policy decision.",
       "tiers": "Tiers 3–5",
+      "automationPotential": "systematic",
+      "automationNote": "Separating assignee and reviewer roles, and blocking self-closure, is an access-control rule a system enforces automatically.",
       "stageId": "AGF-TA11",
       "stageName": "Findings & Remediation"
     }

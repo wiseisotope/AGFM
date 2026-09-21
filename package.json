@@ -1,6 +1,6 @@
 {
   "name": "agfm",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "AI Governance Failure Mode framework (AGFM) — an open catalog of how enterprise AI governance processes fail.",
   "license": "CC-BY-4.0",
